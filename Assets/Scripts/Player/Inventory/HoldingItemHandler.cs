@@ -60,7 +60,6 @@ public class HoldingItemHandler : MonoBehaviour
         }
         // Change Index
         _heldItemSlotIndex = slotIndex;
-
         Transform selectedSlot = Inventory.Instance.HotBarSlotsParent.GetChild(slotIndex);
         Inventory.Instance.HotbarHighlight.transform.position = selectedSlot.position;
     }

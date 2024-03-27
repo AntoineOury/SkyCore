@@ -102,7 +102,10 @@ public class Inventory : MonoBehaviour
         PlayerInput playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
         _backpackAction = playerInput.actions.FindAction("Backpack", true);
         _backpackAction.performed += OnBackpack;
+    }
 
+    private void Start()
+    {
         HoldingItemHandler.Instance.UpdateHeldItem();
     }
 

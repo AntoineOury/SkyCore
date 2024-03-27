@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 /// <summary>
@@ -30,7 +31,7 @@ public class SettingsMenuButtonsHandler : MonoBehaviour
         throw new NotImplementedException();
     }
 
-    public void OnCloseClicked()
+    public void OnCloseButtonClicked()
     {
         _escMenuToggle.SetActive(false);
         if (_pauseManagement != null)
@@ -38,4 +39,33 @@ public class SettingsMenuButtonsHandler : MonoBehaviour
             _pauseManagement.TogglePause();
         }
     }
+
+    public void OnReturnToMainMenuClicked()
+    {
+        StartCoroutine(DisplayConfirmationDialogAndWait());
+    }
+
+
+    private IEnumerator DisplayConfirmationDialogAndWait()
+    {
+        ConfirmationDialog.DisplayConfirmationDialog("Are you sure you want to return to the main menu?");
+
+        while (ConfirmationDialog.IsOpen)
+        {
+            yield return null;
+        }
+
+        if (!ConfirmationDialog.UserChoice)
+        {
+            // The use clicked No, so do nothing here.
+            yield break;
+        }
+        else
+        {
+            // The user clicked Yes, so return to the main menu.
+            SceneManager.LoadScene("StartMenu");
+        }
+
+    }
+
 }
