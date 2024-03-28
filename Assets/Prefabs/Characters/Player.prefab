@@ -88,7 +88,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c26d19d7f7cc0cd4ea2837195b4743bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cameraLookAction: {fileID: 0}
+  _cameraLookAction: {fileID: 7838861856215508277, guid: c0d8178b5f09e324ab7d0a0918e94a52,
+    type: 3}
   _isInverted: 0
   _baseSpeed: 1
   _clampVerticalAngle: 89.9
@@ -160,7 +161,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactionDistance: 2
-  _workBench: {fileID: 0}
   _workBenchUI: {fileID: 0}
 --- !u!114 &1732815361
 MonoBehaviour:
