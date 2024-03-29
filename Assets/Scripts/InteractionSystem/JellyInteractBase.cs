@@ -86,7 +86,7 @@ public class JellyInteractBase : Interactable
 
         _jellyVCamera.SetActive(interact);
 
-        CursorMode.ChangeNumberOfReasonsForFreeCursor(interact);
+        CursorMode.ReasonsForUnlockedCursor.ChangeReason("jelly interact", interact);
 
         if (interact)
         {
@@ -108,7 +108,7 @@ public class JellyInteractBase : Interactable
 
     private void SetUIActive(bool active)
     {
-        InputIgnoring.ChangeNumberOfReasonsToIgnoreInputsForMovementAndInteractionThings(!active);
+        InputIgnoring.ChangeReasonToIgnoreInputsForMovementAndInteractionThings("jelly interact", !active);
     }
 
     /// <summary> 

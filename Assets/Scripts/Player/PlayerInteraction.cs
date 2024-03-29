@@ -61,25 +61,6 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
-    private int _numberOfReasonsToIgnoreInputs = 0;
-    public int NumberOfReasonsToIgnoreInputs
-    {
-        get => _numberOfReasonsToIgnoreInputs;
-        set
-        {
-            _numberOfReasonsToIgnoreInputs = value;
-            //Debug.Log("# reasons ignore inputs for PlayerInteraction: " + value);
-            if (_numberOfReasonsToIgnoreInputs < 0)
-            {
-                throw new System.Exception("In PlayerInteraction, _numberOfReasonsToIgnoreInputs < 0: " + _numberOfReasonsToIgnoreInputs);
-            }
-        }
-    }
-    public bool IgnoreInputs => NumberOfReasonsToIgnoreInputs > 0;
-
-
-
-
 
     /// <summary>
     /// If there is a raycast hit and no interactable assigned, enter interaction
@@ -142,7 +123,7 @@ public class PlayerInteraction : MonoBehaviour
     /// </summary>
     private void OnInteractionStay()
     {
-        if (!IgnoreInputs && Input.GetButtonDown("Interaction Button"))
+        if (!InteractionUI.Instance.DontInteract.AnyReasons && Input.GetButtonDown("Interaction Button"))
         {
             //this is is a kludge, there will need to be a system for determining which interaction to use
             //but doing it like this for now b/c some functionality is better than none
@@ -176,7 +157,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void HandleAction(InputAction.CallbackContext context)
     {
-        if (IgnoreInputs)
+        if (InteractionUI.Instance.DontInteract.AnyReasons)
         {
             return;
         }

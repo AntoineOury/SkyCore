@@ -66,30 +66,11 @@ namespace Player.View
             }
         }
 
-        private int _numberOfReasonsToIgnoreInputs = 0;
-        public int NumberOfReasonsToIgnoreInputs
-        {
-            get => _numberOfReasonsToIgnoreInputs;
-            set
-            {
-                _numberOfReasonsToIgnoreInputs = value;
-                //Debug.Log("# reasons ignore inputs for first person view: " + value);
-                if (_numberOfReasonsToIgnoreInputs < 0)
-                {
-                    throw new System.Exception("In FirstPersonView, _numberOfReasonsToIgnoreInputs < 0: " + _numberOfReasonsToIgnoreInputs);
-                }
-                if (_numberOfReasonsToIgnoreInputs > 0)
-                {
-                    // Clear recent inputs
-                    _lookDirection = Vector2.zero;
-                }
-            }
-        }
-        public bool IgnoreInputs => NumberOfReasonsToIgnoreInputs > 0;
+        public Reasons IgnoreInput { get; private set; }
 
         public Transform CameraTarget => _cameraTarget.transform;
 
-
+        
 
 
         private void OnEnable()
@@ -109,6 +90,7 @@ namespace Player.View
         /// </summary> 
         protected void Awake()
         {
+            IgnoreInput = new Reasons(onBecomeTrue: OnIgnoreInputBecomesTrue);
             _instance = this;
             _verticalRotation = _cameraTarget.transform.rotation.eulerAngles.x;
             CursorMode.Initialize();
@@ -120,6 +102,8 @@ namespace Player.View
 
             _sensitivitySetting = sensitivity / 100f;
         }
+
+        
 
         /// <summary>
         /// Call update each frame, to run the look fuction.
@@ -176,9 +160,15 @@ namespace Player.View
 
         }
 
+        private void OnIgnoreInputBecomesTrue()
+        {
+            // Clear recent inputs
+            _lookDirection = Vector2.zero;
+        }
+
         private void OnLook(InputAction.CallbackContext context)
         {
-            if (!IgnoreInputs)
+            if (!IgnoreInput.AnyReasons)
             {
                 _lookDirection = context.ReadValue<Vector2>();
             }
@@ -203,6 +193,7 @@ namespace Player.View
                 _cameraLookAction.action.canceled -= OnLook;
             }
         }
+
 
         /// <summary>
         /// Function to allow slider settings script to set sensitivity

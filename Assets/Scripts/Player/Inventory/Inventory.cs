@@ -62,21 +62,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private int _numberOfReasonsToIgnoreInputs = 0;
-    public int NumberOfReasonsToIgnoreInputs
-    {
-        get => _numberOfReasonsToIgnoreInputs;
-        set
-        {
-            _numberOfReasonsToIgnoreInputs = value;
-            //Debug.Log("# reasons ignore inputs for inventory: " + value);
-            if (_numberOfReasonsToIgnoreInputs < 0)
-            {
-                throw new System.Exception("In Inventory, _numberOfReasonsToIgnoreInputs < 0: " + _numberOfReasonsToIgnoreInputs);
-            }
-        }
-    }
-    public bool IgnoreInputs => NumberOfReasonsToIgnoreInputs > 0;
+    public Reasons IgnoreInput { get; private set; } = new();
 
 
     public GameObject HotbarHighlight => _hotBarHighlight;
@@ -205,15 +191,15 @@ public class Inventory : MonoBehaviour
 
     private void OnBackpack(InputAction.CallbackContext context)
     {
-        if (IgnoreInputs)
+        if (IgnoreInput.AnyReasons)
         {
             return;
         }
 
         _isInBackpackMode = !_isInBackpackMode;
 
-        CursorMode.ChangeNumberOfReasonsForFreeCursor(_isInBackpackMode);
-        InputIgnoring.ChangeNumberOfReasonsToIgnoreInputsForMovementThings(_isInBackpackMode);
+        CursorMode.ReasonsForUnlockedCursor.ChangeReason("inventory open", _isInBackpackMode);
+        InputIgnoring.ChangeReasonToIgnoreInputsForMovementThings("inventory open", _isInBackpackMode);
 
         if (_isInBackpackMode)
         {

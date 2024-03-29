@@ -68,7 +68,7 @@ public class IslandHeartInteractBase : Interactable
 
         _islandHeartVCamera.SetActive(interact);
 
-        CursorMode.ChangeNumberOfReasonsForFreeCursor(interact);
+        CursorMode.ReasonsForUnlockedCursor.ChangeReason("island heart interact", interact);
 
         if (interact)
         {
@@ -90,7 +90,7 @@ public class IslandHeartInteractBase : Interactable
 
     private void SetUIActive(bool active)
     {
-        InputIgnoring.ChangeNumberOfReasonsToIgnoreInputsForMovementAndInteractionThings(!active);
+        InputIgnoring.ChangeReasonToIgnoreInputsForMovementAndInteractionThings("island heart interact", !active);
     }
 
     /// <summary> 

@@ -25,19 +25,10 @@ public class InteractionUI : MonoBehaviour
         }
     }
 
-    private int _numberOfReasonsToBeInactive = 0;
-    public int NumberOfReasonsToBeInactive
+    public Reasons DontInteract { get; private set; }
+
+    private void Awake()
     {
-        get => _numberOfReasonsToBeInactive;
-        set
-        {
-            _numberOfReasonsToBeInactive = value;
-            //Debug.Log("# reasons InteractionUI inactive: " + value);
-            if (_numberOfReasonsToBeInactive < 0)
-            {
-                throw new System.Exception("In InteractionUI, _numberOfReasonsToBeInactive < 0: " + _numberOfReasonsToBeInactive);
-            }
-            gameObject.SetActive(_numberOfReasonsToBeInactive == 0);
-        }
+        DontInteract = new Reasons((anyReasons) => gameObject.SetActive(!anyReasons));
     }
 }

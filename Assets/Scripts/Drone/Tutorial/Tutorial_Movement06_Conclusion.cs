@@ -127,31 +127,11 @@ public class Tutorial_Movement06_Conclusion : MonoBehaviour
         CameraSystem.SwitchToFirstPersonCamera();
 
         // Re-enable all the player controls.
-        FirstPersonView.Instance.NumberOfReasonsToIgnoreInputs--;
-        PlayerMovement.Instance.NumberOfReasonsToIgnoreJumpInputs--;
-        PlayerMovement.Instance.NumberOfReasonsToIgnoreWASDInputs--;
-
-        Inventory.Instance.NumberOfReasonsToIgnoreInputs--;
-        InteractionUI.Instance.NumberOfReasonsToBeInactive--;
-        PlayerInteraction.Instance.NumberOfReasonsToIgnoreInputs--;
-
-        if (!PauseManagement.IsPaused && (FirstPersonView.Instance.IgnoreInputs 
-            || PlayerMovement.Instance.IgnoreJumpInputs || PlayerMovement.Instance.IgnoreWASDInputs
-            || Inventory.Instance.IgnoreInputs || !InteractionUI.Instance.gameObject.activeSelf
-            || PlayerInteraction.Instance.IgnoreInputs))
-        {
-            throw new System.Exception("At this point, player should be able to move camera, jump, use WASD, use inventory (may change once" +
-                " we add inventory tutorial), and interact with things. info: "
-                + "FirstPersonView.Instance.NumberOfReasonsToIgnoreInputs: " + FirstPersonView.Instance.NumberOfReasonsToIgnoreInputs 
-                + ", PlayerMovement.Instance.NumberOfReasonsToIgnoreJumpInputs: " + PlayerMovement.Instance.NumberOfReasonsToIgnoreJumpInputs 
-                + ", PlayerMovement.Instance.NumberOfReasonsToIgnoreWASDInputs: " + PlayerMovement.Instance.NumberOfReasonsToIgnoreWASDInputs 
-                + ", Inventory.Instance.NumberOfReasonsToIgnoreInputs: " + Inventory.Instance.NumberOfReasonsToIgnoreInputs
-                + ", InteractionUI.Instance.NumberOfReasonsToBeInactive: " + InteractionUI.Instance.NumberOfReasonsToBeInactive
-                + ", InteractionUI.Instance.gameObject.activeSelf: " + InteractionUI.Instance.gameObject.activeSelf
-                + ", PlayerInteraction.Instance.NumberOfReasonsToIgnoreInputs: " + PlayerInteraction.Instance.NumberOfReasonsToIgnoreInputs
-
-                );
-        }
+        FirstPersonView.Instance.IgnoreInput.RemoveReason("movement tutorial");
+        PlayerMovement.Instance.IgnoreWASDInput.RemoveReason("movement tutorial");
+        PlayerMovement.Instance.IgnoreJumpInput.RemoveReason("movement tutorial");
+        Inventory.Instance.IgnoreInput.RemoveReason("movement tutorial");
+        InteractionUI.Instance.DontInteract.RemoveReason("movement tutorial");
     }
 
     private IEnumerator DoTutorialConclusion()

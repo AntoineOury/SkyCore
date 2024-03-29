@@ -60,7 +60,7 @@ public class InventoryDragAndDrop
 
     private void OnClickStart(InputAction.CallbackContext context)
     {
-        if (Inventory.Instance.IgnoreInputs)
+        if (Inventory.Instance.IgnoreInput.AnyReasons)
         {
             return;
         }
@@ -80,7 +80,7 @@ public class InventoryDragAndDrop
 
     private void OnClickCancel(InputAction.CallbackContext context)
     {
-        if (Inventory.Instance.IgnoreInputs)
+        if (Inventory.Instance.IgnoreInput.AnyReasons)
         {
             return;
         }
@@ -101,7 +101,7 @@ public class InventoryDragAndDrop
     {
         if (_beingDragged != null)
         {
-            if (Inventory.Instance.IgnoreInputs)
+            if (Inventory.Instance.IgnoreInput.AnyReasons)
             {
                 TryMoveDraggedItemToSlot(_beingDragged, true);
             }

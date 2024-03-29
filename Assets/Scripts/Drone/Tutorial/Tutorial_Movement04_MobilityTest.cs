@@ -148,8 +148,7 @@ public class Tutorial_Movement04_MobilityTest : MonoBehaviour
 
     private IEnumerator WaitForPlayerToLookAtDrone()
     {
-        //FirstPersonView.Instance.NumberOfReasonsToIgnoreInputs--;
-        if (FirstPersonView.Instance.IgnoreInputs && !PauseManagement.IsPaused)
+        if (FirstPersonView.Instance.IgnoreInput.AnyReasons && !PauseManagement.IsPaused)
         {
             throw new Exception("Player should be able to move the camera at this point");
         }
@@ -168,14 +167,15 @@ public class Tutorial_Movement04_MobilityTest : MonoBehaviour
 
         HUD_Manager.Instance.EnableDroneIndicatorIcon(false);
 
-        FirstPersonView.Instance.NumberOfReasonsToIgnoreInputs++;
+        FirstPersonView.Instance.IgnoreInput.AddReason("movement tutorial");
         CameraSystem.SwitchToTutorialCamera();
         _playerLookedAtDrone = true;
 
         yield return new WaitForSeconds(1.0f);
 
         _pictogramBehaviour.ChangePictogramImage(_sprite_DroneMovementControls);
-        PlayerMovement.Instance.NumberOfReasonsToIgnoreWASDInputs--;
+        PlayerMovement.Instance.IgnoreWASDInput.RemoveReason("movement tutorial");
+
     }
 
     private void CheckIfPlayerHasPassedMobilityTest()
@@ -201,7 +201,7 @@ public class Tutorial_Movement04_MobilityTest : MonoBehaviour
         if (passTest)
         {
             _mobilityTestPassed = true;
-            PlayerMovement.Instance.NumberOfReasonsToIgnoreWASDInputs++;
+            PlayerMovement.Instance.IgnoreWASDInput.AddReason("movement tutorial");
         }
 
     }
