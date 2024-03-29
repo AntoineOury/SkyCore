@@ -16,7 +16,7 @@ namespace Jellies
     {
         [SerializeField, Tooltip("Scriptable object representing" +
         " the type of item to feed the jelly")]
-        private BerryItemIdentity _berryItemIdentity;
+        private FoodItemIdentity _foodItemIdentity;
 
         private Parameters _parameters;
 
@@ -63,9 +63,9 @@ namespace Jellies
         /// </summary>
         public void OnFeedButton()
         {
-            if (Inventory.Instance.TrySubtractItemAmount(_berryItemIdentity, 1))
+            if (Inventory.Instance.TrySubtractItemAmount(_foodItemIdentity, 1))
             {
-                TryFeedJelly(_berryItemIdentity.SaturationValue);
+                TryFeedJelly(_foodItemIdentity.SaturationValue);
             }
         }
     }

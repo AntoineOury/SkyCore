@@ -27,7 +27,7 @@ public class Inventory : MonoBehaviour
     private RectTransform[] _whereToConsiderMouseInsideInventory;
 
     [SerializeField]
-    private BerryItemIdentity _berryItemIdentity;
+    private FoodItemIdentity _berryItemIdentity;
 
     [SerializeField]
     private int _hotBarStacksCapacity = 3;

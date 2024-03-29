@@ -9,7 +9,7 @@ public class BerryBush : MonoBehaviour
     private int _cooldown;
     
     [SerializeField]
-    private ItemIdentity _berryItemIdentity;
+    private ItemIdentity _foodItemIdentity;
     private bool _canBeHarvested = false;
     [SerializeField, Tooltip("The number of berries to be harvested")]
     private int _numOfBerries;
@@ -46,7 +46,7 @@ public class BerryBush : MonoBehaviour
     {
         if (_canBeHarvested)
         {
-            _item = new ItemStack(_berryItemIdentity, _numOfBerries);
+            _item = new ItemStack(_foodItemIdentity, _numOfBerries);
             Inventory.Instance.TakeInAsManyAsFit(_item);
             if (_item.amount == 0)
             {
