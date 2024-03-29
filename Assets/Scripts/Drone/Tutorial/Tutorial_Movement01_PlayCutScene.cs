@@ -92,7 +92,7 @@ public class Tutorial_Movement01_PlayCutScene : MonoBehaviour
         PlayerMovement.Instance.IgnoreWASDInput.AddReason("movement tutorial");
         PlayerMovement.Instance.IgnoreJumpInput.AddReason("movement tutorial");
         Inventory.Instance.IgnoreInput.AddReason("movement tutorial");
-        InteractionUI.Instance.DontInteract.AddReason("movement tutorial");
+        InteractionPrompt.Instance.DontInteract.AddReason("movement tutorial");
     }
 
 
@@ -161,7 +161,7 @@ public class Tutorial_Movement01_PlayCutScene : MonoBehaviour
             PlayerMovement.Instance.IgnoreWASDInput.RemoveReason("movement tutorial");
             PlayerMovement.Instance.IgnoreJumpInput.RemoveReason("movement tutorial");
             Inventory.Instance.IgnoreInput.RemoveReason("movement tutorial");
-            InteractionUI.Instance.DontInteract.RemoveReason("movement tutorial");
+            InteractionPrompt.Instance.DontInteract.RemoveReason("movement tutorial");
 
             return;
         }

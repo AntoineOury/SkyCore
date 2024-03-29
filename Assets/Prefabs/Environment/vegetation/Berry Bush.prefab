@@ -178,7 +178,6 @@ GameObject:
   - component: {fileID: 55583485615312681}
   - component: {fileID: 55583485615312679}
   - component: {fileID: 4836280163345216306}
-  - component: {fileID: 2306716341093136239}
   m_Layer: 6
   m_Name: Berry Bush
   m_TagString: Untagged
@@ -246,18 +245,6 @@ MonoBehaviour:
   _berryItemIdentity: {fileID: 11400000, guid: ea60c6bcafafb47449f58b1932dda3a8, type: 2}
   _numOfBerries: 2
   _indicator: {fileID: 8697415027888095612}
---- !u!114 &2306716341093136239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 865835940704662139}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaf97f853812584459d69465b13f67b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8697415027888095612
 GameObject:
   m_ObjectHideFlags: 0

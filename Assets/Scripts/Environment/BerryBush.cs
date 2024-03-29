@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BerryBush : MonoBehaviour
+public class BerryBush : Interactable
 {
     [SerializeField, Tooltip("How long the bush takes to regrow berries")]
     private int _cooldown;
@@ -17,8 +17,6 @@ public class BerryBush : MonoBehaviour
     [SerializeField, Tooltip("The visual indicator that the bush is ready to harvest")]
     private GameObject _indicator;
 
-    private ItemStack _item;
-
     void Start()
     {
         SpawnBerry();
@@ -26,11 +24,11 @@ public class BerryBush : MonoBehaviour
     }
     private void Update()
     {
-        if (_canBeHarvested && !_indicator.activeInHierarchy)
+        if (_canBeHarvested && !_indicator.activeSelf)
         {
             _indicator.SetActive(true);
         }
-        else if (!_canBeHarvested && _indicator.activeInHierarchy)
+        else if (!_canBeHarvested && _indicator.activeSelf)
         {
             _indicator.SetActive(false);
         }
@@ -42,21 +40,16 @@ public class BerryBush : MonoBehaviour
         _indicator.SetActive(true);
     }
 
-    public void Harvest()
+    public override void OnInteractAction()
     {
         if (_canBeHarvested)
         {
-            _item = new ItemStack(_berryItemIdentity, _numOfBerries);
-            Inventory.Instance.TakeInAsManyAsFit(_item);
-            if (_item.amount == 0)
-            {
-                _canBeHarvested = false;
-                _indicator.SetActive(false);
-            }
-            if (_item.amount < 0)
-            {
-                throw new System.Exception("_item.amount < 0 in BerryBush.Harvest: " + _item.amount);
-            }
+            ItemStack item = new ItemStack(_berryItemIdentity, _numOfBerries);
+            Inventory.Instance.TakeInAsManyAsFit(item);
+
+            _canBeHarvested = false;
+            _indicator.SetActive(false);
+
             StartCoroutine(BushCooldown());
         }
     }

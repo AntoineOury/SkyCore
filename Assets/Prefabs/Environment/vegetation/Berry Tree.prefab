@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 3196877314254856235}
   - component: {fileID: 609438218684118905}
   - component: {fileID: 8726864350929129683}
-  - component: {fileID: 7475081226062181830}
-  - component: {fileID: 5258244351885728814}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -99,34 +97,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7475081226062181830
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3625939396564118192}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e9eddff49e9d09478b46215895a6d3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cooldown: 10
-  _berryItemIdentity: {fileID: 0}
-  _numOfBerries: 3
-  _indicator: {fileID: 3625939396564118192}
---- !u!114 &5258244351885728814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3625939396564118192}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaf97f853812584459d69465b13f67b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3748095181490036162
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,7 +108,6 @@ GameObject:
   - component: {fileID: 3748095181490036161}
   - component: {fileID: 5668071528657323135}
   - component: {fileID: 5017334974248370417}
-  - component: {fileID: 8924327866034643932}
   m_Layer: 6
   m_Name: Berry Tree
   m_TagString: Untagged
@@ -192,18 +161,6 @@ MonoBehaviour:
   _berryItemIdentity: {fileID: 11400000, guid: ea60c6bcafafb47449f58b1932dda3a8, type: 2}
   _numOfBerries: 3
   _indicator: {fileID: 3625939396564118192}
---- !u!114 &8924327866034643932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3748095181490036162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaf97f853812584459d69465b13f67b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2843144087953639335
 PrefabInstance:
   m_ObjectHideFlags: 0

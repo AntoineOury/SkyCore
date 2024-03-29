@@ -7,7 +7,7 @@ public static class InputIgnoring
     public static void ChangeReasonToIgnoreInputsForMovementAndInteractionThings(string reason, bool addDontRemove)
     {
         ChangeReasonToIgnoreInputsForMovementThings(reason, addDontRemove);
-        InteractionUI.Instance.DontInteract.ChangeReason(reason, addDontRemove);
+        InteractionPrompt.Instance.DontInteract.ChangeReason(reason, addDontRemove);
     }
 
     public static void ChangeReasonToIgnoreInputsForMovementThings(string reason, bool addDontRemove)

@@ -121,6 +121,12 @@ public class Inventory : MonoBehaviour
 
     public void TakeInAsManyAsFit(ItemStack item)
     {
+        if (item.amount <= 0)
+        {
+            throw new System.Exception("Trying to take in items from a stack whose amount is "
+                + item.amount + ", item stack: identity: " + item.identity);
+        }
+
         for (int i = 0; i < _sections.Length; i++)
         {
             _sections[i].TakeIntoExistingStacks(item);
@@ -128,6 +134,11 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < _sections.Length; i++)
         {
             _sections[i].TakeIntoNewStacks(item);
+        }
+
+        if (item.amount < 0)
+        {
+            throw new System.Exception("took too many. item.amount: " + item.amount + ", item stack: identity: " + item.identity);
         }
     }
        

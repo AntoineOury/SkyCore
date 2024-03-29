@@ -171,7 +171,7 @@ public class InventoryDragAndDrop
 
     private void FinishDragOutsideInventory()
     {
-        if (!JellyInteractBase.AnyInteracting)
+        if (!InteractableWithUIMode.AnyInteracting)
         {
             TryTossItem();
             return;
@@ -185,7 +185,7 @@ public class InventoryDragAndDrop
             if (Physics.Raycast(ray, out RaycastHit hit, 100, _jellyFeedingLayerMask))
             {
                 JellyInteractBase jellyInteract = hit.collider.GetComponent<JellyInteractBase>();
-                if (jellyInteract == JellyInteractBase.InteractingJelly
+                if (jellyInteract == InteractableWithUIMode.CurrentlyInteracting
                     && jellyInteract.Feeding.TryFeedJelly(_berryItemIdentity.SaturationValue))
                 {
                     _beingDragged._itemStack.amount--;

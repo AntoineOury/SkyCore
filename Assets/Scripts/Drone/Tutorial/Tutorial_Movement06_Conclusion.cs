@@ -131,7 +131,7 @@ public class Tutorial_Movement06_Conclusion : MonoBehaviour
         PlayerMovement.Instance.IgnoreWASDInput.RemoveReason("movement tutorial");
         PlayerMovement.Instance.IgnoreJumpInput.RemoveReason("movement tutorial");
         Inventory.Instance.IgnoreInput.RemoveReason("movement tutorial");
-        InteractionUI.Instance.DontInteract.RemoveReason("movement tutorial");
+        InteractionPrompt.Instance.DontInteract.RemoveReason("movement tutorial");
     }
 
     private IEnumerator DoTutorialConclusion()
