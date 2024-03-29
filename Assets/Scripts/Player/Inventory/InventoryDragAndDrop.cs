@@ -29,9 +29,9 @@ public class InventoryDragAndDrop
 
     private Transform _playerTransform;
     private CapsuleCollider _playerCapsuleCollider;
-    private BerryItemIdentity _berryItemIdentity;
+    private FoodItemIdentity _berryItemIdentity;
 
-    public InventoryDragAndDrop(RectTransform[] whereToConsiderMouseInsideInventory, BerryItemIdentity berryItemIdentity)
+    public InventoryDragAndDrop(RectTransform[] whereToConsiderMouseInsideInventory, FoodItemIdentity berryItemIdentity)
     {
         _berryItemIdentity = berryItemIdentity;
         _whereToConsiderMouseInsideInventory = whereToConsiderMouseInsideInventory;
