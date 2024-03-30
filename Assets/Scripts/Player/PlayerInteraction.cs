@@ -35,7 +35,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         _mainCamera = Camera.main;
         _instance = this;
-        GetComponent<PlayerInput>().actions.FindAction("Interact").started += OnInteractAction;
+        GetComponent<PlayerInput>().actions.FindAction("Interact").performed += OnInteractAction;
     }
 
     private void Update()

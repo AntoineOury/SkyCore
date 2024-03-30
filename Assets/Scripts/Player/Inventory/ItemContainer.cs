@@ -5,13 +5,13 @@ using UnityEngine;
 public class ItemContainer : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _ui;
-    [SerializeField]
-    private Transform _slotsParent;
-    [SerializeField]
     private GameObject _inventorySlotPrefab;
     [SerializeField]
-    private int _numberOfSlots;
+    private InventorySlot[] _uniqueSlots;
+    [SerializeField]
+    private Transform _additionalSlotsParent;
+    [SerializeField]
+    private int _numberOfAdditionalSlots;
 
     private InventorySlot[] _slots;
 
@@ -29,10 +29,17 @@ public class ItemContainer : MonoBehaviour
             throw new System.Exception("parentDuringDragAndDrop is null.");
         }
 
-        _slots = new InventorySlot[_numberOfSlots];
-        for (int i = 0; i < _numberOfSlots; i++)
+        _slots = new InventorySlot[_uniqueSlots.Length + _numberOfAdditionalSlots];
+
+        for (int i = 0; i < _uniqueSlots.Length; i++)
         {
-            GameObject instantiated = Instantiate(_inventorySlotPrefab, _slotsParent);
+            _uniqueSlots[i].InitializeAfterInstantiate(ItemIdentity.ItemSortType.None, parentDuringDragAndDrop, dragAndDrop);
+            _slots[i] = _uniqueSlots[i];
+        }
+
+        for (int i = _uniqueSlots.Length; i < _uniqueSlots.Length + _numberOfAdditionalSlots; i++)
+        {
+            GameObject instantiated = Instantiate(_inventorySlotPrefab, _additionalSlotsParent);
             _slots[i] = instantiated.GetComponentInChildren<InventorySlot>();
             _slots[i].InitializeAfterInstantiate(ItemIdentity.ItemSortType.None, parentDuringDragAndDrop, dragAndDrop);
         }
@@ -44,8 +51,6 @@ public class ItemContainer : MonoBehaviour
         {
             Inventory.Instance.DragAndDrop.TryReturnDraggedItemToItsSlot();
         }
-        _ui.SetActive(false);
-
     }
 
     private bool AnySlotInThisContainerIsBeingDragged()
