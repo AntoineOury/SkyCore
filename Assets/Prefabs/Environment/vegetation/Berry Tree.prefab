@@ -157,10 +157,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e9eddff49e9d09478b46215895a6d3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _harvestableIndicator: {fileID: 3625939396564118192}
+  _itemIdentity: {fileID: 11400000, guid: ea60c6bcafafb47449f58b1932dda3a8, type: 2}
+  _numberToHarvest: 3
   _cooldown: 10
-  _foodItemIdentity: {fileID: 11400000, guid: ea60c6bcafafb47449f58b1932dda3a8, type: 2}
-  _numOfBerries: 3
-  _indicator: {fileID: 3625939396564118192}
 --- !u!1001 &2843144087953639335
 PrefabInstance:
   m_ObjectHideFlags: 0
