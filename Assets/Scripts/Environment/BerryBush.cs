@@ -9,7 +9,7 @@ public class BerryBush : Interactable
     private int _cooldown;
     
     [SerializeField]
-    private ItemIdentity _berryItemIdentity;
+    private ItemIdentity _foodItemIdentity;
     private bool _canBeHarvested = false;
     [SerializeField, Tooltip("The number of berries to be harvested")]
     private int _numOfBerries;
@@ -44,12 +44,12 @@ public class BerryBush : Interactable
     {
         if (_canBeHarvested)
         {
-            ItemStack item = new ItemStack(_berryItemIdentity, _numOfBerries);
+            ItemStack item = new ItemStack(_foodItemIdentity, _numOfBerries);
             Inventory.Instance.TakeInAsManyAsFit(item);
 
             _canBeHarvested = false;
             _indicator.SetActive(false);
-
+			
             StartCoroutine(BushCooldown());
         }
     }

@@ -27,11 +27,11 @@ public class InventoryDragAndDrop
 
 
     private Transform _playerTransform;
-    private BerryItemIdentity _berryItemIdentity;
+    private FoodItemIdentity _berryItemIdentity;
 
     public InventorySlot BeingDragged => _beingDragged;
 
-    public InventoryDragAndDrop(BerryItemIdentity berryItemIdentity)
+    public InventoryDragAndDrop(FoodItemIdentity berryItemIdentity)
     {
         _berryItemIdentity = berryItemIdentity;
         _click = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>().actions.FindAction("ClickForDragAndDrop", true);

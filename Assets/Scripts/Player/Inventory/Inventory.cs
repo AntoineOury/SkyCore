@@ -25,7 +25,7 @@ public class Inventory : MonoBehaviour
     private Transform _resourceSectionSlotsParent;
 
     [SerializeField]
-    private BerryItemIdentity _berryItemIdentity;
+    private FoodItemIdentity _berryItemIdentity;
 
     [SerializeField]
     private int _hotBarStacksCapacity = 3;
