@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class InteractableWithUIMode : Interactable
+public class InteractableWithUIMode : Interactable
 {
     [SerializeField]
     private float _reactivateTime = 1.25f;
 
     [SerializeField]
-    private GameObject _virtualCamera;
+    private GameObject _uiAndMaybeVirtualCamera;
 
     private bool _interacting;
     public bool IsInteracting
@@ -41,9 +41,9 @@ public abstract class InteractableWithUIMode : Interactable
     private void SetInteract(bool interact)
     {
         IsInteracting = interact;
-
-        _virtualCamera.SetActive(interact);
-
+        
+        _uiAndMaybeVirtualCamera.SetActive(interact);
+        
         CursorMode.ReasonsForUnlockedCursor.ChangeReason("interacting", interact);
 
         if (interact)
@@ -52,7 +52,14 @@ public abstract class InteractableWithUIMode : Interactable
         }
         else
         {
-            Invoke(nameof(ReactivateUI), _reactivateTime);
+            if (_reactivateTime == 0)
+            {
+                ReactivateUI();
+            }
+            else
+            {
+                Invoke(nameof(ReactivateUI), _reactivateTime);
+            }
         }
     }
 

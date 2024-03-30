@@ -25,23 +25,21 @@ public class InventoryDragAndDrop
 
     private LayerMask _jellyFeedingLayerMask = 1 << LayerMask.NameToLayer("Jellies");
 
-    private RectTransform[] _whereToConsiderMouseInsideInventory;
 
     private Transform _playerTransform;
-    private CapsuleCollider _playerCapsuleCollider;
     private BerryItemIdentity _berryItemIdentity;
 
-    public InventoryDragAndDrop(RectTransform[] whereToConsiderMouseInsideInventory, BerryItemIdentity berryItemIdentity)
+    public InventorySlot BeingDragged => _beingDragged;
+
+    public InventoryDragAndDrop(BerryItemIdentity berryItemIdentity)
     {
         _berryItemIdentity = berryItemIdentity;
-        _whereToConsiderMouseInsideInventory = whereToConsiderMouseInsideInventory;
         _click = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>().actions.FindAction("ClickForDragAndDrop", true);
         _click.started += OnClickStart;
         _click.canceled += OnClickCancel;
         _click.Disable();
 
         _playerTransform = PlayerMovement.Instance.transform;
-        _playerCapsuleCollider = _playerTransform.GetComponent<CapsuleCollider>();
     }
 
     public void EnableInput()
@@ -51,11 +49,16 @@ public class InventoryDragAndDrop
 
     public void DisableInputAndStop()
     {
+        TryReturnDraggedItemToItsSlot();
+        _click.Disable();
+    }
+
+    public void TryReturnDraggedItemToItsSlot()
+    {
         if (_beingDragged != null)
         {
             TryMoveDraggedItemToSlot(_beingDragged, true);
         }
-        _click.Disable();
     }
 
     private void OnClickStart(InputAction.CallbackContext context)
@@ -144,17 +147,7 @@ public class InventoryDragAndDrop
             throw new System.Exception("_beingDragged._itemStack is null. This shouldn't be possible");
         }
 
-        bool isOutsideInventory = true;
-        for (int i = 0; i < _whereToConsiderMouseInsideInventory.Length; i++)
-        {
-            if (RectTransformUtility.RectangleContainsScreenPoint(_whereToConsiderMouseInsideInventory[i], Input.mousePosition))
-            {
-                isOutsideInventory = false;
-                break;
-            }
-        }
-
-        if (isOutsideInventory)
+        if (!AreaToConsiderMouseInsideInventory.MouseIsInsideInventory())
         {
             FinishDragOutsideInventory();
         }
@@ -164,7 +157,11 @@ public class InventoryDragAndDrop
             if (slotBelowMouse != null 
                 && !InventoryInfoGetter.UnmatchedSortTypes(_beingDragged._itemStack.identity.SortType, slotBelowMouse.SortType))
             {
-                TryMoveDraggedItemToSlot(slotBelowMouse);
+                if (slotBelowMouse._itemStack == null || !InventoryInfoGetter.UnmatchedSortTypes(slotBelowMouse._itemStack.identity.SortType
+                    , _beingDragged.SortType))
+                {
+                    TryMoveDraggedItemToSlot(slotBelowMouse);
+                }
             }
         }
     }

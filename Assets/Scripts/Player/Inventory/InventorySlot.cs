@@ -67,6 +67,12 @@ public class InventorySlot : MonoBehaviour
                     + _itemStack.identity.name + ", amount: " + _itemStack.amount + ", amount shown: " + _countText.text);
             }
         }
+
+
+        if (_dragAndDrop == null)
+        {
+            throw new System.Exception("Inventory slot's _dragAndDrop is null. Remember to call InitializeAfterInstantiate");
+        }
     }
 #endif
 

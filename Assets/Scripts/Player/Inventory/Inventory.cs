@@ -14,7 +14,7 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private Animator _animator;
     [SerializeField]
-    private Transform _itemParentDuringDragAndDrop;
+    private GameObject _prefabForItemParentDuringDragAndDrop;
     [SerializeField]
     private Transform _hotbarSectionSlotsParent;
     [SerializeField]
@@ -23,8 +23,6 @@ public class Inventory : MonoBehaviour
     private Transform _toolSectionSlotsParent;
     [SerializeField]
     private Transform _resourceSectionSlotsParent;
-    [SerializeField]
-    private RectTransform[] _whereToConsiderMouseInsideInventory;
 
     [SerializeField]
     private BerryItemIdentity _berryItemIdentity;
@@ -49,6 +47,10 @@ public class Inventory : MonoBehaviour
         
     public InventoryDragAndDrop _dragAndDrop;
 
+    public InventoryDragAndDrop DragAndDrop => _dragAndDrop;
+
+    public Transform ParentDuringDragAndDrop { get; private set; }
+
     private static Inventory _instance;
     public static Inventory Instance
     {
@@ -57,6 +59,7 @@ public class Inventory : MonoBehaviour
             if (_instance == null)
             {
                 _instance = GameObject.FindGameObjectWithTag("InventoryUI").GetComponent<Inventory>();
+                _instance.CheckCreateThingsUsedByContainersToo();
             }
             return _instance;
         }
@@ -68,20 +71,29 @@ public class Inventory : MonoBehaviour
     public GameObject HotbarHighlight => _hotBarHighlight;
     public Transform HotBarSlotsParent => _hotbarSectionSlotsParent;
 
+    private void CheckCreateThingsUsedByContainersToo()
+    {
+        if (_dragAndDrop == null)
+        {
+            ParentDuringDragAndDrop = Instantiate(_prefabForItemParentDuringDragAndDrop).transform;
+            _dragAndDrop = new InventoryDragAndDrop(_berryItemIdentity);
+        }
+
+    }
 
     private void Awake()
     {
-        _dragAndDrop = new InventoryDragAndDrop(_whereToConsiderMouseInsideInventory, _berryItemIdentity);
+        CheckCreateThingsUsedByContainersToo();
 
         _hotbarSection = new InventorySection(_hotBarStacksCapacity, ItemIdentity.ItemSortType.None
-            , _inventorySlotPrefab, _hotbarSectionSlotsParent, _itemParentDuringDragAndDrop, _dragAndDrop);
+            , _inventorySlotPrefab, _hotbarSectionSlotsParent, ParentDuringDragAndDrop, _dragAndDrop);
 
         InventorySection jellySection = new InventorySection(_jellySectionStacksCapacity, ItemIdentity.ItemSortType.JellyItem
-            , _inventorySlotPrefab, _jellySectionSlotsParent, _itemParentDuringDragAndDrop, _dragAndDrop);
+            , _inventorySlotPrefab, _jellySectionSlotsParent, ParentDuringDragAndDrop, _dragAndDrop);
         InventorySection toolSection = new InventorySection(_toolSectionStacksCapacity, ItemIdentity.ItemSortType.Tool
-            , _inventorySlotPrefab, _toolSectionSlotsParent, _itemParentDuringDragAndDrop, _dragAndDrop);
+            , _inventorySlotPrefab, _toolSectionSlotsParent, ParentDuringDragAndDrop, _dragAndDrop);
         InventorySection resourceSection = new InventorySection(_resourceSectionStacksCapacity, ItemIdentity.ItemSortType.Resource
-           , _inventorySlotPrefab, _resourceSectionSlotsParent, _itemParentDuringDragAndDrop, _dragAndDrop);
+           , _inventorySlotPrefab, _resourceSectionSlotsParent, ParentDuringDragAndDrop, _dragAndDrop);
 
         _sections = new InventorySection[] { _hotbarSection, jellySection, toolSection, resourceSection };
 

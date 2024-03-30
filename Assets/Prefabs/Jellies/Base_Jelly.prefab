@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _reactivateTime: 2
-  _virtualCamera: {fileID: 2479648952889777525}
+  _uiAndMaybeVirtualCamera: {fileID: 2479648952889777525}
   _feedButton: {fileID: 6272395147883262643}
   _saturationSlider: {fileID: 3804658729574142467}
   _saturationText: {fileID: 6462923895547567440}
