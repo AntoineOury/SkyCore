@@ -156,9 +156,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c27351a471b552246bedadfd5e3315e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _wandering: {fileID: 4401181319817377567}
   _reactivateTime: 2
-  _jellyVCamera: {fileID: 2479648952889777525}
+  _uiAndMaybeVirtualCamera: {fileID: 2479648952889777525}
   _feedButton: {fileID: 6272395147883262643}
   _saturationSlider: {fileID: 3804658729574142467}
   _saturationText: {fileID: 6462923895547567440}

@@ -61,51 +61,26 @@ namespace Player.Motion
             }
         }
 
-        private int _numberOfReasonsToIgnoreWASDInputs = 0;
-        public int NumberOfReasonsToIgnoreWASDInputs
-        {
-            get => _numberOfReasonsToIgnoreWASDInputs;
-            set
-            {
-                _numberOfReasonsToIgnoreWASDInputs = value;
-                //Debug.Log("# reasons ignore WASD: " + value);
-                if (_numberOfReasonsToIgnoreWASDInputs < 0)
-                {
-                    throw new System.Exception("In PlayerMovement, _numberOfReasonsToIgnoreWASDInputs < 0: " + _numberOfReasonsToIgnoreWASDInputs);
-                }
-            }
-        }
-        public bool IgnoreWASDInputs => NumberOfReasonsToIgnoreWASDInputs > 0;
-
-        private int _numberOfReasonsToIgnoreJumpInputs = 0;
-        public int NumberOfReasonsToIgnoreJumpInputs
-        {
-            get => _numberOfReasonsToIgnoreJumpInputs;
-            set
-            {
-                _numberOfReasonsToIgnoreJumpInputs = value;
-                //Debug.Log("# reasons ignore jump: " + value);
-                if (_numberOfReasonsToIgnoreJumpInputs < 0)
-                {
-                    throw new System.Exception("In PlayerMovement, _numberOfReasonsToIgnoreJumpInputs < 0: " + _numberOfReasonsToIgnoreJumpInputs);
-                }
-                if (_numberOfReasonsToIgnoreJumpInputs > 0)
-                {
-                    // Clear recent inputs which could otherwise cause jumping later.
-                    _jumpInputTime = float.NegativeInfinity;
-                    _jumpInputHappenedInAFrameWhereFixedUpdateDidntRun = false;
-                }
-            }
-        }
-        public bool IgnoreJumpInputs => NumberOfReasonsToIgnoreJumpInputs > 0;
+        public Reasons IgnoreWASDInput { get; private set; }
+        public Reasons IgnoreJumpInput { get; private set; }
 
 
         private void Awake()
         {
+            IgnoreWASDInput = new Reasons();
+            IgnoreJumpInput = new Reasons(onBecomeTrue: OnIgnoreJumpInputBecomesTrue);
+
             _settings.Initialize();
             _rigidbody = GetComponent<Rigidbody>();
             _rigidbody.sleepThreshold = -1; // don't sleep
             _instance = this;
+        }
+
+        private void OnIgnoreJumpInputBecomesTrue()
+        {
+            // Clear recent inputs which could otherwise cause jumping later.
+            _jumpInputTime = float.NegativeInfinity;
+            _jumpInputHappenedInAFrameWhereFixedUpdateDidntRun = false;
         }
 
         private void OnEnable() => _rigidbody.isKinematic = false;
@@ -278,7 +253,7 @@ namespace Player.Motion
 
         public void GetWASDInputAxes(out float rightLeft, out float forwardsBackwards)
         {
-            if (IgnoreWASDInputs)
+            if (IgnoreWASDInput.AnyReasons)
             {
                 rightLeft = 0;
                 forwardsBackwards = 0;
@@ -290,7 +265,7 @@ namespace Player.Motion
 
         public bool GetJumpInput()
         {
-            if (IgnoreJumpInputs)
+            if (IgnoreJumpInput.AnyReasons)
             {
                 return false;
             }

@@ -47,7 +47,7 @@ public class Wandering : MonoBehaviour
     /// </summary>
     private void UpdateWandering()
     {
-        if (!_jellyInteractBase.Interacting)
+        if (!_jellyInteractBase.IsInteracting)
         {
             ChooseWanderDestination();
         }

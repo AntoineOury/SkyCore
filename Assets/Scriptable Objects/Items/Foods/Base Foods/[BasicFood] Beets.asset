@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3a20d29b5288624e8fd9f6854587b14, type: 3}
   m_Name: '[BasicFood] Beets'
   m_EditorClassIdentifier: 
-  <Icon>k__BackingField: {fileID: 21300000, guid: ffba26bbe9968df4d8e501be48a6c5a4,
+  <Icon>k__BackingField: {fileID: 21300000, guid: 2151856b1887a624fa566e1b4e6c135f,
     type: 3}
-  <ItemPrefab>k__BackingField: {fileID: 2871547551631433579, guid: 2cf3a1d7a2f05e84c82186c4e888254d,
+  <ItemPrefab>k__BackingField: {fileID: 2871547551631433579, guid: d8a79b7ef1d55ee41be15db37ca68359,
     type: 3}
   <MaxStack>k__BackingField: 99
   <SortType>k__BackingField: 2

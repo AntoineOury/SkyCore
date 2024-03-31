@@ -315,7 +315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _reactivateTime: 1.25
-  _islandHeartVCamera: {fileID: 2742302176866090469}
+  _uiAndMaybeVirtualCamera: {fileID: 2742302176866090469}
   _feedButton: {fileID: 9168640807804570373}
 --- !u!114 &1735056278268887820
 MonoBehaviour:
