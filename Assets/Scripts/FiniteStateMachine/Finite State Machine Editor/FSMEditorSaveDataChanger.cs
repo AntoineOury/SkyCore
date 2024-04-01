@@ -10,232 +10,220 @@ namespace FiniteStateMachineEditor
 {
     public static class FSMEditorSaveDataChanger
     {
-        private static SerializedObject _serializedObject;
-        private static SerializedProperty _serializedProperty;
-
-        private static SerializedProperty Property(Object unityObject, string property)
-        {
-            _serializedObject = new SerializedObject(unityObject);
-            _serializedProperty = _serializedObject.FindProperty(property);
-            return _serializedProperty;
-        }
-
-        private static SerializedProperty SwitchProperty(string property)
-        {
-            _serializedProperty = _serializedObject.FindProperty(property);
-            return _serializedProperty;
-        }
-
-        private static SerializedProperty SubProperty(string subProperty)
-        {
-            _serializedProperty = _serializedProperty.FindPropertyRelative(subProperty);
-            return _serializedProperty;
-        }
-
-        private static SerializedProperty ArrayElement(int index)
-        {
-            _serializedProperty = _serializedProperty.GetArrayElementAtIndex(index);
-            return _serializedProperty;
-        }
-
-        private static SerializedProperty AppendAndGotoNewArrayElement(int priorLength)
-        {
-            _serializedProperty.InsertArrayElementAtIndex(priorLength);
-            return ArrayElement(priorLength);
-        }
-
-        private static SerializedProperty GoToPropertyOfCondition(FSMTransition transition
-            , int conditionIndex, string property)
-        {
-            Property(transition, "_conditions");
-            ArrayElement(conditionIndex);
-            return SubProperty(property);
-        }
-
-        private static void ApplyModifiedProperties()
-        {
-            _serializedObject.ApplyModifiedPropertiesWithoutUndo();
-            _serializedObject = null; // to make it less bug-prone
-            _serializedProperty = null;
-        }
-
-
-
         public static void RemoveParameterFromFSMDefinition(FSMDefinition fsmDefinition, int parameterIndex)
         {
-            Property(fsmDefinition, "<Parameters>k__BackingField").DeleteArrayElementAtIndex(parameterIndex);
-            ApplyModifiedProperties();
+            SerializedObject so = new SerializedObject(fsmDefinition);
+            SerializedProperty arrayProperty = so.FindProperty("<Parameters>k__BackingField");
+            arrayProperty.DeleteArrayElementAtIndex(parameterIndex);
+            so.ApplyModifiedPropertiesWithoutUndo();
         }
 
 
         public static void AddParameterToFSMDefinition(FSMParameter parameter, FSMDefinition fsmDefinition)
         {
-            Property(fsmDefinition, "<Parameters>k__BackingField");
-            AppendAndGotoNewArrayElement(fsmDefinition.Parameters.Length).objectReferenceValue = parameter;
-            ApplyModifiedProperties();
+            int newIndex = fsmDefinition.Parameters.Length;
+            SerializedObject so = new SerializedObject(fsmDefinition);
+            SerializedProperty arrayProperty = so.FindProperty("<Parameters>k__BackingField");
+            arrayProperty.InsertArrayElementAtIndex(newIndex);
+            arrayProperty.GetArrayElementAtIndex(newIndex).objectReferenceValue = parameter;
+            so.ApplyModifiedPropertiesWithoutUndo();
         }
-
-       
 
 
 
 
         public static void SetParameterInitialTrigger(FSMParameter parameter, bool initial)
         {
-            Property(parameter, "<InitialTrigger>k__BackingField").boolValue = initial;
-            ApplyModifiedProperties();
+            SerializedObject so = new SerializedObject(parameter);
+            so.FindProperty("<InitialTrigger>k__BackingField").boolValue = initial;
+            so.ApplyModifiedPropertiesWithoutUndo();
         }
 
         public static void SetParameterInitialBool(FSMParameter parameter, bool initial)
         {
-            Property(parameter, "<InitialBool>k__BackingField").boolValue = initial;
-            ApplyModifiedProperties();
+            SerializedObject so = new SerializedObject(parameter);
+            so.FindProperty("<InitialBool>k__BackingField").boolValue = initial;
+            so.ApplyModifiedPropertiesWithoutUndo();
         }
 
         public static void SetParameterInitialFloat(FSMParameter parameter, float initial)
         {
-            Property(parameter, "<InitialFloat>k__BackingField").floatValue = initial;
-            ApplyModifiedProperties();
+            SerializedObject so = new SerializedObject(parameter);
+            so.FindProperty("<InitialFloat>k__BackingField").floatValue = initial;
+            so.ApplyModifiedPropertiesWithoutUndo();
         }
 
         public static void SetParameterType(FSMParameter parameter, int typeIndex)
         {
-            Property(parameter, "<Type>k__BackingField").intValue = typeIndex;
-            ApplyModifiedProperties();
+            SerializedObject so = new SerializedObject(parameter);
+            so.FindProperty("<Type>k__BackingField").intValue = typeIndex;
+            so.ApplyModifiedPropertiesWithoutUndo();
         }
 
         public static void SetConditionParameter(FSMTransition transition, int conditionIndex, FSMParameter parameter)
         {
-            GoToPropertyOfCondition(transition, conditionIndex, "_parameter")
-                .objectReferenceValue = parameter;
-            ApplyModifiedProperties();
+            SerializedObject so = new SerializedObject(transition);
+            SerializedProperty conditionsArrayProperty = so.FindProperty("_conditions");
+            SerializedProperty conditionProperty = conditionsArrayProperty.GetArrayElementAtIndex(conditionIndex);
+            conditionProperty.FindPropertyRelative("_parameter").objectReferenceValue = parameter;
+            so.ApplyModifiedPropertiesWithoutUndo();
         }
 
         public static void SetConditionBoolRequirement(FSMTransition transition, int conditionIndex, bool requiredBool)
         {
-            GoToPropertyOfCondition(transition, conditionIndex, "_equalsForBoolParameter")
-                .boolValue = requiredBool;
-            ApplyModifiedProperties();
+            SerializedObject so = new SerializedObject(transition);
+            SerializedProperty conditionsArrayProperty = so.FindProperty("_conditions");
+            SerializedProperty conditionProperty = conditionsArrayProperty.GetArrayElementAtIndex(conditionIndex);
+            conditionProperty.FindPropertyRelative("_equalsForBoolParameter").boolValue = requiredBool;
+            so.ApplyModifiedPropertiesWithoutUndo();
         }
 
-        public static void SetConditionFloatComparisonType(FSMTransition transition, int conditionIndex, int comparisonTypeAsInt)
+        public static void SetConditionFloatComparisonType(FSMTransition transition, int conditionIndex
+            , int comparisonTypeAsInt)
         {
-            GoToPropertyOfCondition(transition, conditionIndex, "_comparisonTypeForFloatParameter")
-               .intValue = comparisonTypeAsInt;
-            ApplyModifiedProperties();
+            SerializedObject so = new SerializedObject(transition);
+            SerializedProperty conditionsArrayProperty = so.FindProperty("_conditions");
+            SerializedProperty conditionProperty = conditionsArrayProperty.GetArrayElementAtIndex(conditionIndex);
+            conditionProperty.FindPropertyRelative("_comparisonTypeForFloatParameter").intValue = comparisonTypeAsInt;
+            so.ApplyModifiedPropertiesWithoutUndo();
         }
-
-        
 
         public static void SetConditionOtherFloatParameterToCompareTo(FSMTransition transition, int conditionIndex, FSMParameter compareTo)
         {
-            GoToPropertyOfCondition(transition, conditionIndex, "_otherFloatParameterToCompareTo")
-              .objectReferenceValue = compareTo;
-            ApplyModifiedProperties();
+            SerializedObject so = new SerializedObject(transition);
+            SerializedProperty conditionsArrayProperty = so.FindProperty("_conditions");
+            SerializedProperty conditionProperty = conditionsArrayProperty.GetArrayElementAtIndex(conditionIndex);
+            conditionProperty.FindPropertyRelative("_otherFloatParameterToCompareTo").objectReferenceValue = compareTo;
+            so.ApplyModifiedPropertiesWithoutUndo();
         }
 
         public static void SetConditionFloatValueToCompareTo(FSMTransition transition, int conditionIndex, float compareTo)
         {
-            GoToPropertyOfCondition(transition, conditionIndex, "_comparedToForFloatParameter")
-              .floatValue = compareTo;
-            ApplyModifiedProperties();
+            SerializedObject so = new SerializedObject(transition);
+            SerializedProperty conditionsArrayProperty = so.FindProperty("_conditions");
+            SerializedProperty conditionProperty = conditionsArrayProperty.GetArrayElementAtIndex(conditionIndex);
+            conditionProperty.FindPropertyRelative("_comparedToForFloatParameter").floatValue = compareTo;
+            so.ApplyModifiedPropertiesWithoutUndo();
         }
 
 
 
         public static void AddDefaultCondition(FSMTransition transition, FSMDefinition fsmDefinition)
         {
-            Property(transition, "_conditions");
-            AppendAndGotoNewArrayElement(transition.Conditions.Length);
-            _serializedProperty.FindPropertyRelative("_parameter").objectReferenceValue = fsmDefinition.Parameters[0];
-            _serializedProperty.FindPropertyRelative("_equalsForBoolParameter").boolValue = false;
-            _serializedProperty.FindPropertyRelative("_comparisonTypeForFloatParameter").intValue = 0;
-            _serializedProperty.FindPropertyRelative("_otherFloatParameterToCompareTo").objectReferenceValue = null;
-            _serializedProperty.FindPropertyRelative("_comparedToForFloatParameter").floatValue = 0;
-            ApplyModifiedProperties();
+            int newIndex = transition.Conditions.Length;
+            SerializedObject so = new SerializedObject(transition);
+            SerializedProperty conditionsArrayProperty = so.FindProperty("_conditions");
+            conditionsArrayProperty.InsertArrayElementAtIndex(newIndex);
+            SerializedProperty conditionProperty = conditionsArrayProperty.GetArrayElementAtIndex(newIndex);
+            conditionProperty.FindPropertyRelative("_parameter").objectReferenceValue = fsmDefinition.Parameters[0];
+            conditionProperty.FindPropertyRelative("_equalsForBoolParameter").boolValue = false;
+            conditionProperty.FindPropertyRelative("_comparisonTypeForFloatParameter").intValue = 0;
+            conditionProperty.FindPropertyRelative("_otherFloatParameterToCompareTo").objectReferenceValue = null;
+            conditionProperty.FindPropertyRelative("_comparedToForFloatParameter").floatValue = 0;
+            so.ApplyModifiedPropertiesWithoutUndo();
+
         }
 
         
 
         public static void RemoveTransitionAtIndex(FSMDefinition fsmDefinition, int index)
         {
-            Property(fsmDefinition, "<Transitions>k__BackingField").DeleteArrayElementAtIndex(index);
-            ApplyModifiedProperties();
+            SerializedObject so = new SerializedObject(fsmDefinition);
+            SerializedProperty transitionsArrayProperty = so.FindProperty("<Transitions>k__BackingField");
+            transitionsArrayProperty.DeleteArrayElementAtIndex(index);
+            so.ApplyModifiedPropertiesWithoutUndo();
         }
 
         public static void RemoveConditionAtIndex(FSMTransition transition, int index)
         {
-            Property(transition, "_conditions").DeleteArrayElementAtIndex(index);
-            ApplyModifiedProperties();
+            SerializedObject so = new SerializedObject(transition);
+            SerializedProperty conditionsArrayProperty = so.FindProperty("_conditions");
+            conditionsArrayProperty.DeleteArrayElementAtIndex(index);
+            so.ApplyModifiedPropertiesWithoutUndo();
         }
 
         public static void SetFSMTransitionLogFailureReason(FSMTransition transition, bool logFailureReason)
         {
-            Property(transition, "<LogFailureReason>k__BackingField").boolValue = logFailureReason;
-            ApplyModifiedProperties();
+            SerializedObject so = new SerializedObject(transition);
+            so.FindProperty("<LogFailureReason>k__BackingField").boolValue = logFailureReason;
+            so.ApplyModifiedPropertiesWithoutUndo();
         }
 
         public static void SetFSMTransitionDisable(FSMTransition transition, bool disable)
         {
-            Property(transition, "_disable").boolValue = disable;
-            ApplyModifiedProperties();
+            SerializedObject so = new SerializedObject(transition);
+            so.FindProperty("_disable").boolValue = disable;
+            so.ApplyModifiedPropertiesWithoutUndo();
         }
 
         public static void SetFSMTransitionMinDurationInFrom(FSMTransition transition, float minDurationInFrom)
         {
-            Property(transition, "_minDurationInFrom").floatValue = minDurationInFrom;
-            ApplyModifiedProperties();
+            SerializedObject so = new SerializedObject(transition);
+            so.FindProperty("_minDurationInFrom").floatValue = minDurationInFrom;
+            so.ApplyModifiedPropertiesWithoutUndo();
         }
 
         public static void SetFSMTransitionMinDurationParameter(FSMTransition transition, FSMParameter parameter)
         {
-            Property(transition, "_parameterForMinDurationInFrom").objectReferenceValue = parameter;
-            ApplyModifiedProperties();
+            SerializedObject so = new SerializedObject(transition);
+            so.FindProperty("_parameterForMinDurationInFrom").objectReferenceValue = parameter;
+            so.ApplyModifiedPropertiesWithoutUndo();
         }
 
         public static void SetFSMDefinitionDefaultState(FSMDefinition fsmDefinition, FSMState defaultState)
         {
-            Property(fsmDefinition, "<DefaultState>k__BackingField").objectReferenceValue = defaultState;
-            ApplyModifiedProperties();
+            SerializedObject so = new SerializedObject(fsmDefinition);
+            so.FindProperty("<DefaultState>k__BackingField").objectReferenceValue = defaultState;
+            so.ApplyModifiedPropertiesWithoutUndo();
         }
 
         public static void AddTransitionToFSMDefinition(FSMDefinition fsmDefinition, FSMTransition transition)
         {
-            Property(fsmDefinition, "<Transitions>k__BackingField");
-            AppendAndGotoNewArrayElement(fsmDefinition.Transitions.Length).objectReferenceValue = transition;
-            ApplyModifiedProperties();
+            SerializedObject so = new SerializedObject(fsmDefinition);
+            int newIndex = fsmDefinition.Transitions.Length;
+            SerializedProperty transitionsArrayProperty = so.FindProperty("<Transitions>k__BackingField");
+            transitionsArrayProperty.InsertArrayElementAtIndex(newIndex);
+            SerializedProperty transitionProperty = transitionsArrayProperty.GetArrayElementAtIndex(newIndex);
+            transitionProperty.objectReferenceValue = transition;
+            so.ApplyModifiedProperties();
         }
 
         public static void SetFSMTransitionFromAndTo(FSMTransition transition, FSMState from, FSMState to)
         {
-            Property(transition, "_from").objectReferenceValue = from;
-            SwitchProperty("_to").objectReferenceValue = to;
-            ApplyModifiedProperties();
+            SerializedObject so = new SerializedObject(transition);
+            so.FindProperty("_from").objectReferenceValue = from;
+            so.FindProperty("_to").objectReferenceValue = to;
+            so.ApplyModifiedProperties();
         }
 
         public static void AddStateToFSMDefinition(FSMDefinition fsmDefinition, FSMState state)
         {
             bool noStatesYet = fsmDefinition.EditorInfo.States == null;
-            int statesLength = noStatesYet ? 0 : fsmDefinition.EditorInfo.States.Length;
-
             bool noPositionsYet = fsmDefinition.EditorInfo.StateEditorPositions == null;
+            int statesLength = noStatesYet ? 0 : fsmDefinition.EditorInfo.States.Length;
             int positionsLength = noPositionsYet ? 0 : fsmDefinition.EditorInfo.StateEditorPositions.Length;
-
             if (statesLength != positionsLength)
-            {
                 throw new System.InvalidOperationException("Unequal lengths of arrays in the fsm definition's editor info "
-                    + statesLength + " " + positionsLength + ", fsmDefinition: " + fsmDefinition.name);
-            }
+                    + statesLength + " " + positionsLength);
 
-            SerializedProperty editorInfoProperty = Property(fsmDefinition, "<EditorInfo>k__BackingField");
-            SubProperty("<States>k__BackingField");
-            AppendAndGotoNewArrayElement(statesLength).objectReferenceValue = state;
+            SerializedObject so = new SerializedObject(fsmDefinition);
 
-            _serializedProperty = editorInfoProperty;
-            SubProperty("<StateEditorPositions>k__BackingField");
-            AppendAndGotoNewArrayElement(statesLength).vector2Value = Camera.main.transform.position;
+            int newIndex = noStatesYet ? 0 : fsmDefinition.EditorInfo.States.Length;
 
-            ApplyModifiedProperties();
+            SerializedProperty statesArrayProperty = so.FindProperty("<EditorInfo>k__BackingField")
+               .FindPropertyRelative("<States>k__BackingField");
+            statesArrayProperty.InsertArrayElementAtIndex(newIndex);
+            SerializedProperty stateProperty = statesArrayProperty.GetArrayElementAtIndex(newIndex);
+            stateProperty.objectReferenceValue = state;
+            
+            Vector2 position = Camera.main.transform.position;
+            SerializedProperty positionsArrayProperty = so.FindProperty("<EditorInfo>k__BackingField")
+                .FindPropertyRelative("<StateEditorPositions>k__BackingField");
+            positionsArrayProperty.InsertArrayElementAtIndex(newIndex);
+            SerializedProperty positionProperty = positionsArrayProperty.GetArrayElementAtIndex(newIndex);
+            positionProperty.vector2Value = position;
+
+            so.ApplyModifiedProperties();
         }
 
         public static void RemoveStateAtIndex(FSMDefinition fsmDefinition, int index)
@@ -243,13 +231,17 @@ namespace FiniteStateMachineEditor
             if (fsmDefinition.EditorInfo.States.Length != fsmDefinition.EditorInfo.StateEditorPositions.Length)
                 throw new System.InvalidOperationException("Unequal lengths of arrays in the fsm definition's editor info.");
 
-            SerializedProperty editorInfoProperty = Property(fsmDefinition, "<EditorInfo>k__BackingField");
-            SubProperty("<States>k__BackingField").DeleteArrayElementAtIndex(index);
+            SerializedObject so = new SerializedObject(fsmDefinition);
 
-            _serializedProperty = editorInfoProperty;
-            SubProperty("<StateEditorPositions>k__BackingField").DeleteArrayElementAtIndex(index);
+            SerializedProperty statesArrayProperty = so.FindProperty("<EditorInfo>k__BackingField")
+               .FindPropertyRelative("<States>k__BackingField");
+            statesArrayProperty.DeleteArrayElementAtIndex(index);
 
-            ApplyModifiedProperties();
+            SerializedProperty positionsArrayProperty = so.FindProperty("<EditorInfo>k__BackingField")
+                .FindPropertyRelative("<StateEditorPositions>k__BackingField");
+            positionsArrayProperty.DeleteArrayElementAtIndex(index);
+
+            so.ApplyModifiedPropertiesWithoutUndo();
         }
 
 
@@ -259,34 +251,18 @@ namespace FiniteStateMachineEditor
         public static void SetGameEventsOfState(FSMState state
             , GameEventScriptableObject onEnter, GameEventScriptableObject onUpdate, GameEventScriptableObject onExit)
         {
-            Property(state, "<OnEnter>k__BackingField").objectReferenceValue = onEnter;
-            SwitchProperty("<OnUpdate>k__BackingField").objectReferenceValue = onUpdate;
-            SwitchProperty("<OnExit>k__BackingField").objectReferenceValue = onExit;
-            ApplyModifiedProperties();
-        }
-
-
-        public static void SavePositionOfState(FSMDefinition fsmDefinition, FSMEditorOneState stateEditor)
-        {
-            Property(fsmDefinition, "<EditorInfo>k__BackingField");
-
-            if (!stateEditor.IsForAnystate)
-            {
-                SubProperty("<StateEditorPositions>k__BackingField");
-                ArrayElement(FindStateIndexInFSMDefinition(fsmDefinition, stateEditor.State));
-            }
-            else
-            {
-                SubProperty("<StateEditorForAnystatePosition>k__BackingField");
-            }
-
-            _serializedProperty.vector2Value = stateEditor.transform.position;
-            ApplyModifiedProperties();
+            SerializedObject so = new SerializedObject(state);
+            SerializedProperty onEnterProperty = so.FindProperty("<OnEnter>k__BackingField");
+            SerializedProperty onUpdateProperty = so.FindProperty("<OnUpdate>k__BackingField");
+            SerializedProperty onExitProperty = so.FindProperty("<OnExit>k__BackingField");
+            onEnterProperty.objectReferenceValue = onEnter;
+            onUpdateProperty.objectReferenceValue = onUpdate;
+            onExitProperty.objectReferenceValue = onExit;
+            so.ApplyModifiedProperties();
         }
 
 
 
-        // split this out
         public static Vector2 GetPositionOfState(FSMDefinition fsmDefinition, FSMState state)
         {
             if (state == null)
@@ -297,7 +273,6 @@ namespace FiniteStateMachineEditor
             return fsmDefinition.EditorInfo.StateEditorPositions[index];
         }
 
-        // split this out
         private static int FindStateIndexInFSMDefinition(FSMDefinition fsmDefinition, FSMState state)
         {
             int i = 0;
@@ -311,7 +286,29 @@ namespace FiniteStateMachineEditor
             return i;
         }
 
-        
+        public static void SavePositionOfState(FSMDefinition fsmDefinition, FSMEditorOneState stateEditor)
+        {
+            // Essentially _fsmDefinition.EditorInfo.StateEditorPositions[index] = stateRect.transform.position;
+
+            SerializedObject so = new SerializedObject(fsmDefinition);
+
+            if (!stateEditor.IsForAnystate)
+            {
+                int index = FindStateIndexInFSMDefinition(fsmDefinition, stateEditor.State);
+                so.FindProperty("<EditorInfo>k__BackingField")
+                    .FindPropertyRelative("<StateEditorPositions>k__BackingField")
+                    .GetArrayElementAtIndex(index)
+                    .vector2Value = stateEditor.transform.position;
+            }
+            else
+            {
+                so.FindProperty("<EditorInfo>k__BackingField")
+                   .FindPropertyRelative("<StateEditorForAnystatePosition>k__BackingField")
+                   .vector2Value = stateEditor.transform.position;
+            }
+
+            so.ApplyModifiedPropertiesWithoutUndo();
+        }
 
     }
 }
