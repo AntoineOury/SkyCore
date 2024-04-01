@@ -185,7 +185,7 @@ namespace FiniteStateMachineEditor
             transitionsArrayProperty.InsertArrayElementAtIndex(newIndex);
             SerializedProperty transitionProperty = transitionsArrayProperty.GetArrayElementAtIndex(newIndex);
             transitionProperty.objectReferenceValue = transition;
-            so.ApplyModifiedProperties();
+            so.ApplyModifiedPropertiesWithoutUndo();
         }
 
         public static void SetFSMTransitionFromAndTo(FSMTransition transition, FSMState from, FSMState to)
@@ -193,7 +193,7 @@ namespace FiniteStateMachineEditor
             SerializedObject so = new SerializedObject(transition);
             so.FindProperty("_from").objectReferenceValue = from;
             so.FindProperty("_to").objectReferenceValue = to;
-            so.ApplyModifiedProperties();
+            so.ApplyModifiedPropertiesWithoutUndo();
         }
 
         public static void AddStateToFSMDefinition(FSMDefinition fsmDefinition, FSMState state)
@@ -223,7 +223,7 @@ namespace FiniteStateMachineEditor
             SerializedProperty positionProperty = positionsArrayProperty.GetArrayElementAtIndex(newIndex);
             positionProperty.vector2Value = position;
 
-            so.ApplyModifiedProperties();
+            so.ApplyModifiedPropertiesWithoutUndo();
         }
 
         public static void RemoveStateAtIndex(FSMDefinition fsmDefinition, int index)
@@ -258,7 +258,7 @@ namespace FiniteStateMachineEditor
             onEnterProperty.objectReferenceValue = onEnter;
             onUpdateProperty.objectReferenceValue = onUpdate;
             onExitProperty.objectReferenceValue = onExit;
-            so.ApplyModifiedProperties();
+            so.ApplyModifiedPropertiesWithoutUndo();
         }
 
 
