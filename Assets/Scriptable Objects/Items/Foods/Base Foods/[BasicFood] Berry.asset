@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3a20d29b5288624e8fd9f6854587b14, type: 3}
   m_Name: '[BasicFood] Berry'
   m_EditorClassIdentifier: 
-  <Icon>k__BackingField: {fileID: 21300000, guid: ffba26bbe9968df4d8e501be48a6c5a4,
+  <Icon>k__BackingField: {fileID: 21300000, guid: 63edb4fc3279cdd4ba3ddc5ddae5e819,
     type: 3}
   <ItemPrefab>k__BackingField: {fileID: 2871547551631433579, guid: 2cf3a1d7a2f05e84c82186c4e888254d,
     type: 3}

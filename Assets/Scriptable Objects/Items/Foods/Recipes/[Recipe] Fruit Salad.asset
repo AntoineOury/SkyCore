@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3a20d29b5288624e8fd9f6854587b14, type: 3}
-  m_Name: '[BasicFood] Pepper'
+  m_Name: '[Recipe] Fruit Salad'
   m_EditorClassIdentifier: 
-  <Icon>k__BackingField: {fileID: 21300000, guid: 8d0533d05f86f7f44a7fbac7de41a214,
+  <Icon>k__BackingField: {fileID: 21300000, guid: 3b62053f4d537d04e90102c3ad738275,
     type: 3}
-  <ItemPrefab>k__BackingField: {fileID: 2871547551631433579, guid: 0f0ec47815834ff499bb9a8da0d46516,
+  <ItemPrefab>k__BackingField: {fileID: 2871547551631433579, guid: 25a0cbb85df1e6b4e89a6820482ba8a5,
     type: 3}
   <MaxStack>k__BackingField: 99
   <SortType>k__BackingField: 2
   <AttractionRadius>k__BackingField: 0.75
   <AttractionRadiusIfSpawnedByTossingFromInventory>k__BackingField: 0.75
   <SaturationValue>k__BackingField: 5
-  <Sour>k__BackingField: 0
-  <Sweet>k__BackingField: 0
-  <Savory>k__BackingField: 0
-  <Salty>k__BackingField: 1
-  <Bitter>k__BackingField: 1
-  <Spicy>k__BackingField: 2
+  <Sour>k__BackingField: 1
+  <Sweet>k__BackingField: 3
+  <Savory>k__BackingField: 1
+  <Salty>k__BackingField: 0
+  <Bitter>k__BackingField: 0
+  <Spicy>k__BackingField: 0
