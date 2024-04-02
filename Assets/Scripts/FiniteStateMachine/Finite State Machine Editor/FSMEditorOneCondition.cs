@@ -55,14 +55,14 @@ namespace FiniteStateMachineEditor
 
         public void UpdateParameterDropdownsAndCondition()
         {
-            SetParametersInDropdown(_fsmDefinition, _parameterSelectionDropdown);
-            SetParametersInDropdownOnlyIncludingFloats(_fsmDefinition, _comparedToParameterSelectionDropdown);
+            FSMEditorHelper.SetParametersInDropdown(_fsmDefinition, _parameterSelectionDropdown);
+            FSMEditorHelper.SetParametersInDropdownOnlyIncludingFloats(_fsmDefinition, _comparedToParameterSelectionDropdown);
             UpdateDisplayedCondition();
         }
 
         private void UpdateDisplayedCondition()
         {
-            _parameterSelectionDropdown.SetValueWithoutNotify(GetParameterIndex(_fsmDefinition, Condition.Parameter));
+            _parameterSelectionDropdown.SetValueWithoutNotify(FSMEditorHelper.GetParameterIndex(_fsmDefinition, Condition.Parameter));
 
             _boolRequirementDropdown.SetValueWithoutNotify(Condition.EqualsForBoolParameter ? 1 : 0);
             _floatComparisonDropdown.SetValueWithoutNotify((int)Condition.ComparisonTypeForFloatParameter);
@@ -72,7 +72,7 @@ namespace FiniteStateMachineEditor
             if (compareToOtherParameter)
             {
                 _comparedToParameterSelectionDropdown.SetValueWithoutNotify(
-                    GetParameterIndexAmongstFloats(_fsmDefinition, Condition.OtherFloatParameterToCompareTo));
+                    FSMEditorHelper.GetParameterIndexAmongstFloats(_fsmDefinition, Condition.OtherFloatParameterToCompareTo));
             }
 
             _boolRequirement.SetActive(Condition.Parameter.Type == FSMParameter.ParameterType.Bool);
@@ -121,139 +121,10 @@ namespace FiniteStateMachineEditor
             UpdateDisplayedCondition();
         }
 
-
-
-
         public void OnSelectedToggle(bool toggleTo)
         {
             _backgroundImage.color = toggleTo ? _selectedColor : _normalColor;
             _fsmEditor.OnToggleSelectedConditionEditor(this, toggleTo);
-        }
-
-
-
-
-        // split out these static things
-
-        public static int GetTransitionIndex(FSMDefinition fsmDefinition, FSMTransition transition)
-        {
-            for (int i = 0; i < fsmDefinition.Transitions.Length; i++)
-            {
-                if (fsmDefinition.Transitions[i] == transition)
-                {
-                    return i;
-                }
-            }
-            return -1;
-        }
-
-        public static int GetIndexOfDefaultState(FSMDefinition fsmDefinition)
-        {
-            for (int i = 0; i < fsmDefinition.EditorInfo.States.Length; i++)
-            {
-                if (fsmDefinition.EditorInfo.States[i] == fsmDefinition.DefaultState)
-                {
-                    return i;
-                }
-            }
-            return -1;
-        }
-
-        public static int GetStateIndex(FSMDefinition fsmDefinition, FSMState state)
-        {
-            for (int i = 0; i < fsmDefinition.EditorInfo.States.Length; i++)
-            {
-                if (fsmDefinition.EditorInfo.States[i] == state)
-                {
-                    return i;
-                }
-            }
-            return -1;
-        }
-
-        public static int GetParameterIndex(FSMDefinition fsmDefinition, FSMParameter parameter)
-        {
-            for (int i = 0; i < fsmDefinition.Parameters.Length; i++)
-            {
-                if (fsmDefinition.Parameters[i] == parameter)
-                {
-                    return i;
-                }
-            }
-            return -1;
-        }
-
-        public static int GetParameterIndexAmongstFloats(FSMDefinition fsmDefinition, FSMParameter parameter)
-        {
-            if (parameter.Type != FSMParameter.ParameterType.Float)
-            {
-                throw new System.InvalidOperationException("must be a float parameter");
-            }
-            int result = 0;
-            for (int i = 0; i < fsmDefinition.Parameters.Length; i++)
-            {
-                if (fsmDefinition.Parameters[i] == parameter)
-                    return result;
-                if (fsmDefinition.Parameters[i].Type == FSMParameter.ParameterType.Float)
-                    result++;
-            }
-            throw new System.InvalidOperationException("shouldnt get here, is the parameter not included in the fsmDefinition?");
-        }
-
-        public static void SetParametersInDropdown(FSMDefinition fsmDefinition, TMP_Dropdown dropdown)
-        {
-            FSMParameter[] parameters = fsmDefinition.Parameters;
-            dropdown.options.Clear();
-            for (int i = 0; i < parameters.Length; i++)
-                dropdown.options.Add(new TMP_Dropdown.OptionData(parameters[i].name));
-            dropdown.RefreshShownValue();
-        }
-
-        public static void SetParametersInDropdownOnlyIncludingFloats(FSMDefinition fsmDefinition, TMP_Dropdown dropdown)
-        {
-            FSMParameter[] parameters = fsmDefinition.Parameters;
-            dropdown.options.Clear();
-            for (int i = 0; i < parameters.Length; i++)
-            {
-                if (parameters[i].Type == FSMParameter.ParameterType.Float)
-                    dropdown.options.Add(new TMP_Dropdown.OptionData(parameters[i].name));
-            }
-            dropdown.RefreshShownValue();
-        }
-
-        public static int ConvertIndexOfParameterAmongstFloatsToAmongstAllParameters(FSMDefinition fsmDefinition, int indexAmongstFloats)
-        {
-            int nthFloat = 0;
-            for (int i = 0; i < fsmDefinition.Parameters.Length; i++)
-            {
-                if (fsmDefinition.Parameters[i].Type == FSMParameter.ParameterType.Float)
-                {
-                    if (nthFloat == indexAmongstFloats)
-                        return i;
-                    nthFloat++;
-                }
-            }
-            throw new System.InvalidOperationException("didnt find the float parameter");
-        }
-
-        public static bool HasAnyFloatParameter(FSMDefinition fsmDefinition)
-        {
-            foreach (FSMParameter parameter in fsmDefinition.Parameters)
-            {
-                if (parameter.Type == FSMParameter.ParameterType.Float)
-                    return true;
-            }
-            return false;
-        }
-
-        public static int GetConditionIndex(FSMTransition transition, FSMTransitionCondition condition)
-        {
-            for (int i = 0; i < transition.Conditions.Length; i++)
-            {
-                if (transition.Conditions[i] == condition)
-                    return i;
-            }
-            throw new System.InvalidOperationException("couldn't find the condition in the transition");
         }
     }
 }

@@ -46,7 +46,7 @@ namespace FiniteStateMachineEditor
 
             UpdateText();
 
-            _rectTransform.transform.position = FSMEditorSaveDataChanger.GetPositionOfState(_fsmDefinition, State);
+            _rectTransform.transform.position = FSMEditorHelper.GetPositionOfState(_fsmDefinition, State);
 
             UpdateWhetherDefaultState();
 

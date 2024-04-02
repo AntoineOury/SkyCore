@@ -70,8 +70,7 @@ namespace FiniteStateMachineEditor
             _refs.UIToggle.SetActive(true);
 
             _cameraInfo = new CameraInfo();
-            _cameraControls = new FSMEditorCameraControls(_refs.Workspace
-                , _refs.NonZoomedAreaLeftForSeeingWorkspace, _cameraInfo);
+            _cameraControls = new FSMEditorCameraControls(_refs.Workspace, _refs.NonZoomedAreaLeftForSeeingWorkspace, _cameraInfo);
 
             _initialConditionsContentAreaHeight = _refs.ConditionsScrolledContentRect.rect.height;
             _initialParametersContentAreaHeight = _refs.ParametersScrolledContentRect.rect.height;
@@ -89,7 +88,7 @@ namespace FiniteStateMachineEditor
 
             _transitionEditorToShowCreatingTransition = CreateVisualForTransitionForCreatingNewTransitions();
 
-            int defaultStateIndex = FSMEditorOneCondition.GetIndexOfDefaultState(_stateMachineDefinition);
+            int defaultStateIndex = FSMEditorHelper.GetIndexOfDefaultState(_stateMachineDefinition);
             _cameraControls.MoveCameraToPutWorldPosInCenterOfScreenSpaceRect(
                 _stateMachineDefinition.EditorInfo.StateEditorPositions[defaultStateIndex], _refs.NonZoomedAreaLeftForSeeingWorkspace);
 
@@ -132,15 +131,10 @@ namespace FiniteStateMachineEditor
 
             _stateMachineDefinition = ScriptableObject.CreateInstance<FSMDefinition>();
             AssetDatabase.CreateAsset(_stateMachineDefinition, pathOfFSMDefinition);
-            AddState(out _);
+            AddState();
 
             Debug.Log("Created new state machine in " + pathOfStateMachineFolder);
         }
-
-
-
-
-
 
 
 
@@ -200,11 +194,6 @@ namespace FiniteStateMachineEditor
                 if (_selectedTransition != null)
                 {
                     DeleteTransition(_selectedTransition);
-                    for (int i = 0; i < _transitions.Count; i++)
-                    {
-                        _transitions[i].UpdateNthBetweenSameTwoStates();
-                        _transitions[i].UpdateLine();
-                    }
                 }
                 if (_selectedState != null && !_selectedState.IsForAnystate && _selectedState != _creatingTransitionFrom)
                 {
@@ -241,6 +230,11 @@ namespace FiniteStateMachineEditor
         private void DeleteStateAndAssociatedThings(FSMEditorOneState stateEditor)
         {
             // delete it, all attached transitions, and the associated game events
+            FSMEditorSaver.DeleteState(_stateMachineDefinition, stateEditor.State);
+
+            _states.Remove(stateEditor);
+            Destroy(stateEditor.gameObject);
+
             if (stateEditor == _selectedState)
             {
                 _selectedState = null;
@@ -248,54 +242,54 @@ namespace FiniteStateMachineEditor
             }
 
             // delete the associated transitions
-            FSMEditorOneTransition[] transitions = new FSMEditorOneTransition[stateEditor.ConnectedTransitions.Count];
-            stateEditor.ConnectedTransitions.CopyTo(transitions);
-            for (int i = 0; i < transitions.Length; i++)
-                DeleteTransition(transitions[i]);
 
-            // delete the associated game events
-            if (stateEditor.State.OnEnter != null)
-                AssetDatabase.DeleteAsset(AssetDatabase.GetAssetPath(stateEditor.State.OnEnter));
-            if (stateEditor.State.OnUpdate != null)
-            AssetDatabase.DeleteAsset(AssetDatabase.GetAssetPath(stateEditor.State.OnUpdate));
-            if (stateEditor.State.OnExit != null)
-            AssetDatabase.DeleteAsset(AssetDatabase.GetAssetPath(stateEditor.State.OnExit));
-
-            // reassign the default state
-            if (stateEditor.State == _stateMachineDefinition.DefaultState)
-            {
-                FSMEditorOneState newDefaultState = _states[1]; // at index is 0 is the one for Anystate.
-                if (newDefaultState == stateEditor)
-                    newDefaultState = _states[2];
-                FSMEditorSaveDataChanger.SetFSMDefinitionDefaultState(_stateMachineDefinition, newDefaultState.State);
-                newDefaultState.UpdateWhetherDefaultState();
-            }
-
-            // delete the state
-            int index = FSMEditorOneCondition.GetStateIndex(_stateMachineDefinition, stateEditor.State);
-            FSMEditorSaveDataChanger.RemoveStateAtIndex(_stateMachineDefinition, index);
-
-            _states.Remove(stateEditor);
-            Destroy(stateEditor.gameObject);
-        }
-
-        private void DeleteTransition(FSMEditorOneTransition transitionEditor)
-        {
-            if (_selectedTransition == transitionEditor)
+            if (_selectedTransition.From == stateEditor || _selectedTransition.To == stateEditor)
             {
                 _selectedTransition = null;
                 _refs.SelectedTransitionEditorToggle.SetActive(false);
             }
+            
+            FSMEditorOneTransition[] transitions = new FSMEditorOneTransition[stateEditor.ConnectedTransitions.Count];
+            stateEditor.ConnectedTransitions.CopyTo(transitions);
+            for (int i = 0; i < transitions.Length; i++)
+            {
+                
+            }
 
-            int index = FSMEditorOneCondition.GetTransitionIndex(_stateMachineDefinition, transitionEditor.Transition);
-            FSMEditorSaveDataChanger.RemoveTransitionAtIndex(_stateMachineDefinition, index);
+            // delete the associated game events
+            if (stateEditor.State.OnEnter != null)
+                FSMEditorSaver.DeleteGameEvent(stateEditor.State.OnEnter);
+            if (stateEditor.State.OnUpdate != null)
+                FSMEditorSaver.DeleteGameEvent(stateEditor.State.OnUpdate);
+            if (stateEditor.State.OnExit != null)
+                FSMEditorSaver.DeleteGameEvent(stateEditor.State.OnExit);
 
-            AssetDatabase.DeleteAsset(AssetDatabase.GetAssetPath(transitionEditor.Transition));
+            
+            if (stateEditor.State == _stateMachineDefinition.DefaultState)
+            {
+                // reassign the default state
+                FSMEditorOneState newDefaultState = _states[1]; // index 1 because 0 has the state editor for Anystate.
+                if (newDefaultState == stateEditor) // it's being deleted
+                    newDefaultState = _states[2]; 
+                FSMEditorSaveDataChanger.SetFSMDefinitionDefaultState(_stateMachineDefinition, newDefaultState.State);
+                newDefaultState.UpdateWhetherDefaultState();
+            }
+        }
 
-            transitionEditor.From.RemoveDeletedTransition(transitionEditor);
-            transitionEditor.To.RemoveDeletedTransition(transitionEditor);
-            _transitions.Remove(transitionEditor);
-            Destroy(transitionEditor.gameObject);
+        private void DeleteTransition(FSMEditorOneTransition transition)
+        {
+            FSMEditorSaver.DeleteTransition(_stateMachineDefinition, transition.Transition);
+
+            transition.From.RemoveDeletedTransition(transition);
+            transition.To.RemoveDeletedTransition(transition);
+            _transitions.Remove(transition);
+            Destroy(transition.gameObject);
+
+            for (int i = 0; i < _transitions.Count; i++)
+            {
+                _transitions[i].UpdateNthBetweenSameTwoStates();
+                _transitions[i].UpdateLine();
+            }
         }
 
 
@@ -335,7 +329,7 @@ namespace FiniteStateMachineEditor
 
         public void OnChangeParameterType()
         {
-            FSMEditorOneCondition.SetParametersInDropdownOnlyIncludingFloats(_stateMachineDefinition
+            FSMEditorHelper.SetParametersInDropdownOnlyIncludingFloats(_stateMachineDefinition
                 , _refs.TransitionMinTimeParameterSelectionDropdown);
             if (_selectedTransition != null)
             {
@@ -380,12 +374,8 @@ namespace FiniteStateMachineEditor
                 }
                 else
                 {
-                    string transitionTitle = $"[{_creatingTransitionFrom.Name}] to [{_selectedState.Name}]";
-                    string transitionPath = MakePathForScriptableObject(ref transitionTitle, "Transitions");
-                    FSMTransition newTransition = ScriptableObject.CreateInstance<FSMTransition>();
-                    AssetDatabase.CreateAsset(newTransition, transitionPath);
-                    FSMEditorSaveDataChanger.SetFSMTransitionFromAndTo(newTransition, _creatingTransitionFrom.State, _selectedState.State);
-                    FSMEditorSaveDataChanger.AddTransitionToFSMDefinition(_stateMachineDefinition, newTransition);
+                    FSMTransition newTransition = FSMEditorSaver.CreateTransition(_stateMachineDefinition
+                        , _creatingTransitionFrom, _selectedState);
 
                     AddVisualForTransition(newTransition);
 
@@ -414,7 +404,7 @@ namespace FiniteStateMachineEditor
 
                 UpdateConditionsInScrollArea();
 
-                FSMEditorOneCondition.SetParametersInDropdownOnlyIncludingFloats(_stateMachineDefinition
+                FSMEditorHelper.SetParametersInDropdownOnlyIncludingFloats(_stateMachineDefinition
                     , _refs.TransitionMinTimeParameterSelectionDropdown);
 
                 UpdateShownMinDuration();
@@ -481,7 +471,7 @@ namespace FiniteStateMachineEditor
 
             if (useParameterForMinDuration)
             {
-                int index = FSMEditorOneCondition.GetParameterIndexAmongstFloats(_stateMachineDefinition
+                int index = FSMEditorHelper.GetParameterIndexAmongstFloats(_stateMachineDefinition
                     , _selectedTransition.Transition.ParameterForMinDurationInFrom);
                 _refs.TransitionMinTimeParameterSelectionDropdown.SetValueWithoutNotify(index);
             }
@@ -500,7 +490,7 @@ namespace FiniteStateMachineEditor
             if (_selectedTransition == null)
                 return;
             FSMParameter parameter = _stateMachineDefinition.Parameters[changeTo];
-            int conditionIndex = FSMEditorOneCondition.GetConditionIndex(_selectedTransition.Transition, conditionEditor.Condition);
+            int conditionIndex = FSMEditorHelper.GetConditionIndex(_selectedTransition.Transition, conditionEditor.Condition);
             FSMEditorSaveDataChanger.SetConditionParameter(_selectedTransition.Transition, conditionIndex, parameter);
         }
 
@@ -508,7 +498,7 @@ namespace FiniteStateMachineEditor
         {
             if (_selectedTransition == null)
                 return;
-            int conditionIndex = FSMEditorOneCondition.GetConditionIndex(_selectedTransition.Transition, conditionEditor.Condition);
+            int conditionIndex = FSMEditorHelper.GetConditionIndex(_selectedTransition.Transition, conditionEditor.Condition);
             FSMEditorSaveDataChanger.SetConditionBoolRequirement(_selectedTransition.Transition, conditionIndex, changeTo);
         }
 
@@ -516,7 +506,7 @@ namespace FiniteStateMachineEditor
         {
             if (_selectedTransition == null)
                 return;
-            int conditionIndex = FSMEditorOneCondition.GetConditionIndex(_selectedTransition.Transition, conditionEditor.Condition);
+            int conditionIndex = FSMEditorHelper.GetConditionIndex(_selectedTransition.Transition, conditionEditor.Condition);
             FSMEditorSaveDataChanger.SetConditionFloatComparisonType(_selectedTransition.Transition, conditionIndex, changeTo);
         }
 
@@ -524,7 +514,7 @@ namespace FiniteStateMachineEditor
         {
             if (_selectedTransition == null)
                 return;
-            int conditionIndex = FSMEditorOneCondition.GetConditionIndex(_selectedTransition.Transition, conditionEditor.Condition);
+            int conditionIndex = FSMEditorHelper.GetConditionIndex(_selectedTransition.Transition, conditionEditor.Condition);
             FSMEditorSaveDataChanger.SetConditionFloatValueToCompareTo(_selectedTransition.Transition, conditionIndex, changeTo);
         }
 
@@ -532,10 +522,10 @@ namespace FiniteStateMachineEditor
         {
             if (_selectedTransition == null)
                 return;
-            int parameterIndex = FSMEditorOneCondition.ConvertIndexOfParameterAmongstFloatsToAmongstAllParameters(
+            int parameterIndex = FSMEditorHelper.ConvertIndexOfParameterAmongstFloatsToAmongstAllParameters(
                 _stateMachineDefinition, changeTo);
             FSMParameter parameter = _stateMachineDefinition.Parameters[parameterIndex];
-            int conditionIndex = FSMEditorOneCondition.GetConditionIndex(_selectedTransition.Transition, conditionEditor.Condition);
+            int conditionIndex = FSMEditorHelper.GetConditionIndex(_selectedTransition.Transition, conditionEditor.Condition);
             FSMEditorSaveDataChanger.SetConditionOtherFloatParameterToCompareTo(_selectedTransition.Transition, conditionIndex, parameter);
         }
 
@@ -545,14 +535,14 @@ namespace FiniteStateMachineEditor
             if (_selectedTransition == null)
                 return;
 
-            if (!FSMEditorOneCondition.HasAnyFloatParameter(_stateMachineDefinition))
+            if (!FSMEditorHelper.HasAnyFloatParameter(_stateMachineDefinition))
             {
                 Debug.LogWarning("Cannot switch to parameter mode because the state machine has no float parameter.");
                 dropdown.SetValueWithoutNotify(0);
                 return;
             }
 
-            int conditionIndex = FSMEditorOneCondition.GetConditionIndex(_selectedTransition.Transition, conditionEditor.Condition);
+            int conditionIndex = FSMEditorHelper.GetConditionIndex(_selectedTransition.Transition, conditionEditor.Condition);
 
             if (changeTo == 0)
             {
@@ -565,7 +555,7 @@ namespace FiniteStateMachineEditor
             {
                 // parameter
                 int parameterIndex
-                    = FSMEditorOneCondition.ConvertIndexOfParameterAmongstFloatsToAmongstAllParameters(_stateMachineDefinition, 0);
+                    = FSMEditorHelper.ConvertIndexOfParameterAmongstFloatsToAmongstAllParameters(_stateMachineDefinition, 0);
                 FSMParameter parameter = _stateMachineDefinition.Parameters[parameterIndex];
                 FSMEditorSaveDataChanger.SetConditionOtherFloatParameterToCompareTo(_selectedTransition.Transition
                    , conditionIndex, parameter);
@@ -580,7 +570,7 @@ namespace FiniteStateMachineEditor
             if (_selectedTransition == null)
                 return;
 
-            if (!FSMEditorOneCondition.HasAnyFloatParameter(_stateMachineDefinition))
+            if (!FSMEditorHelper.HasAnyFloatParameter(_stateMachineDefinition))
             {
                 Debug.LogWarning("Cannot switch to parameter mode because the state machine has no float parameter.");
                 _refs.TransitionMinTimeParameterOrValueDropdown.SetValueWithoutNotify(0);
@@ -597,7 +587,7 @@ namespace FiniteStateMachineEditor
             {
                 // parameter
                 int parameterIndex 
-                    = FSMEditorOneCondition.ConvertIndexOfParameterAmongstFloatsToAmongstAllParameters(_stateMachineDefinition, 0);
+                    = FSMEditorHelper.ConvertIndexOfParameterAmongstFloatsToAmongstAllParameters(_stateMachineDefinition, 0);
                 FSMParameter parameter = _stateMachineDefinition.Parameters[parameterIndex];
                 FSMEditorSaveDataChanger.SetFSMTransitionMinDurationParameter(_selectedTransition.Transition, parameter);
             }
@@ -610,7 +600,7 @@ namespace FiniteStateMachineEditor
                 return;
 
             int parameterIndex 
-                = FSMEditorOneCondition.ConvertIndexOfParameterAmongstFloatsToAmongstAllParameters(_stateMachineDefinition, changeTo);
+                = FSMEditorHelper.ConvertIndexOfParameterAmongstFloatsToAmongstAllParameters(_stateMachineDefinition, changeTo);
             FSMParameter parameter = _stateMachineDefinition.Parameters[parameterIndex];
             FSMEditorSaveDataChanger.SetFSMTransitionMinDurationParameter(_selectedTransition.Transition, parameter);
         }
@@ -713,70 +703,16 @@ namespace FiniteStateMachineEditor
             if (_selectedState == null)
                 return;
 
-            renameTo = renameTo.Trim();
-            
-            if (renameTo.Length == 0 || renameTo == _selectedState.Name)
-            {
-                _refs.StateTitleInputField.SetTextWithoutNotify(_selectedState.Name);
-                return;
-            }
-
-
-            // rename the state
-
-            string statePath = AssetDatabase.GetAssetPath(_selectedState.State);
-
-            string pathOfStateFolder = PathOfFolder(_selectedState.State);
-            renameTo = AdjustTitleToNotAlreadyExist(renameTo, pathOfStateFolder, out _);
-
-            string errorMessage = AssetDatabase.RenameAsset(statePath, renameTo);
-            if (errorMessage.Length != 0)
-                Debug.LogWarning(errorMessage);
-            else
-                _selectedState.UpdateText();
+            FSMEditorSaver.RenameState(_selectedState, renameTo);
+            _selectedState.UpdateText();
 
             _refs.StateTitleInputField.SetTextWithoutNotify(_selectedState.Name);
 
-
             // rename the transitions connected to the state
             foreach (FSMEditorOneTransition transition in _selectedState.ConnectedTransitions)
-            {
-                string transitionTitle = $"[{transition.From.Name}] to [{transition.To.Name}]"; // excludes numbers at end
-                string oldTransitionPath = AssetDatabase.GetAssetPath(transition.Transition);
-                string newTransitionPath = MakePathForScriptableObject(ref transitionTitle, "Transitions", oldTransitionPath);
-                string errorMessage2 = AssetDatabase.RenameAsset(oldTransitionPath, newTransitionPath);
-                if (errorMessage2.Length != 0)
-                    Debug.LogWarning(errorMessage2 + $" (oldTransitionPath: {oldTransitionPath}, newTransitionPath: {newTransitionPath})");
-            }
+                FSMEditorSaver.RenameTransitionWhenRenamedState(transition);
 
-            // rename the game events
-
-            string enterGameEventPath = AssetDatabase.GetAssetPath(_selectedState.State.OnEnter);
-            string updateGameEventPath = AssetDatabase.GetAssetPath(_selectedState.State.OnUpdate);
-            string exitGameEventPath = AssetDatabase.GetAssetPath(_selectedState.State.OnExit);
-
-            DecideTitlesOfStateGameEvents(_selectedState.Name, out string enterTitle, out string updateTitle, out string exitTitle);
-
-            if (enterGameEventPath.Length != 0)
-            {
-                errorMessage = AssetDatabase.RenameAsset(enterGameEventPath, enterTitle);
-                if (errorMessage.Length != 0)
-                    Debug.LogWarning(errorMessage);
-            }
-
-            if (updateGameEventPath.Length != 0)
-            {
-                errorMessage = AssetDatabase.RenameAsset(updateGameEventPath, updateTitle);
-                if (errorMessage.Length != 0)
-                    Debug.LogWarning(errorMessage);
-            }
-
-            if (exitGameEventPath.Length != 0)
-            {
-                errorMessage = AssetDatabase.RenameAsset(exitGameEventPath, exitTitle);
-                if (errorMessage.Length != 0)
-                    Debug.LogWarning(errorMessage);
-            }
+            FSMEditorSaver.RenameGameEventsWhenRenamedState(_selectedState);
         }
 
         public void OnParameterTitleChanged()
@@ -785,24 +721,14 @@ namespace FiniteStateMachineEditor
                 return;
             foreach (FSMEditorOneCondition condition in _conditionsOfSelectedTransition)
                 condition.UpdateParameterDropdownsAndCondition();
-            FSMEditorOneCondition.SetParametersInDropdownOnlyIncludingFloats(_stateMachineDefinition
+            FSMEditorHelper.SetParametersInDropdownOnlyIncludingFloats(_stateMachineDefinition
                 , _refs.TransitionMinTimeParameterSelectionDropdown);
         }
 
 
-
-
-
-
-
-
         public void OnCreateParameterButton()
         {
-            string parameterTitle = "New Parameter";
-            string parameterPath = MakePathForScriptableObject(ref parameterTitle, "Parameters");
-            FSMParameter newParameter = ScriptableObject.CreateInstance<FSMParameter>();
-            AssetDatabase.CreateAsset(newParameter, parameterPath);
-            FSMEditorSaveDataChanger.AddParameterToFSMDefinition(newParameter, _stateMachineDefinition);
+            FSMParameter newParameter = FSMEditorSaver.AddParameter(_stateMachineDefinition);
 
             AddVisualForParameter(newParameter);
             
@@ -823,35 +749,8 @@ namespace FiniteStateMachineEditor
             if (_selectedParameter != null)
                 editorToRemove = _selectedParameter;
 
-            FSMParameter parameterToRemove = editorToRemove.Parameter;
-
-            for (int i = 0; i < _transitions.Count; i++)
-            {
-                if (_transitions[i].Transition.ParameterForMinDurationInFrom == parameterToRemove)
-                {
-                    Debug.LogWarning($"Cannot remove the parameter {parameterToRemove.name} because it's used by a transition's " +
-                        $"Min Duration in Prior State. Transition is: {_transitions[i].From.Name} -> {_transitions[i].To.Name}");
-                    return;
-                }
-
-                FSMTransitionCondition[] conditions = _transitions[i].Transition.Conditions;
-                for (int j = 0; j < conditions.Length; j++)
-                {
-                    FSMTransitionCondition condition = conditions[j];
-                    bool parameterIsComparedToIt = condition.Parameter.Type == FSMParameter.ParameterType.Float
-                        && condition.OtherFloatParameterToCompareTo == parameterToRemove;
-
-                    if (condition.Parameter == parameterToRemove || parameterIsComparedToIt)
-                    {
-                        Debug.LogWarning($"Cannot remove the parameter {parameterToRemove.name} because it's used by a transition." +
-                            $" Transition is: {_transitions[i].From.Name} -> {_transitions[i].To.Name}");
-                        return;
-                    }
-                }
-            }
-
-            int parameterIndex = FSMEditorOneCondition.GetParameterIndex(_stateMachineDefinition, parameterToRemove);
-            FSMEditorSaveDataChanger.RemoveParameterFromFSMDefinition(_stateMachineDefinition, parameterIndex);
+            if (!FSMEditorSaver.TryDeleteParameter(_stateMachineDefinition, editorToRemove.Parameter))
+                return;
 
             _parameters.Remove(editorToRemove);
             Destroy(editorToRemove.gameObject);
@@ -863,18 +762,11 @@ namespace FiniteStateMachineEditor
                     _conditionsOfSelectedTransition[i].UpdateParameterDropdownsAndCondition();
             }
             UpdateParametersScrollContentHeight();
-
-            AssetDatabase.DeleteAsset(AssetDatabase.GetAssetPath(parameterToRemove));
         }
 
-        private void AddState(out FSMState newState)
+        private FSMState AddState()
         {
-            string stateTitle = "New State";
-            string statePath = MakePathForScriptableObject(ref stateTitle, "States");
-
-            newState = ScriptableObject.CreateInstance<FSMState>();
-            AssetDatabase.CreateAsset(newState, statePath);
-            FSMEditorSaveDataChanger.AddStateToFSMDefinition(_stateMachineDefinition, newState);
+            FSMState newState = FSMEditorSaver.AddState(_stateMachineDefinition);
 
             if (_stateMachineDefinition.EditorInfo.States.Length == 1)
             {
@@ -882,24 +774,12 @@ namespace FiniteStateMachineEditor
                 SetDefaultState(_stateMachineDefinition.EditorInfo.States[0]);
             }
 
-            DecideTitlesOfStateGameEvents(stateTitle, out string enterTitle, out string updateTitle, out string exitTitle);
-            string enterPath = MakePathForScriptableObject(ref enterTitle, "GameEvents");
-            string updatePath = MakePathForScriptableObject(ref updateTitle, "GameEvents");
-            string exitPath = MakePathForScriptableObject(ref exitTitle, "GameEvents");
-
-            GameEventScriptableObject enterEvent = ScriptableObject.CreateInstance<GameEventScriptableObject>();
-            GameEventScriptableObject updateEvent = ScriptableObject.CreateInstance<GameEventScriptableObject>();
-            GameEventScriptableObject exitEvent = ScriptableObject.CreateInstance<GameEventScriptableObject>();
-
-            AssetDatabase.CreateAsset(enterEvent, enterPath);
-            AssetDatabase.CreateAsset(updateEvent, updatePath);
-            AssetDatabase.CreateAsset(exitEvent, exitPath);
-            FSMEditorSaveDataChanger.SetGameEventsOfState(newState, enterEvent, updateEvent, exitEvent);
+            return newState;
         }
 
         public void OnCreateStateButton()
         {
-            AddState(out FSMState newState);
+            FSMState newState = AddState();
             AddVisualForState(newState);
 
             if (_creatingTransitionFrom == null)
@@ -909,65 +789,6 @@ namespace FiniteStateMachineEditor
                 _refs.SelectedStateEditorToggle.SetActive(true);
             }
         }
-
-        private void DecideTitlesOfStateGameEvents(string stateTitle
-            , out string enterTitle, out string updateTitle, out string exitTitle)
-        {
-            enterTitle = stateTitle + " {Enter}";
-            updateTitle = stateTitle + " {Update}";
-            exitTitle = stateTitle + " {Exit}";
-        }
-
-        public static string AdjustTitleToNotAlreadyExist(string title, string pathOfFolder, out int number
-            , string pathWhichCanAlreadyExistBecauseWillRename = null)
-        {
-            number = 0;
-            string path;
-            string newTitle;
-            do
-            {
-                newTitle = number == 0 ? title : $"{title} {number}";
-                string fileName = $"{newTitle}.asset";
-                path = System.IO.Path.Combine(pathOfFolder, fileName);
-                number++;
-            } while (AssetDatabase.AssetPathToGUID(path, AssetPathToGUIDOptions.OnlyExistingAssets).Length != 0
-            && (pathWhichCanAlreadyExistBecauseWillRename == null || path != pathWhichCanAlreadyExistBecauseWillRename));
-
-            number--;
-            return newTitle;
-        }
-
-        public static string PathOfFolder(ScriptableObject scriptableObject)
-        {
-            string pathOfAsset = AssetDatabase.GetAssetPath(scriptableObject);
-            return System.IO.Path.GetDirectoryName(pathOfAsset);
-        }
-
-        private string PathOfParentFolder()
-        {
-            return PathOfFolder(_stateMachineDefinition);
-        }
-
-        private string MakePathForScriptableObject(ref string title, string subfolder = null
-            , string pathWhichCanAlreadyExistBecauseWillRename = null)
-        {
-            string pathOfParentFolder = PathOfParentFolder();
-            string pathOfFolder = pathOfParentFolder;
-            if (subfolder != null && subfolder.Length != 0)
-            {
-                pathOfFolder = System.IO.Path.Combine(pathOfFolder, subfolder);
-                if (!AssetDatabase.IsValidFolder(pathOfFolder))
-                    AssetDatabase.CreateFolder(pathOfParentFolder, subfolder);
-            }
-            if (!AssetDatabase.IsValidFolder(pathOfFolder))
-                throw new System.InvalidOperationException("The folder isn't valid somehow.");
-
-            title = AdjustTitleToNotAlreadyExist(title, pathOfFolder, out _, pathWhichCanAlreadyExistBecauseWillRename);
-            return System.IO.Path.Combine(pathOfFolder, $"{title}.asset");
-        }
-
-
-
 
 
 

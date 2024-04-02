@@ -96,14 +96,7 @@ namespace FiniteStateMachineEditor
                 return;
             }
 
-            string statePath = AssetDatabase.GetAssetPath(Parameter);
-
-            string pathOfStateFolder = FSMEditor.PathOfFolder(Parameter);
-            renameTo = FSMEditor.AdjustTitleToNotAlreadyExist(renameTo, pathOfStateFolder, out _);
-
-            string errorMessage = AssetDatabase.RenameAsset(statePath, renameTo);
-            if (errorMessage.Length != 0)
-                Debug.LogWarning(errorMessage);
+            FSMEditorSaver.Rename(Parameter, renameTo);
 
             _titleInputField.SetTextWithoutNotify(Parameter.name);
 

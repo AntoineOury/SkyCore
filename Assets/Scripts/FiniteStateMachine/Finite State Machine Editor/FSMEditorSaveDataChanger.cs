@@ -5,13 +5,16 @@ using UnityEngine;
 using FiniteStateMachine;
 using UnityEditor;
 
+// Changes saved data for existing assets.
 
 namespace FiniteStateMachineEditor
 {
     public static class FSMEditorSaveDataChanger
     {
-        public static void RemoveParameterFromFSMDefinition(FSMDefinition fsmDefinition, int parameterIndex)
+        public static void RemoveParameterFromFSMDefinition(FSMDefinition fsmDefinition, FSMParameter parameter)
         {
+            int parameterIndex = FSMEditorHelper.GetParameterIndex(fsmDefinition, parameter);
+
             SerializedObject so = new SerializedObject(fsmDefinition);
             SerializedProperty arrayProperty = so.FindProperty("<Parameters>k__BackingField");
             arrayProperty.DeleteArrayElementAtIndex(parameterIndex);
@@ -126,8 +129,10 @@ namespace FiniteStateMachineEditor
 
         
 
-        public static void RemoveTransitionAtIndex(FSMDefinition fsmDefinition, int index)
+        public static void RemoveTransitionFromFSMDefinition(FSMDefinition fsmDefinition, FSMTransition transition)
         {
+            int index = FSMEditorHelper.GetTransitionIndex(fsmDefinition, transition);
+
             SerializedObject so = new SerializedObject(fsmDefinition);
             SerializedProperty transitionsArrayProperty = so.FindProperty("<Transitions>k__BackingField");
             transitionsArrayProperty.DeleteArrayElementAtIndex(index);
@@ -226,10 +231,12 @@ namespace FiniteStateMachineEditor
             so.ApplyModifiedPropertiesWithoutUndo();
         }
 
-        public static void RemoveStateAtIndex(FSMDefinition fsmDefinition, int index)
+        public static void RemoveStateFromFSMDefinition(FSMDefinition fsmDefinition, FSMState state)
         {
             if (fsmDefinition.EditorInfo.States.Length != fsmDefinition.EditorInfo.StateEditorPositions.Length)
                 throw new System.InvalidOperationException("Unequal lengths of arrays in the fsm definition's editor info.");
+
+            int index = FSMEditorHelper.GetStateIndex(fsmDefinition, state);
 
             SerializedObject so = new SerializedObject(fsmDefinition);
 
@@ -263,28 +270,7 @@ namespace FiniteStateMachineEditor
 
 
 
-        public static Vector2 GetPositionOfState(FSMDefinition fsmDefinition, FSMState state)
-        {
-            if (state == null)
-            {
-                return fsmDefinition.EditorInfo.StateEditorForAnystatePosition;
-            }
-            int index = FindStateIndexInFSMDefinition(fsmDefinition, state);
-            return fsmDefinition.EditorInfo.StateEditorPositions[index];
-        }
-
-        private static int FindStateIndexInFSMDefinition(FSMDefinition fsmDefinition, FSMState state)
-        {
-            int i = 0;
-            for (; i < fsmDefinition.EditorInfo.States.Length; i++)
-            {
-                if (fsmDefinition.EditorInfo.States[i] == state)
-                    break;
-            }
-            if (i >= fsmDefinition.EditorInfo.StateEditorPositions.Length)
-                throw new System.Exception("Error while initializing editor for one state");
-            return i;
-        }
+        
 
         public static void SavePositionOfState(FSMDefinition fsmDefinition, FSMEditorOneState stateEditor)
         {
@@ -294,7 +280,7 @@ namespace FiniteStateMachineEditor
 
             if (!stateEditor.IsForAnystate)
             {
-                int index = FindStateIndexInFSMDefinition(fsmDefinition, stateEditor.State);
+                int index = FSMEditorHelper.FindStateIndexInFSMDefinition(fsmDefinition, stateEditor.State);
                 so.FindProperty("<EditorInfo>k__BackingField")
                     .FindPropertyRelative("<StateEditorPositions>k__BackingField")
                     .GetArrayElementAtIndex(index)
