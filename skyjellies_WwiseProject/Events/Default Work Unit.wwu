@@ -258,10 +258,10 @@
 						</Folder>
 						<Event Name="Play_Left_Click" ID="{EDC3F8FC-73DA-4377-BB8F-F9F5AA0B2BC1}">
 							<ChildrenList>
-								<Action Name="" ID="{76DAD913-6BA1-4E34-BCE1-4D9B5B039E16}" ShortID="830292465">
+								<Action Name="" ID="{B7DDE8F5-971B-43C6-B4D8-34645B96631B}" ShortID="966272815">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="UI_Mouse_Hover" ID="{3B506B45-A658-42F9-A5CF-3AA6F18649FE}" WorkUnitID="{24F872FC-45D6-49A0-9AC7-B0BBEB815244}"/>
+											<ObjectRef Name="Left_Click" ID="{C818610C-0419-48DE-BEAC-42B48E50B713}" WorkUnitID="{24F872FC-45D6-49A0-9AC7-B0BBEB815244}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -346,6 +346,17 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="Mid" ID="{2F43133F-B95F-4C6C-AB6A-FE4D31B9F385}" WorkUnitID="{5F0A70B5-4CFD-4F47-A45F-35000A121C70}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Menu_Music" ID="{7B908E6A-DD20-413F-9C77-DA27B9FFF84F}">
+							<ChildrenList>
+								<Action Name="" ID="{4090A849-3C61-4DA6-9D6E-44FB87144133}" ShortID="267573413">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Day_Music" ID="{0B431F5B-F7ED-42BD-9007-F2AA781D5B9C}" WorkUnitID="{ABE72476-8F6F-4310-A911-9A7E0C513B95}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>

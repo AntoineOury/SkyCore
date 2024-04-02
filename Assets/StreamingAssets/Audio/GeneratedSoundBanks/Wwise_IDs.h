@@ -13,27 +13,9 @@ namespace AK
 {
     namespace EVENTS
     {
-        static const AkUniqueID PLAY_BROKEN_SPACESHIP = 303910132U;
-        static const AkUniqueID PLAY_DAY_NIGHT = 2687999423U;
-        static const AkUniqueID PLAY_DRONE_ALL = 2169761796U;
-        static const AkUniqueID PLAY_DRONE_SCANNING = 4284253250U;
-        static const AkUniqueID PLAY_ISLAND_HEART = 2126837384U;
-        static const AkUniqueID PLAY_JELLIES_PET = 403792184U;
-        static const AkUniqueID PLAY_JELLIES_ROAM_GRASS = 1406322581U;
-        static const AkUniqueID PLAY_JELLY_EATING = 2405070987U;
-        static const AkUniqueID PLAY_JELLY_LEVEL_UP = 496414419U;
         static const AkUniqueID PLAY_LEFT_CLICK = 2830116340U;
         static const AkUniqueID PLAY_MENU_MUSIC = 2228153899U;
         static const AkUniqueID PLAY_MOUSE_HOVERING = 3807302544U;
-        static const AkUniqueID PLAY_PICKUPITEM = 152276835U;
-        static const AkUniqueID PLAY_PLAYER_DROPITEM = 3537301466U;
-        static const AkUniqueID PLAY_PLAYER_FOOTSTEPS = 98439365U;
-        static const AkUniqueID PLAY_PLAYER_JUMP = 562256996U;
-        static const AkUniqueID PLAY_UI_CLOSEMENU = 2736433684U;
-        static const AkUniqueID PLAY_UI_INVENTORY_DROP = 3929504087U;
-        static const AkUniqueID PLAY_UI_INVENTORY_TAKE = 546353625U;
-        static const AkUniqueID PLAY_UI_OPENMENU = 3541361906U;
-        static const AkUniqueID PLAY_USEITEM = 2229253950U;
     } // namespace EVENTS
 
     namespace STATES
@@ -153,7 +135,6 @@ namespace AK
         static const AkUniqueID INIT = 1355168291U;
         static const AkUniqueID GENERAL = 133642231U;
         static const AkUniqueID MAIN_MENU = 2005704188U;
-        static const AkUniqueID TESTING = 1512859615U;
     } // namespace BANKS
 
     namespace BUSSES
