@@ -13,54 +13,55 @@ namespace AK
 {
     namespace EVENTS
     {
-        static const AkUniqueID PLAY_CAMPFIRE = 4000411161U;
-        static const AkUniqueID PLAY_CAMPFIRE_EXTINGUISH = 2264789132U;
-        static const AkUniqueID PLAY_ENV_BLOCK_SOUND = 2922412317U;
-        static const AkUniqueID PLAY_ENV_DRONE_ALLSOUNDS = 2451341124U;
-        static const AkUniqueID PLAY_ISLANDHEART_LEVELUP = 3487040007U;
+        static const AkUniqueID PLAY_BROKEN_SPACESHIP = 303910132U;
+        static const AkUniqueID PLAY_DAY_NIGHT = 2687999423U;
+        static const AkUniqueID PLAY_DRONE_ALL = 2169761796U;
+        static const AkUniqueID PLAY_DRONE_SCANNING = 4284253250U;
+        static const AkUniqueID PLAY_ISLAND_HEART = 2126837384U;
         static const AkUniqueID PLAY_JELLIES_PET = 403792184U;
         static const AkUniqueID PLAY_JELLIES_ROAM_GRASS = 1406322581U;
-        static const AkUniqueID PLAY_JELLIES_ROAM_STONE = 37469952U;
-        static const AkUniqueID PLAY_JELLIES_ROAM_WOOD = 2015355878U;
         static const AkUniqueID PLAY_JELLY_EATING = 2405070987U;
-        static const AkUniqueID PLAY_JELLYDUE_PICKUP = 3822484859U;
-        static const AkUniqueID PLAY_MUSIC__LOADINGSCREEN_01 = 2124889703U;
-        static const AkUniqueID PLAY_PAUSE_MENU_MUSIC = 1423477630U;
-        static const AkUniqueID PLAY_PICKUP_ISLANDBLOCKS = 1113491808U;
-        static const AkUniqueID PLAY_PICKUPITEM_BERRIES = 1376999814U;
+        static const AkUniqueID PLAY_JELLY_LEVEL_UP = 496414419U;
+        static const AkUniqueID PLAY_LEFT_CLICK = 2830116340U;
+        static const AkUniqueID PLAY_MENU_MUSIC = 2228153899U;
+        static const AkUniqueID PLAY_MOUSE_HOVERING = 3807302544U;
+        static const AkUniqueID PLAY_PICKUPITEM = 152276835U;
+        static const AkUniqueID PLAY_PLAYER_DROPITEM = 3537301466U;
         static const AkUniqueID PLAY_PLAYER_FOOTSTEPS = 98439365U;
-        static const AkUniqueID PLAY_TITLE_SCREEN_MUSIC = 375134059U;
-        static const AkUniqueID PLAY_UI__CRAFTINGMENU_CLOSINGCRAFTINGSYSTEM_01 = 1158385986U;
-        static const AkUniqueID PLAY_UI__CRAFTINGMENU_CRAFT_01 = 3079436876U;
-        static const AkUniqueID PLAY_UI__CRAFTINGMENU_CRAFTCANTDONE_01 = 1488088378U;
-        static const AkUniqueID PLAY_UI__CRAFTINGMENU_LEFTCLICKICON_02 = 2406796967U;
-        static const AkUniqueID PLAY_UI__CRAFTINGMENU_LISTOFITEMS_01 = 1848836357U;
-        static const AkUniqueID PLAY_UI__CRAFTINGMENU_OPENINGUPCRAFTINGSYSTEM_01 = 2962648104U;
-        static const AkUniqueID PLAY_UI__CRAFTINGMENU_RIGHTCLICKICON_02 = 2584199242U;
-        static const AkUniqueID PLAY_UI__CRAFTINGMENU_SORTING_01 = 3170528434U;
-        static const AkUniqueID PLAY_UI__CRAFTINGMENU_UPGRADE_01 = 2013194162U;
-        static const AkUniqueID PLAY_UI_PAUSE_CLOSEMENU = 1572933919U;
-        static const AkUniqueID PLAY_UI_PAUSE_INMENUSOUNDS = 2540695190U;
-        static const AkUniqueID PLAY_UI_PAUSE_OPENMENU = 659570891U;
-        static const AkUniqueID PLAY_UI_PAUSE_TABSOUNDS = 4190538351U;
-        static const AkUniqueID PLAY_USEITEM_BLOCK = 2978452144U;
-        static const AkUniqueID STOP_CAMPFIRE = 3878502195U;
-        static const AkUniqueID STOP_TITLE_SCREEN_MUSIC = 4201027921U;
+        static const AkUniqueID PLAY_PLAYER_JUMP = 562256996U;
+        static const AkUniqueID PLAY_UI_CLOSEMENU = 2736433684U;
+        static const AkUniqueID PLAY_UI_INVENTORY_DROP = 3929504087U;
+        static const AkUniqueID PLAY_UI_INVENTORY_TAKE = 546353625U;
+        static const AkUniqueID PLAY_UI_OPENMENU = 3541361906U;
+        static const AkUniqueID PLAY_USEITEM = 2229253950U;
     } // namespace EVENTS
 
     namespace STATES
     {
-        namespace FIRESTATE
+        namespace DAY_NIGHT
         {
-            static const AkUniqueID GROUP = 1043523140U;
+            static const AkUniqueID GROUP = 2666809638U;
 
             namespace STATE
             {
-                static const AkUniqueID FIREOFF = 205898616U;
-                static const AkUniqueID FIREON = 307829538U;
+                static const AkUniqueID DAY = 311764537U;
+                static const AkUniqueID MID = 1182670505U;
+                static const AkUniqueID NIGHT = 1011622525U;
                 static const AkUniqueID NONE = 748895195U;
             } // namespace STATE
-        } // namespace FIRESTATE
+        } // namespace DAY_NIGHT
+
+        namespace DRONESTATE
+        {
+            static const AkUniqueID GROUP = 3733145084U;
+
+            namespace STATE
+            {
+                static const AkUniqueID ACTIVE = 58138747U;
+                static const AkUniqueID IDLE = 1874288895U;
+                static const AkUniqueID NONE = 748895195U;
+            } // namespace STATE
+        } // namespace DRONESTATE
 
         namespace GAMESTATE
         {
@@ -74,22 +75,44 @@ namespace AK
             } // namespace STATE
         } // namespace GAMESTATE
 
+        namespace WATER
+        {
+            static const AkUniqueID GROUP = 2654748154U;
+
+            namespace STATE
+            {
+                static const AkUniqueID ABOVE = 2432428U;
+                static const AkUniqueID BELOW = 384800980U;
+                static const AkUniqueID NONE = 748895195U;
+            } // namespace STATE
+        } // namespace WATER
+
     } // namespace STATES
 
     namespace SWITCHES
     {
-        namespace ITEMTYPE
+        namespace ISLANDHEART_XP
         {
-            static const AkUniqueID GROUP = 4247838896U;
+            static const AkUniqueID GROUP = 1673590565U;
 
             namespace SWITCH
             {
-                static const AkUniqueID BLOCKBROKEN = 3465160839U;
-                static const AkUniqueID BLOCKGRASS = 2065309022U;
-                static const AkUniqueID BLOCKSTONE = 2903927127U;
-                static const AkUniqueID BLOCKWOOD = 3915253415U;
+                static const AkUniqueID LEVEL_UP = 2145291615U;
+                static const AkUniqueID UNLEVELED = 1548389549U;
             } // namespace SWITCH
-        } // namespace ITEMTYPE
+        } // namespace ISLANDHEART_XP
+
+        namespace ITEM_TYPE
+        {
+            static const AkUniqueID GROUP = 1281648863U;
+
+            namespace SWITCH
+            {
+                static const AkUniqueID BERRY = 302590163U;
+                static const AkUniqueID JELLY_DEW = 333239846U;
+                static const AkUniqueID PORTABLE_GENERATOR = 1759730654U;
+            } // namespace SWITCH
+        } // namespace ITEM_TYPE
 
         namespace MATERIAL
         {
@@ -99,17 +122,28 @@ namespace AK
             {
                 static const AkUniqueID DIRT = 2195636714U;
                 static const AkUniqueID GRASS = 4248645337U;
-                static const AkUniqueID SAND = 803837735U;
-                static const AkUniqueID STONE = 1216965916U;
-                static const AkUniqueID WOOD = 2058049674U;
+                static const AkUniqueID WATER = 2654748154U;
             } // namespace SWITCH
         } // namespace MATERIAL
+
+        namespace MENU_TYPE
+        {
+            static const AkUniqueID GROUP = 1819922903U;
+
+            namespace SWITCH
+            {
+                static const AkUniqueID INVENTORY_MENU = 3090328911U;
+                static const AkUniqueID MAIN_MENU = 2005704188U;
+                static const AkUniqueID PAUSE_MENU = 3422541661U;
+            } // namespace SWITCH
+        } // namespace MENU_TYPE
 
     } // namespace SWITCHES
 
     namespace GAME_PARAMETERS
     {
         static const AkUniqueID GAME_MUSIC_VOLUME = 1850957680U;
+        static const AkUniqueID ISLAND_HEART_XP = 2803209766U;
         static const AkUniqueID MASTER_VOLUME = 4179668880U;
         static const AkUniqueID SFX_VOLUME = 1564184899U;
     } // namespace GAME_PARAMETERS
@@ -118,7 +152,8 @@ namespace AK
     {
         static const AkUniqueID INIT = 1355168291U;
         static const AkUniqueID GENERAL = 133642231U;
-        static const AkUniqueID MUSIC = 3991942870U;
+        static const AkUniqueID MAIN_MENU = 2005704188U;
+        static const AkUniqueID TESTING = 1512859615U;
     } // namespace BANKS
 
     namespace BUSSES

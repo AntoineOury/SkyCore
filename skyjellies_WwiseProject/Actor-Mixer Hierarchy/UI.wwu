@@ -8,6 +8,28 @@
 			</PropertyList>
 			<ChildrenList>
 				<SwitchContainer Name="Mouse Hovering" ID="{61F6FA9B-99C3-4D78-9E32-765456371A48}" ShortID="926327528">
+					<PropertyList>
+						<Property Name="Highpass" Type="int16">
+							<ModifierList>
+								<ModifierInfo>
+									<Modifier Name="" ID="{157FE4FA-DF7E-4231-82B2-A2DC2C1ECC8B}"/>
+								</ModifierInfo>
+							</ModifierList>
+						</Property>
+						<Property Name="Pitch" Type="int32">
+							<ModifierList>
+								<ModifierInfo>
+									<Modifier Name="" ID="{06DA9C74-8ACC-4AEE-957D-D5E5FE38A0F2}">
+										<PropertyList>
+											<Property Name="Enabled" Type="bool" Value="True"/>
+											<Property Name="Max" Type="Real64" Value="100"/>
+											<Property Name="Min" Type="Real64" Value="-100"/>
+										</PropertyList>
+									</Modifier>
+								</ModifierInfo>
+							</ModifierList>
+						</Property>
+					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{47B5B937-BFA4-4565-8652-12F68D5C9E74}"/>
@@ -20,11 +42,23 @@
 						</Reference>
 					</ReferenceList>
 					<ChildrenList>
-						<Sound Name="UI_Mouse_Hover" ID="{BE48169B-F312-4921-A5A2-C5EBBA47168F}" ShortID="108241289">
+						<Sound Name="UI_Mouse_Hover" ID="{3B506B45-A658-42F9-A5CF-3AA6F18649FE}" ShortID="876536839">
 							<PropertyList>
+								<Property Name="Highpass" Type="int16">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{D405CD38-08DC-4930-BD6A-CA94C32A5B92}"/>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+								<Property Name="Pitch" Type="int32">
+									<ValueList>
+										<Value>700</Value>
+									</ValueList>
+								</Property>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>3</Value>
+										<Value>-3</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
@@ -37,47 +71,21 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<AudioFileSource Name="Menu_HoveringMenuButtons_04" ID="{A7CC1F8D-7347-491C-A125-7899F3A10766}">
+								<AudioFileSource Name="UI_Menu Generic_Click" ID="{7AAFFF43-A545-4A8C-AC45-E3ECBD23E643}">
+									<PropertyList>
+										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+										<Property Name="TrimBegin" Type="Real64" Value="0.0285547785547785"/>
+									</PropertyList>
 									<Language>SFX</Language>
-									<AudioFile>Menu_HoveringMenuButtons_04.wav</AudioFile>
+									<AudioFile>UI_Menu Generic_Click.wav</AudioFile>
 									<MediaIDList>
-										<MediaID ID="60950605"/>
+										<MediaID ID="339822177"/>
 									</MediaIDList>
 								</AudioFileSource>
 							</ChildrenList>
 							<ObjectLists/>
 							<ActiveSourceList>
-								<ActiveSource Name="Menu_HoveringMenuButtons_04" ID="{A7CC1F8D-7347-491C-A125-7899F3A10766}" Platform="Linked"/>
-							</ActiveSourceList>
-						</Sound>
-						<Sound Name="UI_Mouse_Hover_Inventory_Menu" ID="{ECAAC3DD-03F6-4D08-A33B-5F95709BE4A2}" ShortID="23939496">
-							<PropertyList>
-								<Property Name="Pitch" Type="int32">
-									<ValueList>
-										<Value>700</Value>
-									</ValueList>
-								</Property>
-							</PropertyList>
-							<ReferenceList>
-								<Reference Name="Conversion">
-									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{47B5B937-BFA4-4565-8652-12F68D5C9E74}"/>
-								</Reference>
-								<Reference Name="OutputBus">
-									<ObjectRef Name="UI" ID="{D6763F23-7F52-40D9-A8A6-888D2B2848C9}" WorkUnitID="{15EDDDFB-E268-4B43-BBAD-DDEE4AA347C2}"/>
-								</Reference>
-							</ReferenceList>
-							<ChildrenList>
-								<AudioFileSource Name="Menu_HoveringMenu_Inventory_Lufs" ID="{26A8B962-CDD4-4FDC-93C8-9DD3F8F9D099}">
-									<Language>SFX</Language>
-									<AudioFile>Menu_HoveringMenu_Inventory_Lufs.wav</AudioFile>
-									<MediaIDList>
-										<MediaID ID="485921160"/>
-									</MediaIDList>
-								</AudioFileSource>
-							</ChildrenList>
-							<ObjectLists/>
-							<ActiveSourceList>
-								<ActiveSource Name="Menu_HoveringMenu_Inventory_Lufs" ID="{26A8B962-CDD4-4FDC-93C8-9DD3F8F9D099}" Platform="Linked"/>
+								<ActiveSource Name="UI_Menu Generic_Click" ID="{7AAFFF43-A545-4A8C-AC45-E3ECBD23E643}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
 					</ChildrenList>
@@ -85,29 +93,26 @@
 					<GroupingInfo>
 						<GroupingBehaviorList>
 							<GroupingBehavior>
-								<ItemRef Name="UI_Mouse_Hover" ID="{BE48169B-F312-4921-A5A2-C5EBBA47168F}"/>
-							</GroupingBehavior>
-							<GroupingBehavior>
-								<ItemRef Name="UI_Mouse_Hover_Inventory_Menu" ID="{ECAAC3DD-03F6-4D08-A33B-5F95709BE4A2}"/>
+								<ItemRef Name="UI_Mouse_Hover" ID="{3B506B45-A658-42F9-A5CF-3AA6F18649FE}"/>
 							</GroupingBehavior>
 						</GroupingBehaviorList>
 						<GroupingList>
 							<Grouping>
 								<SwitchRef Name="Pause_Menu" ID="{5D069452-5AB5-4B6E-BBF5-5F00C8CAA3E5}"/>
 								<ItemList>
-									<ItemRef Name="UI_Mouse_Hover" ID="{BE48169B-F312-4921-A5A2-C5EBBA47168F}"/>
+									<ItemRef Name="UI_Mouse_Hover" ID="{3B506B45-A658-42F9-A5CF-3AA6F18649FE}"/>
 								</ItemList>
 							</Grouping>
 							<Grouping>
 								<SwitchRef Name="Inventory_Menu" ID="{BAB869D1-0079-4D7D-B27F-C70F13026CB8}"/>
 								<ItemList>
-									<ItemRef Name="UI_Mouse_Hover_Inventory_Menu" ID="{ECAAC3DD-03F6-4D08-A33B-5F95709BE4A2}"/>
+									<ItemRef Name="UI_Mouse_Hover" ID="{3B506B45-A658-42F9-A5CF-3AA6F18649FE}"/>
 								</ItemList>
 							</Grouping>
 							<Grouping>
 								<SwitchRef Name="Main_Menu" ID="{30D578E6-B84B-4B73-8CB3-5E89A7BB71C5}"/>
 								<ItemList>
-									<ItemRef Name="UI_Mouse_Hover" ID="{BE48169B-F312-4921-A5A2-C5EBBA47168F}"/>
+									<ItemRef Name="UI_Mouse_Hover" ID="{3B506B45-A658-42F9-A5CF-3AA6F18649FE}"/>
 								</ItemList>
 							</Grouping>
 						</GroupingList>
@@ -137,13 +142,6 @@
 							</ReferenceList>
 							<ChildrenList>
 								<BlendContainer Name="Pause Menu Open" ID="{20E7BC86-5C4A-409C-B2BD-3B1D25BDC156}" ShortID="207875178">
-									<PropertyList>
-										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>4</Value>
-											</ValueList>
-										</Property>
-									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{47B5B937-BFA4-4565-8652-12F68D5C9E74}"/>
@@ -324,11 +322,6 @@
 												<Value>27</Value>
 											</ValueList>
 										</Property>
-										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>4</Value>
-											</ValueList>
-										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
@@ -477,58 +470,124 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<Sound Name="UI_Inventory_Drop" ID="{1030A6BD-79C0-4823-B128-177DB10BEF12}" ShortID="920461446">
+								<BlendContainer Name="Drop_Item" ID="{D077B39F-BBDC-435D-9DD6-A26558391963}" ShortID="59844798">
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{47B5B937-BFA4-4565-8652-12F68D5C9E74}"/>
 										</Reference>
 										<Reference Name="OutputBus">
-											<ObjectRef Name="UI" ID="{D6763F23-7F52-40D9-A8A6-888D2B2848C9}" WorkUnitID="{15EDDDFB-E268-4B43-BBAD-DDEE4AA347C2}"/>
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{15EDDDFB-E268-4B43-BBAD-DDEE4AA347C2}"/>
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<AudioFileSource Name="UI_Pause_Slider_Grabbing_Dropping_Lufs" ID="{164B622C-B633-4EF4-B315-2E5A9F23673C}">
+										<Sound Name="UI_Inventory_DropItem_01" ID="{2BB89AF2-6035-4818-BF30-D09F48306CD3}" ShortID="118962185">
 											<PropertyList>
-												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-												<Property Name="TrimBegin" Type="Real64" Value="1.36200923787529"/>
+												<Property Name="Inclusion" Type="bool">
+													<ValueList>
+														<Value>False</Value>
+													</ValueList>
+												</Property>
+												<Property Name="Lowpass" Type="int16">
+													<ValueList>
+														<Value>34</Value>
+													</ValueList>
+												</Property>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>5</Value>
+													</ValueList>
+												</Property>
 											</PropertyList>
-											<Language>SFX</Language>
-											<AudioFile>UI_Pause_Slider_Grabbing_Dropping_Lufs.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="435491131"/>
-											</MediaIDList>
-										</AudioFileSource>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{47B5B937-BFA4-4565-8652-12F68D5C9E74}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{15EDDDFB-E268-4B43-BBAD-DDEE4AA347C2}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="UI_Inventory_DropItem_01" ID="{727B2DB9-6B81-4EF9-98D9-5E708D698C87}">
+													<PropertyList>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.324446386946387"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>UI_Inventory_DropItem_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="808096695"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists/>
+											<ActiveSourceList>
+												<ActiveSource Name="UI_Inventory_DropItem_01" ID="{727B2DB9-6B81-4EF9-98D9-5E708D698C87}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="UI_Inventory_Take" ID="{4C0B4F71-7781-4433-8EC0-FA9D4FD81FE2}" ShortID="237487593">
+											<PropertyList>
+												<Property Name="Pitch" Type="int32">
+													<ValueList>
+														<Value>30</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{47B5B937-BFA4-4565-8652-12F68D5C9E74}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="UI" ID="{D6763F23-7F52-40D9-A8A6-888D2B2848C9}" WorkUnitID="{15EDDDFB-E268-4B43-BBAD-DDEE4AA347C2}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="UI_Inventory_TakeItem_01" ID="{D7AD3333-5148-44E8-B2B4-E5179AE26850}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.106627573815074"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0.0675808566433567"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimEnd" Type="Real64" Value="0.171204836829837"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>UI_Inventory_TakeItem_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="943732005"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists/>
+											<ActiveSourceList>
+												<ActiveSource Name="UI_Inventory_TakeItem_01" ID="{D7AD3333-5148-44E8-B2B4-E5179AE26850}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
 									</ChildrenList>
 									<ObjectLists/>
-									<ActiveSourceList>
-										<ActiveSource Name="UI_Pause_Slider_Grabbing_Dropping_Lufs" ID="{164B622C-B633-4EF4-B315-2E5A9F23673C}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
+								</BlendContainer>
 							</ChildrenList>
 							<ObjectLists/>
 							<GroupingInfo>
 								<GroupingBehaviorList>
 									<GroupingBehavior>
-										<ItemRef Name="UI_Inventory_Drop" ID="{1030A6BD-79C0-4823-B128-177DB10BEF12}"/>
+										<ItemRef Name="Drop_Item" ID="{D077B39F-BBDC-435D-9DD6-A26558391963}"/>
 									</GroupingBehavior>
 								</GroupingBehaviorList>
 								<GroupingList>
 									<Grouping>
 										<SwitchRef Name="Portable_Generator" ID="{0FC2380C-CB58-4202-92F4-EE91C6372D50}"/>
 										<ItemList>
-											<ItemRef Name="UI_Inventory_Drop" ID="{1030A6BD-79C0-4823-B128-177DB10BEF12}"/>
+											<ItemRef Name="Drop_Item" ID="{D077B39F-BBDC-435D-9DD6-A26558391963}"/>
 										</ItemList>
 									</Grouping>
 									<Grouping>
 										<SwitchRef Name="Berry" ID="{D3E7BB4F-513C-4605-A2C9-5DF20E59C16C}"/>
 										<ItemList>
-											<ItemRef Name="UI_Inventory_Drop" ID="{1030A6BD-79C0-4823-B128-177DB10BEF12}"/>
+											<ItemRef Name="Drop_Item" ID="{D077B39F-BBDC-435D-9DD6-A26558391963}"/>
 										</ItemList>
 									</Grouping>
 									<Grouping>
 										<SwitchRef Name="Jelly_Dew" ID="{304397C4-5A3D-4122-A07C-D36D7587CBCD}"/>
 										<ItemList>
-											<ItemRef Name="UI_Inventory_Drop" ID="{1030A6BD-79C0-4823-B128-177DB10BEF12}"/>
+											<ItemRef Name="Drop_Item" ID="{D077B39F-BBDC-435D-9DD6-A26558391963}"/>
 										</ItemList>
 									</Grouping>
 								</GroupingList>
@@ -547,59 +606,81 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<Sound Name="UI_Inventory_Take" ID="{8A86E9B3-63EE-4C4E-B2F8-42BCD7B0CF97}" ShortID="276594514">
+								<BlendContainer Name="Take_Item" ID="{C9EF6EB8-7E2D-4311-853B-777B30638299}" ShortID="604494966">
+									<PropertyList>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-3</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{47B5B937-BFA4-4565-8652-12F68D5C9E74}"/>
 										</Reference>
 										<Reference Name="OutputBus">
-											<ObjectRef Name="UI" ID="{D6763F23-7F52-40D9-A8A6-888D2B2848C9}" WorkUnitID="{15EDDDFB-E268-4B43-BBAD-DDEE4AA347C2}"/>
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{15EDDDFB-E268-4B43-BBAD-DDEE4AA347C2}"/>
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<AudioFileSource Name="UI_Pause_Slider_Grabbing_Dropping_Lufs" ID="{5EDC75DE-426F-4174-AA6B-F50B8C29A7DF}">
+										<Sound Name="UI_Inventory_Take" ID="{8A86E9B3-63EE-4C4E-B2F8-42BCD7B0CF97}" ShortID="276594514">
 											<PropertyList>
-												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-												<Property Name="TrimBegin" Type="Real64" Value="0.0141454965357968"/>
-												<Property Name="TrimEnd" Type="Real64" Value="0.127309468822171"/>
+												<Property Name="Pitch" Type="int32">
+													<ValueList>
+														<Value>480</Value>
+													</ValueList>
+												</Property>
 											</PropertyList>
-											<Language>SFX</Language>
-											<AudioFile>UI_Pause_Slider_Grabbing_Dropping_Lufs.wav</AudioFile>
-											<MediaIDList>
-												<MediaID ID="78256152"/>
-											</MediaIDList>
-										</AudioFileSource>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{47B5B937-BFA4-4565-8652-12F68D5C9E74}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="UI" ID="{D6763F23-7F52-40D9-A8A6-888D2B2848C9}" WorkUnitID="{15EDDDFB-E268-4B43-BBAD-DDEE4AA347C2}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="UI_Inventory_TakeItem_01" ID="{7B0F0FE6-D32E-4D37-B819-80C87A82904B}">
+													<Language>SFX</Language>
+													<AudioFile>UI_Inventory_TakeItem_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="33475178"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists/>
+											<ActiveSourceList>
+												<ActiveSource Name="UI_Inventory_TakeItem_01" ID="{7B0F0FE6-D32E-4D37-B819-80C87A82904B}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
 									</ChildrenList>
 									<ObjectLists/>
-									<ActiveSourceList>
-										<ActiveSource Name="UI_Pause_Slider_Grabbing_Dropping_Lufs" ID="{5EDC75DE-426F-4174-AA6B-F50B8C29A7DF}" Platform="Linked"/>
-									</ActiveSourceList>
-								</Sound>
+								</BlendContainer>
 							</ChildrenList>
 							<ObjectLists/>
 							<GroupingInfo>
 								<GroupingBehaviorList>
 									<GroupingBehavior>
-										<ItemRef Name="UI_Inventory_Take" ID="{8A86E9B3-63EE-4C4E-B2F8-42BCD7B0CF97}"/>
+										<ItemRef Name="Take_Item" ID="{C9EF6EB8-7E2D-4311-853B-777B30638299}"/>
 									</GroupingBehavior>
 								</GroupingBehaviorList>
 								<GroupingList>
 									<Grouping>
 										<SwitchRef Name="Portable_Generator" ID="{0FC2380C-CB58-4202-92F4-EE91C6372D50}"/>
 										<ItemList>
-											<ItemRef Name="UI_Inventory_Take" ID="{8A86E9B3-63EE-4C4E-B2F8-42BCD7B0CF97}"/>
+											<ItemRef Name="Take_Item" ID="{C9EF6EB8-7E2D-4311-853B-777B30638299}"/>
 										</ItemList>
 									</Grouping>
 									<Grouping>
 										<SwitchRef Name="Berry" ID="{D3E7BB4F-513C-4605-A2C9-5DF20E59C16C}"/>
 										<ItemList>
-											<ItemRef Name="UI_Inventory_Take" ID="{8A86E9B3-63EE-4C4E-B2F8-42BCD7B0CF97}"/>
+											<ItemRef Name="Take_Item" ID="{C9EF6EB8-7E2D-4311-853B-777B30638299}"/>
 										</ItemList>
 									</Grouping>
 									<Grouping>
 										<SwitchRef Name="Jelly_Dew" ID="{304397C4-5A3D-4122-A07C-D36D7587CBCD}"/>
 										<ItemList>
-											<ItemRef Name="UI_Inventory_Take" ID="{8A86E9B3-63EE-4C4E-B2F8-42BCD7B0CF97}"/>
+											<ItemRef Name="Take_Item" ID="{C9EF6EB8-7E2D-4311-853B-777B30638299}"/>
 										</ItemList>
 									</Grouping>
 								</GroupingList>
@@ -608,29 +689,6 @@
 					</ChildrenList>
 					<ObjectLists/>
 				</ActorMixer>
-				<Sound Name="UI_Generic_Click" ID="{3B506B45-A658-42F9-A5CF-3AA6F18649FE}" ShortID="876536839">
-					<ReferenceList>
-						<Reference Name="Conversion">
-							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{47B5B937-BFA4-4565-8652-12F68D5C9E74}"/>
-						</Reference>
-						<Reference Name="OutputBus">
-							<ObjectRef Name="UI" ID="{D6763F23-7F52-40D9-A8A6-888D2B2848C9}" WorkUnitID="{15EDDDFB-E268-4B43-BBAD-DDEE4AA347C2}"/>
-						</Reference>
-					</ReferenceList>
-					<ChildrenList>
-						<AudioFileSource Name="UI_Menu Generic_Click" ID="{7AAFFF43-A545-4A8C-AC45-E3ECBD23E643}">
-							<Language>SFX</Language>
-							<AudioFile>UI_Menu Generic_Click.wav</AudioFile>
-							<MediaIDList>
-								<MediaID ID="310241983"/>
-							</MediaIDList>
-						</AudioFileSource>
-					</ChildrenList>
-					<ObjectLists/>
-					<ActiveSourceList>
-						<ActiveSource Name="UI_Menu Generic_Click" ID="{7AAFFF43-A545-4A8C-AC45-E3ECBD23E643}" Platform="Linked"/>
-					</ActiveSourceList>
-				</Sound>
 				<ActorMixer Name="Slider Bar" ID="{CF56B114-00B3-4BE3-91DC-B7D8D385F891}" ShortID="466663804">
 					<ReferenceList>
 						<Reference Name="Conversion">
@@ -699,6 +757,149 @@
 					</ChildrenList>
 					<ObjectLists/>
 				</ActorMixer>
+				<BlendContainer Name="Generic Click" ID="{A34681B5-5074-473D-B6A7-2F8FE99354F8}" ShortID="1062737368">
+					<PropertyList>
+						<Property Name="Highpass" Type="int16">
+							<ModifierList>
+								<ModifierInfo>
+									<Modifier Name="" ID="{E3505AD3-834C-4153-BCAF-2D5BB477FF50}"/>
+								</ModifierInfo>
+							</ModifierList>
+						</Property>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{47B5B937-BFA4-4565-8652-12F68D5C9E74}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{15EDDDFB-E268-4B43-BBAD-DDEE4AA347C2}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<BlendContainer Name="Left_Click" ID="{C818610C-0419-48DE-BEAC-42B48E50B713}" ShortID="651552585">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{47B5B937-BFA4-4565-8652-12F68D5C9E74}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{15EDDDFB-E268-4B43-BBAD-DDEE4AA347C2}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="UI_Generic_Click" ID="{BE48169B-F312-4921-A5A2-C5EBBA47168F}" ShortID="108241289">
+									<PropertyList>
+										<Property Name="Inclusion" Type="bool">
+											<ValueList>
+												<Value>False</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>3</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{47B5B937-BFA4-4565-8652-12F68D5C9E74}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{15EDDDFB-E268-4B43-BBAD-DDEE4AA347C2}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Menu_HoveringMenuButtons_04" ID="{A7CC1F8D-7347-491C-A125-7899F3A10766}">
+											<PropertyList>
+												<Property Name="LoopBegin" Type="Real64" Value="0.027972027972028"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimBegin" Type="Real64" Value="0.027972027972028"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>Menu_HoveringMenuButtons_04.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="60950605"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ObjectLists/>
+									<ActiveSourceList>
+										<ActiveSource Name="Menu_HoveringMenuButtons_04" ID="{A7CC1F8D-7347-491C-A125-7899F3A10766}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="UI_Generic_Click_Low" ID="{32DA54E2-606C-4F37-8FBE-9B55361A988E}" ShortID="1042275775">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ValueList>
+												<Value>-200</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-3</Value>
+											</ValueList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{47B5B937-BFA4-4565-8652-12F68D5C9E74}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{15EDDDFB-E268-4B43-BBAD-DDEE4AA347C2}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="UI_Menu Generic_Click" ID="{BF5DDB66-481D-421D-9B87-9D022E254A10}">
+											<PropertyList>
+												<Property Name="LoopBegin" Type="Real64" Value="0.0192307692307692"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimBegin" Type="Real64" Value="0.0192307692307692"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>UI_Menu Generic_Click.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="310241983"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ObjectLists/>
+									<ActiveSourceList>
+										<ActiveSource Name="UI_Menu Generic_Click" ID="{BF5DDB66-481D-421D-9B87-9D022E254A10}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="UI_Left_Click" ID="{345D83B8-49DF-4914-8816-4926FA228FF4}" ShortID="709791523">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{47B5B937-BFA4-4565-8652-12F68D5C9E74}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="UI" ID="{D6763F23-7F52-40D9-A8A6-888D2B2848C9}" WorkUnitID="{15EDDDFB-E268-4B43-BBAD-DDEE4AA347C2}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="UI_Inventory_TakeItem_01" ID="{01849A35-557D-4AAD-9861-BBC76CA6E64E}">
+											<PropertyList>
+												<Property Name="FadeInDuration" Type="Real64" Value="0.036794021950272"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimBegin" Type="Real64" Value="0.0525628885003885"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>UI_Inventory_TakeItem_01.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="913560433"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ObjectLists/>
+									<ActiveSourceList>
+										<ActiveSource Name="UI_Inventory_TakeItem_01" ID="{01849A35-557D-4AAD-9861-BBC76CA6E64E}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+							<ObjectLists/>
+						</BlendContainer>
+					</ChildrenList>
+					<ObjectLists/>
+				</BlendContainer>
 			</ChildrenList>
 		</WorkUnit>
 	</AudioObjects>

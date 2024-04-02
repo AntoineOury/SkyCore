@@ -158,7 +158,7 @@
 						</Event>
 						<Event Name="Play_UseItem" ID="{C102DE79-18F9-4FA1-AEA8-855C4491521E}">
 							<ChildrenList>
-								<Action Name="" ID="{29E1F203-A4FB-4C74-8C3A-C664E1837A91}" ShortID="1027150509">
+								<Action Name="" ID="{1CD73DF5-0EAB-4E6C-93BB-869DF9309718}" ShortID="925455424">
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="Use" ID="{6FF3C257-1474-4D7A-B7A6-DFB2A365714B}" WorkUnitID="{77E6AF40-97DC-4391-B713-B4353111E069}"/>
@@ -261,7 +261,7 @@
 								<Action Name="" ID="{76DAD913-6BA1-4E34-BCE1-4D9B5B039E16}" ShortID="830292465">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="UI_Generic_Click" ID="{3B506B45-A658-42F9-A5CF-3AA6F18649FE}" WorkUnitID="{24F872FC-45D6-49A0-9AC7-B0BBEB815244}"/>
+											<ObjectRef Name="UI_Mouse_Hover" ID="{3B506B45-A658-42F9-A5CF-3AA6F18649FE}" WorkUnitID="{24F872FC-45D6-49A0-9AC7-B0BBEB815244}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -275,22 +275,77 @@
 						<Property Name="OverrideColor" Type="bool" Value="True"/>
 					</PropertyList>
 					<ChildrenList>
-						<Event Name="Play_Main_Title_Music" ID="{E79D8DC7-77BE-448C-A0DB-126D5DB15803}">
+						<Event Name="Play_Firstiome_Day_Music" ID="{10CE4E37-8BC5-47CA-8110-0A33ADE8603D}">
 							<ChildrenList>
-								<Action Name="" ID="{A654D67F-E64D-478A-BE17-A878041A6AE1}" ShortID="70466728">
+								<Action Name="" ID="{F9436432-6986-4C1B-822F-5867F18E01A5}" ShortID="543539801">
 									<PropertyList>
 										<Property Name="ActionType" Type="int16" Value="2"/>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="Ttile Screen" ID="{9C5877D1-112F-477F-9342-E891E0DE712C}" WorkUnitID="{ABE72476-8F6F-4310-A911-9A7E0C513B95}"/>
+											<ObjectRef Name="Night_Music" ID="{9C5877D1-112F-477F-9342-E891E0DE712C}" WorkUnitID="{ABE72476-8F6F-4310-A911-9A7E0C513B95}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
-								<Action Name="" ID="{6F274C1D-06D7-4B88-B825-508B214D867B}" ShortID="507308960">
+								<Action Name="" ID="{F282FAAA-32DC-49A6-9767-CE0E3751EC43}" ShortID="90102172">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="22"/>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="Ttile Screen" ID="{9C5877D1-112F-477F-9342-E891E0DE712C}" WorkUnitID="{ABE72476-8F6F-4310-A911-9A7E0C513B95}"/>
+											<ObjectRef Name="Day" ID="{292D43AA-1244-4DA2-A66F-6E8FE89D3415}" WorkUnitID="{5F0A70B5-4CFD-4F47-A45F-35000A121C70}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{6D65188F-02B0-4155-99EC-63B8D08A3816}" ShortID="332276496">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Day_Music" ID="{0B431F5B-F7ED-42BD-9007-F2AA781D5B9C}" WorkUnitID="{ABE72476-8F6F-4310-A911-9A7E0C513B95}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Firstiome_Night_Music" ID="{C8ADFCD2-9827-4CDA-9415-E53A77D2319B}">
+							<ChildrenList>
+								<Action Name="" ID="{16C91A44-42B7-44CD-94CE-37A56283F8BE}" ShortID="266735890">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="2"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Day_Music" ID="{0B431F5B-F7ED-42BD-9007-F2AA781D5B9C}" WorkUnitID="{ABE72476-8F6F-4310-A911-9A7E0C513B95}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{3BFC92FC-A31E-482A-B223-43EC5CEBF492}" ShortID="776288527">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="22"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Night" ID="{C738B72D-9455-4DC8-BA13-9B784358E14C}" WorkUnitID="{5F0A70B5-4CFD-4F47-A45F-35000A121C70}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{FAE84130-3227-491D-8021-0D4A925577EF}" ShortID="778453594">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Night_Music" ID="{9C5877D1-112F-477F-9342-E891E0DE712C}" WorkUnitID="{ABE72476-8F6F-4310-A911-9A7E0C513B95}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_State_Mid" ID="{2DBA505D-8E8E-4DEF-ABFB-C37179B6FA6F}">
+							<ChildrenList>
+								<Action Name="" ID="{5319A346-B0AF-49F5-8B61-0BE490052648}" ShortID="572724337">
+									<PropertyList>
+										<Property Name="ActionType" Type="int16" Value="22"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Mid" ID="{2F43133F-B95F-4C6C-AB6A-FE4D31B9F385}" WorkUnitID="{5F0A70B5-4CFD-4F47-A45F-35000A121C70}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>

@@ -19,6 +19,9 @@
 					</TransitionList>
 				</StateGroup>
 				<StateGroup Name="Day_Night" ID="{123D2424-D2FD-45D8-9AEC-1543CE2E8849}">
+					<PropertyList>
+						<Property Name="DefaultTransitionTime" Type="Real64" Value="5"/>
+					</PropertyList>
 					<ChildrenList>
 						<State Name="None" ID="{8222AC9D-E762-4CAA-9368-47D3C8BFE898}"/>
 						<State Name="Day" ID="{292D43AA-1244-4DA2-A66F-6E8FE89D3415}"/>
@@ -29,14 +32,14 @@
 						<Transition>
 							<StartState Name="Day" ID="{292D43AA-1244-4DA2-A66F-6E8FE89D3415}"/>
 							<EndState Name="Mid" ID="{2F43133F-B95F-4C6C-AB6A-FE4D31B9F385}"/>
-							<Time>5</Time>
-							<IsShared>true</IsShared>
+							<Time>10</Time>
+							<IsShared>false</IsShared>
 						</Transition>
 						<Transition>
 							<StartState Name="Mid" ID="{2F43133F-B95F-4C6C-AB6A-FE4D31B9F385}"/>
 							<EndState Name="Night" ID="{C738B72D-9455-4DC8-BA13-9B784358E14C}"/>
-							<Time>5</Time>
-							<IsShared>true</IsShared>
+							<Time>10</Time>
+							<IsShared>false</IsShared>
 						</Transition>
 					</TransitionList>
 				</StateGroup>
