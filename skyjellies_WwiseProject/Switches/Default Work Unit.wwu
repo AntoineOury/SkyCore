@@ -53,13 +53,6 @@
 						</Curve>
 					</SwitchOnRTPC>
 				</SwitchGroup>
-				<SwitchGroup Name="Day_Cycle" ID="{AEA0F0D6-C21F-4113-8AF2-2F6A72AB326C}">
-					<ChildrenList>
-						<Switch Name="Day" ID="{0190B17C-9450-4F44-9DCC-F28978A1E577}"/>
-						<Switch Name="Night" ID="{3CEF3E22-3260-4185-A9A1-CD9BB35F25AE}"/>
-						<Switch Name="Mid" ID="{B6964031-576C-4676-BD7A-698C65D66222}"/>
-					</ChildrenList>
-				</SwitchGroup>
 			</ChildrenList>
 		</WorkUnit>
 	</Switches>

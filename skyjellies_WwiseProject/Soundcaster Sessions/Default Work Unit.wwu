@@ -10,47 +10,55 @@
 							<Position X="0" Y="0"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="UI_PauseMenu_Close" ID="{E30A7C90-E0E3-43FB-A709-80BC0611BDBF}" WorkUnitID="{24F872FC-45D6-49A0-9AC7-B0BBEB815244}"/>
+							<ObjectRef Name="Mouse Hovering" ID="{61F6FA9B-99C3-4D78-9E32-765456371A48}" WorkUnitID="{24F872FC-45D6-49A0-9AC7-B0BBEB815244}"/>
 							<Position X="0" Y="1"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="Ttile Screen" ID="{9C5877D1-112F-477F-9342-E891E0DE712C}" WorkUnitID="{ABE72476-8F6F-4310-A911-9A7E0C513B95}"/>
+							<ObjectRef Name="UI_Pause_Slider_Grab" ID="{4B1CFCE5-BB8F-4FA5-B968-A23AC09064DE}" WorkUnitID="{24F872FC-45D6-49A0-9AC7-B0BBEB815244}"/>
 							<Position X="0" Y="2"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="Biome Music" ID="{0B431F5B-F7ED-42BD-9007-F2AA781D5B9C}" WorkUnitID="{ABE72476-8F6F-4310-A911-9A7E0C513B95}"/>
+							<ObjectRef Name="Take Item" ID="{FF82B4A3-306C-4FAA-91AF-1757E122F70D}" WorkUnitID="{24F872FC-45D6-49A0-9AC7-B0BBEB815244}"/>
 							<Position X="0" Y="3"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="UI_Mouse_Hover" ID="{BE48169B-F312-4921-A5A2-C5EBBA47168F}" WorkUnitID="{24F872FC-45D6-49A0-9AC7-B0BBEB815244}"/>
+							<ObjectRef Name="UI_PauseMenu_Close" ID="{E30A7C90-E0E3-43FB-A709-80BC0611BDBF}" WorkUnitID="{24F872FC-45D6-49A0-9AC7-B0BBEB815244}"/>
 							<Position X="1" Y="0"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="UI_Generic_Click" ID="{3B506B45-A658-42F9-A5CF-3AA6F18649FE}" WorkUnitID="{24F872FC-45D6-49A0-9AC7-B0BBEB815244}"/>
+							<ObjectRef Name="Generic Click" ID="{A34681B5-5074-473D-B6A7-2F8FE99354F8}" WorkUnitID="{24F872FC-45D6-49A0-9AC7-B0BBEB815244}"/>
 							<Position X="1" Y="1"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="Birds" ID="{072DC396-6B66-49AF-8D77-A58B734B862B}" WorkUnitID="{32D576A2-9496-4B74-A2EF-F2F7B909F3D2}"/>
+							<ObjectRef Name="UI_Pause_Slider_Drop" ID="{F2D2A696-5F26-4100-9BFD-7433EF622034}" WorkUnitID="{24F872FC-45D6-49A0-9AC7-B0BBEB815244}"/>
+							<Position X="1" Y="2"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Drop Item" ID="{460FC465-2BBF-4CC1-B967-6C6917BB063E}" WorkUnitID="{24F872FC-45D6-49A0-9AC7-B0BBEB815244}"/>
 							<Position X="1" Y="3"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="UI_Pause_Slider_Grab" ID="{4B1CFCE5-BB8F-4FA5-B968-A23AC09064DE}" WorkUnitID="{24F872FC-45D6-49A0-9AC7-B0BBEB815244}"/>
+							<ObjectRef Name="Birds" ID="{072DC396-6B66-49AF-8D77-A58B734B862B}" WorkUnitID="{32D576A2-9496-4B74-A2EF-F2F7B909F3D2}"/>
 							<Position X="2" Y="0"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="UI_Pause_Slider_Drop" ID="{F2D2A696-5F26-4100-9BFD-7433EF622034}" WorkUnitID="{24F872FC-45D6-49A0-9AC7-B0BBEB815244}"/>
+							<ObjectRef Name="ENV_Waterfall" ID="{C5433E5D-E101-44CB-818A-EDFF24E54673}" WorkUnitID="{32D576A2-9496-4B74-A2EF-F2F7B909F3D2}"/>
 							<Position X="2" Y="1"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="ENV_Waterfall" ID="{C5433E5D-E101-44CB-818A-EDFF24E54673}" WorkUnitID="{32D576A2-9496-4B74-A2EF-F2F7B909F3D2}"/>
+							<ObjectRef Name="Use" ID="{6FF3C257-1474-4D7A-B7A6-DFB2A365714B}" WorkUnitID="{77E6AF40-97DC-4391-B713-B4353111E069}"/>
 							<Position X="2" Y="2"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="Footsteps" ID="{375DF73B-757F-4E81-B399-62A7530C5168}" WorkUnitID="{77E6AF40-97DC-4391-B713-B4353111E069}"/>
+							<ObjectRef Name="Pick" ID="{4A901DED-4464-41DA-A2A2-CCB35073D205}" WorkUnitID="{77E6AF40-97DC-4391-B713-B4353111E069}"/>
+							<Position X="2" Y="3"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Night_Music" ID="{9C5877D1-112F-477F-9342-E891E0DE712C}" WorkUnitID="{ABE72476-8F6F-4310-A911-9A7E0C513B95}"/>
 							<Position X="3" Y="0"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="Jump" ID="{613166A8-628C-444B-91DC-EA988EE4818B}" WorkUnitID="{77E6AF40-97DC-4391-B713-B4353111E069}"/>
+							<ObjectRef Name="Day_Music" ID="{0B431F5B-F7ED-42BD-9007-F2AA781D5B9C}" WorkUnitID="{ABE72476-8F6F-4310-A911-9A7E0C513B95}"/>
 							<Position X="3" Y="1"/>
 						</Module>
 						<Module>
@@ -58,8 +66,12 @@
 							<Position X="3" Y="2"/>
 						</Module>
 						<Module>
-							<ObjectRef Name="UI_Mouse_Hover_Inventory_Menu" ID="{ECAAC3DD-03F6-4D08-A33B-5F95709BE4A2}" WorkUnitID="{24F872FC-45D6-49A0-9AC7-B0BBEB815244}"/>
-							<Position X="4" Y="0"/>
+							<ObjectRef Name="Footsteps" ID="{375DF73B-757F-4E81-B399-62A7530C5168}" WorkUnitID="{77E6AF40-97DC-4391-B713-B4353111E069}"/>
+							<Position X="3" Y="3"/>
+						</Module>
+						<Module>
+							<ObjectRef Name="Jump" ID="{613166A8-628C-444B-91DC-EA988EE4818B}" WorkUnitID="{77E6AF40-97DC-4391-B713-B4353111E069}"/>
+							<Position X="4" Y="2"/>
 						</Module>
 					</ModuleList>
 					<RTPCValueList ShowAll="true">
@@ -81,15 +93,14 @@
 						</RTPCValue>
 					</RTPCValueList>
 					<CurrentStateList ShowAll="true">
-						<CurrentStateRef Name="Below" ID="{50E4D1AF-30EF-4F99-B664-8A0B9B5871B9}"/>
-						<CurrentStateRef Name="Mid" ID="{2F43133F-B95F-4C6C-AB6A-FE4D31B9F385}"/>
+						<CurrentStateRef Name="Above" ID="{9F40E068-E5BA-4328-86AE-99F27150F0BA}"/>
+						<CurrentStateRef Name="Day" ID="{292D43AA-1244-4DA2-A66F-6E8FE89D3415}"/>
 						<CurrentStateRef Name="Game_On" ID="{A030FA25-8AAD-4478-9CE7-30EECD46C8D5}"/>
 					</CurrentStateList>
 					<CurrentSwitchList ShowAll="true">
-						<CurrentSwitchRef Name="Mid" ID="{B6964031-576C-4676-BD7A-698C65D66222}"/>
 						<CurrentSwitchRef Name="Level_UP" ID="{62F4D3F4-A9C3-4EF9-B8C5-2E7EF664320B}"/>
-						<CurrentSwitchRef Name="Berry" ID="{D3E7BB4F-513C-4605-A2C9-5DF20E59C16C}"/>
-						<CurrentSwitchRef Name="Inventory_Menu" ID="{BAB869D1-0079-4D7D-B27F-C70F13026CB8}"/>
+						<CurrentSwitchRef Name="Jelly_Dew" ID="{304397C4-5A3D-4122-A07C-D36D7587CBCD}"/>
+						<CurrentSwitchRef Name="Main_Menu" ID="{30D578E6-B84B-4B73-8CB3-5E89A7BB71C5}"/>
 						<CurrentSwitchRef Name="Dirt" ID="{36E36445-7B78-4A85-A233-DA9D3B7C02E8}"/>
 					</CurrentSwitchList>
 				</SoundcasterSession>

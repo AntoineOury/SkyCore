@@ -22,7 +22,16 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<Sound Name="Player_Pick_Berry" ID="{4B9A9115-E6A2-479E-9135-FD3EAB3509A9}" ShortID="268462541">
+								<BlendContainer Name="Player_Pick_JellyDew" ID="{6093FA16-B9AF-41B7-A3D0-18214D67550F}" ShortID="780298122">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{EA97C66C-7957-4EE6-8FBE-371B1C7BBB5A}"/>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{47B5B937-BFA4-4565-8652-12F68D5C9E74}"/>
@@ -31,15 +40,215 @@
 											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{15EDDDFB-E268-4B43-BBAD-DDEE4AA347C2}"/>
 										</Reference>
 									</ReferenceList>
+									<ChildrenList>
+										<Sound Name="Player_Pick_JellyDew_Low" ID="{A5FC7311-8E7E-436A-93AC-E5BC3956DC36}" ShortID="12611747">
+											<PropertyList>
+												<Property Name="Inclusion" Type="bool">
+													<ValueList>
+														<Value>False</Value>
+													</ValueList>
+												</Property>
+												<Property Name="Pitch" Type="int32">
+													<ValueList>
+														<Value>-500</Value>
+													</ValueList>
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{474900F7-B015-4BF8-B295-882850FBD011}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="500"/>
+																	<Property Name="Min" Type="Real64" Value="-300"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{47B5B937-BFA4-4565-8652-12F68D5C9E74}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Player" ID="{E54A8076-4F36-425D-907A-529BE321906D}" WorkUnitID="{15EDDDFB-E268-4B43-BBAD-DDEE4AA347C2}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Player_PickUp_JellyDew_01" ID="{65B81E4A-2A06-4D4E-A1B5-5ECBFF775A00}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0412994123931624"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.0300359362859363"/>
+														<Property Name="TrimEnd" Type="Real64" Value="0.0818479263791763"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Player_PickUp_JellyDew_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="105897543"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists/>
+											<ActiveSourceList>
+												<ActiveSource Name="Player_PickUp_JellyDew_01" ID="{65B81E4A-2A06-4D4E-A1B5-5ECBFF775A00}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Player_Pick_JellyDew_High" ID="{6AE7EB49-FD6C-4A68-B3A5-F78FE35D59A3}" ShortID="358532691">
+											<PropertyList>
+												<Property Name="Lowpass" Type="int16">
+													<ValueList>
+														<Value>46</Value>
+													</ValueList>
+												</Property>
+												<Property Name="Pitch" Type="int32">
+													<ValueList>
+														<Value>1200</Value>
+													</ValueList>
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{C60DAE3E-F465-4509-9970-BC2805F5A930}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="500"/>
+																	<Property Name="Min" Type="Real64" Value="-300"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{47B5B937-BFA4-4565-8652-12F68D5C9E74}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Player" ID="{E54A8076-4F36-425D-907A-529BE321906D}" WorkUnitID="{15EDDDFB-E268-4B43-BBAD-DDEE4AA347C2}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Player_PickUp_JellyDew_01" ID="{F140BFE5-EB43-479D-B047-3D509A5A320A}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0360431235431235"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.0262814442501942"/>
+														<Property Name="TrimEnd" Type="Real64" Value="0.0818479263791763"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Player_PickUp_JellyDew_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="175737074"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists/>
+											<ActiveSourceList>
+												<ActiveSource Name="Player_PickUp_JellyDew_01" ID="{F140BFE5-EB43-479D-B047-3D509A5A320A}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Player_Use_JellyDew_02" ID="{7CB88AFE-98F0-424B-A8FB-2566AE1E7C02}" ShortID="311557808">
+											<PropertyList>
+												<Property Name="Highpass" Type="int16">
+													<ValueList>
+														<Value>38</Value>
+													</ValueList>
+												</Property>
+												<Property Name="Pitch" Type="int32">
+													<ValueList>
+														<Value>700</Value>
+													</ValueList>
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{A8005B16-0FDD-4E2E-9853-5F635714A094}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="500"/>
+																	<Property Name="Min" Type="Real64" Value="-100"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{47B5B937-BFA4-4565-8652-12F68D5C9E74}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Player" ID="{E54A8076-4F36-425D-907A-529BE321906D}" WorkUnitID="{15EDDDFB-E268-4B43-BBAD-DDEE4AA347C2}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Player_Use_JellyDew_02" ID="{7AF54543-7438-41F3-BD32-32030821F9AB}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.00150179681429684"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.182468312937063"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.126150932400933"/>
+														<Property Name="TrimEnd" Type="Real64" Value="0.420503108003108"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Player_Use_JellyDew_02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="689219991"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists/>
+											<ActiveSourceList>
+												<ActiveSource Name="Player_Use_JellyDew_02" ID="{7AF54543-7438-41F3-BD32-32030821F9AB}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Player_PickUp_JellyDew_02" ID="{3FA40D1C-3C6A-4847-8B2C-FF366FC55BEE}" ShortID="543266085">
+											<PropertyList>
+												<Property Name="Pitch" Type="int32">
+													<ValueList>
+														<Value>700</Value>
+													</ValueList>
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{C8B9BADE-B50A-4A82-8A42-8A8E164B5D7A}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="100"/>
+																	<Property Name="Min" Type="Real64" Value="-100"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{47B5B937-BFA4-4565-8652-12F68D5C9E74}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{15EDDDFB-E268-4B43-BBAD-DDEE4AA347C2}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Player_PickUp_JellyDew_02" ID="{6E170429-65B0-4D84-B426-75DDC2ECDBDB}">
+													<Language>SFX</Language>
+													<AudioFile>Player_PickUp_JellyDew_02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="710785367"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists/>
+											<ActiveSourceList>
+												<ActiveSource Name="Player_PickUp_JellyDew_02" ID="{6E170429-65B0-4D84-B426-75DDC2ECDBDB}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
 									<ObjectLists/>
-								</Sound>
-								<Sound Name="Player_Pick_JellyDew" ID="{A5FC7311-8E7E-436A-93AC-E5BC3956DC36}" ShortID="12611747">
+								</BlendContainer>
+								<Sound Name="Player_Pick_Berry" ID="{4B9A9115-E6A2-479E-9135-FD3EAB3509A9}" ShortID="268462541">
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{47B5B937-BFA4-4565-8652-12F68D5C9E74}"/>
 										</Reference>
 										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{15EDDDFB-E268-4B43-BBAD-DDEE4AA347C2}"/>
+											<ObjectRef Name="Player" ID="{E54A8076-4F36-425D-907A-529BE321906D}" WorkUnitID="{15EDDDFB-E268-4B43-BBAD-DDEE4AA347C2}"/>
 										</Reference>
 									</ReferenceList>
 									<ObjectLists/>
@@ -49,10 +258,10 @@
 							<GroupingInfo>
 								<GroupingBehaviorList>
 									<GroupingBehavior>
-										<ItemRef Name="Player_Pick_JellyDew" ID="{A5FC7311-8E7E-436A-93AC-E5BC3956DC36}"/>
+										<ItemRef Name="Player_Pick_Berry" ID="{4B9A9115-E6A2-479E-9135-FD3EAB3509A9}"/>
 									</GroupingBehavior>
 									<GroupingBehavior>
-										<ItemRef Name="Player_Pick_Berry" ID="{4B9A9115-E6A2-479E-9135-FD3EAB3509A9}"/>
+										<ItemRef Name="Player_Pick_JellyDew" ID="{6093FA16-B9AF-41B7-A3D0-18214D67550F}"/>
 									</GroupingBehavior>
 								</GroupingBehaviorList>
 								<GroupingList>
@@ -65,7 +274,7 @@
 									<Grouping>
 										<SwitchRef Name="Jelly_Dew" ID="{304397C4-5A3D-4122-A07C-D36D7587CBCD}"/>
 										<ItemList>
-											<ItemRef Name="Player_Pick_JellyDew" ID="{A5FC7311-8E7E-436A-93AC-E5BC3956DC36}"/>
+											<ItemRef Name="Player_Pick_JellyDew" ID="{6093FA16-B9AF-41B7-A3D0-18214D67550F}"/>
 										</ItemList>
 									</Grouping>
 								</GroupingList>
@@ -76,6 +285,15 @@
 				<Folder Name="Use Item" ID="{6C3809C0-5087-42B2-B11E-66E50BEC950A}" ShortID="747230066">
 					<ChildrenList>
 						<SwitchContainer Name="Use" ID="{6FF3C257-1474-4D7A-B7A6-DFB2A365714B}" ShortID="208448682">
+							<PropertyList>
+								<Property Name="Highpass" Type="int16">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{030276B6-E694-46D7-809F-954DDC85C2C2}"/>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{47B5B937-BFA4-4565-8652-12F68D5C9E74}"/>
@@ -89,6 +307,30 @@
 							</ReferenceList>
 							<ChildrenList>
 								<BlendContainer Name="JellyDew" ID="{4FD6F012-66C4-46C2-A718-14C25A695994}" ShortID="734478747">
+									<PropertyList>
+										<Property Name="Highpass" Type="int16">
+											<ValueList>
+												<Value>25</Value>
+											</ValueList>
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{8A0B6607-8384-41C1-B8A8-4DD442D2249F}"/>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{E7461E01-B855-49AF-8E51-158B2158EB85}">
+														<PropertyList>
+															<Property Name="Max" Type="Real64" Value="300"/>
+															<Property Name="Min" Type="Real64" Value="-200"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{47B5B937-BFA4-4565-8652-12F68D5C9E74}"/>
@@ -98,63 +340,37 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<Sound Name="Player_Use_JellyDew_" ID="{2DBC9049-DAEE-4BE4-8544-2E2B8E7F1B08}" ShortID="25297412">
-											<PropertyList>
-												<Property Name="Lowpass" Type="int16">
-													<RTPCList>
-														<RTPC Name="" ID="{5C8196B9-E70F-4BF5-9EEE-4DB9DCAF6B4D}" ShortID="732667344">
-															<ReferenceList>
-																<Reference Name="ControlInput">
-																	<ObjectRef Name="Island_Heart_XP" ID="{65AD78AC-938C-4914-B9CC-4293041DA912}" WorkUnitID="{15D68C6F-C506-4BCB-BB6D-07CAE8B9E043}"/>
-																</Reference>
-															</ReferenceList>
-															<Curve Name="" ID="{33A2B9DD-0756-4B0E-86D2-C01EDB22DE60}">
-																<PropertyList>
-																	<Property Name="Flags" Type="int32" Value="65537"/>
-																</PropertyList>
-																<PointList>
-																	<Point>
-																		<XPos>0</XPos>
-																		<YPos>45</YPos>
-																		<Flags>5</Flags>
-																	</Point>
-																	<Point>
-																		<XPos>100</XPos>
-																		<YPos>0</YPos>
-																		<Flags>37</Flags>
-																	</Point>
-																</PointList>
-															</Curve>
-														</RTPC>
-													</RTPCList>
-												</Property>
-											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{47B5B937-BFA4-4565-8652-12F68D5C9E74}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{15EDDDFB-E268-4B43-BBAD-DDEE4AA347C2}"/>
-												</Reference>
-											</ReferenceList>
-											<ObjectLists/>
-										</Sound>
 										<Sound Name="Player_Use_JellyDew_Response" ID="{A87EABC7-5487-4E08-8EAD-0BBA38E51EE8}" ShortID="972464982">
 											<PropertyList>
 												<Property Name="Highpass" Type="int16">
 													<ValueList>
 														<Value>41</Value>
 													</ValueList>
-												</Property>
-												<Property Name="Inclusion" Type="bool">
-													<ValueList>
-														<Value>False</Value>
-													</ValueList>
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{EFD062A3-3017-4E25-8592-78A06EFA881A}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Min" Type="Real64" Value="-15"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
 												</Property>
 												<Property Name="OverrideEffect" Type="bool" Value="True"/>
 												<Property Name="Pitch" Type="int32">
 													<ValueList>
 														<Value>330</Value>
+													</ValueList>
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{56335940-EBF6-4FD1-AB2A-182AA61FE8FA}"/>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+												<Property Name="Volume" Type="Real64">
+													<ValueList>
+														<Value>4</Value>
 													</ValueList>
 												</Property>
 											</PropertyList>
@@ -172,12 +388,12 @@
 											<ChildrenList>
 												<AudioFileSource Name="ENV--General-LvlUpIsland_01" ID="{949DCBFD-83E6-40A6-8434-C81F9CAF9102}">
 													<PropertyList>
-														<Property Name="FadeInDuration" Type="Real64" Value="0.128147064782294"/>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.226592778749029"/>
 														<Property Name="FadeInShape" Type="int16" Value="9"/>
 														<Property Name="FadeOutDuration" Type="Real64" Value="0.499221120184424"/>
 														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-														<Property Name="TrimBegin" Type="Real64" Value="0.385607418545961"/>
-														<Property Name="TrimEnd" Type="Real64" Value="1.09937529107387"/>
+														<Property Name="TrimBegin" Type="Real64" Value="1.54982548867028"/>
+														<Property Name="TrimEnd" Type="Real64" Value="2.13857665568149"/>
 													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>ENV--General-LvlUpIsland_01.wav</AudioFile>
@@ -191,10 +407,119 @@
 												<ActiveSource Name="ENV--General-LvlUpIsland_01" ID="{949DCBFD-83E6-40A6-8434-C81F9CAF9102}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
+										<Sound Name="Player_Use_JellyDew_02" ID="{9B09BEA2-2235-4228-AC9F-C7FB10F5C6A2}" ShortID="690107965">
+											<PropertyList>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{A69130D5-B2EF-4FAD-8EE2-8497E899F512}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="100"/>
+																	<Property Name="Min" Type="Real64" Value="-100"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{47B5B937-BFA4-4565-8652-12F68D5C9E74}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{15EDDDFB-E268-4B43-BBAD-DDEE4AA347C2}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Player_Use_JellyDew_02" ID="{1021FF88-B372-46B0-B25C-15EB3A67EEA3}">
+													<PropertyList>
+														<Property Name="LoopBegin" Type="Real64" Value="0.0758407391219891"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.0758407391219891"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Player_Use_JellyDew_02.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="390909482"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists/>
+											<ActiveSourceList>
+												<ActiveSource Name="Player_Use_JellyDew_02" ID="{1021FF88-B372-46B0-B25C-15EB3A67EEA3}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Player_Pick_JellyDew_High" ID="{FCE8DD27-6DCD-4B79-A987-DA967BCA8052}" ShortID="758806346">
+											<PropertyList>
+												<Property Name="Inclusion" Type="bool">
+													<ValueList>
+														<Value>False</Value>
+													</ValueList>
+												</Property>
+												<Property Name="Lowpass" Type="int16">
+													<ValueList>
+														<Value>7</Value>
+													</ValueList>
+												</Property>
+												<Property Name="Pitch" Type="int32">
+													<ValueList>
+														<Value>-1200</Value>
+													</ValueList>
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{EE5EF7C3-1F77-4B0D-A361-472D2E338566}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="500"/>
+																	<Property Name="Min" Type="Real64" Value="-100"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{47B5B937-BFA4-4565-8652-12F68D5C9E74}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Player" ID="{E54A8076-4F36-425D-907A-529BE321906D}" WorkUnitID="{15EDDDFB-E268-4B43-BBAD-DDEE4AA347C2}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Player_PickUp_JellyDew_01" ID="{0E441604-43D7-4184-908E-50EB07B49DB4}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.0360431235431235"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.0397976155788656"/>
+														<Property Name="TrimEnd" Type="Real64" Value="0.0818479263791763"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Player_PickUp_JellyDew_01.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="194333281"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ObjectLists/>
+											<ActiveSourceList>
+												<ActiveSource Name="Player_PickUp_JellyDew_01" ID="{0E441604-43D7-4184-908E-50EB07B49DB4}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
 									</ChildrenList>
 									<ObjectLists/>
 								</BlendContainer>
 								<RandomSequenceContainer Name="Berry" ID="{E56DC253-2964-4AA1-BB5F-732C4E165287}" ShortID="770726443">
+									<PropertyList>
+										<Property Name="Highpass" Type="int16">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{093D6B98-742C-40ED-98C6-A0C996EFF00D}"/>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{47B5B937-BFA4-4565-8652-12F68D5C9E74}"/>
@@ -264,6 +589,9 @@
 									</ValueList>
 								</Property>
 								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-2</Value>
+									</ValueList>
 									<ModifierList>
 										<ModifierInfo>
 											<Modifier Name="" ID="{47EFDEC0-7A8B-4E03-9029-303DB608E0C4}">

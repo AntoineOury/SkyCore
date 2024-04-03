@@ -14,7 +14,7 @@ TagManager:
   - InteractionUI
   - InventoryUI
   - IslandHeart
-  - PetButton
+  - WorkBench
   layers:
   - Default
   - TransparentFX
