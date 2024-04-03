@@ -1,9 +1,11 @@
 using Jellies;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UI;
+using Player;
 
 namespace Jellies
 {
@@ -15,8 +17,12 @@ namespace Jellies
 
         private SlimeExperience _slimeExp;
 
+        private JellyInteractBase _jellyInteract;
+
         [SerializeField]
         private GameObject _pettingButton;
+
+        private Animator _animator;
 
         [SerializeField, Tooltip("How often the player can pet the jelly")]
         private float _pettingCooldown;
@@ -26,6 +32,8 @@ namespace Jellies
             _parameter = GetComponent<Parameters>();
             _dew = GetComponent<DewInstantiate>();
             _slimeExp = GetComponent<SlimeExperience>();
+            _jellyInteract = GetComponent<JellyInteractBase>();
+            _animator = GetComponent<Animator>();
             _parameter.CanBePet = true;
             //_pettingButton = GameObject.Find("PetButton").GetComponent<Button>();
         }
@@ -40,17 +48,19 @@ namespace Jellies
         {
             if (_parameter.CanBePet)
             {
-                _dew.DewSpawn(2);
+                int index = Math.Min(_parameter.NumOfDewSpawnedAtLevel.Length - 1, _slimeExp.LevelNum - 1);
                 _parameter.CanBePet = false;
-                _slimeExp.AddEXP(10, "Petting");
+                
+                _jellyInteract.SpawnDewAndAddEXP(_parameter.NumOfDewSpawnedAtLevel[index], 10, "Petting");
                 StartCoroutine(Delay());
             }
         }
         private IEnumerator Delay()
         {
-            //_pettingButton.gameObject.SetActive(false);
+            _animator.Play("Petting",0,0);
+            _pettingButton.gameObject.SetActive(false);
             yield return new WaitForSeconds(_pettingCooldown);
-            //_pettingButton.gameObject.SetActive(true);
+            _pettingButton.gameObject.SetActive(true);
             _parameter.CanBePet = true;
         }
     }

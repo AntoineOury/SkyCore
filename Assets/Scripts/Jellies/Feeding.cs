@@ -24,6 +24,11 @@ namespace Jellies
 
         private SlimeExperience _slimeExp;
 
+        private JellyInteractBase _jellyInteract;
+
+        [SerializeField,Tooltip("How much exp the jelly gets from being fed")]
+        private int _foodEXPGain;
+
 
         public bool IsFull => _parameters.FoodSaturation == _parameters.MaxFoodSaturation;
 
@@ -32,6 +37,7 @@ namespace Jellies
             _parameters = GetComponent<Parameters>();
             _dew = GetComponent<DewInstantiate>();
             _slimeExp = GetComponent<SlimeExperience>();
+            _jellyInteract = GetComponent<JellyInteractBase>();
         }
 
         /// <summary>
@@ -53,8 +59,7 @@ namespace Jellies
             _parameters.IncreaseFoodSaturation(amountToIncrease);
 
             int index = Math.Min(_parameters.NumOfDewSpawnedAtLevel.Length - 1, _slimeExp.LevelNum - 1);
-            _dew.DewSpawn(_parameters.NumOfDewSpawnedAtLevel[index]);
-
+            _jellyInteract.SpawnDewAndAddEXP(_parameters.NumOfDewSpawnedAtLevel[index], _foodEXPGain, "Red Berries");
             return true;
         }
 

@@ -26,6 +26,9 @@ public class JellyInteractBase : Interactable
     [SerializeField] 
     private TextMeshProUGUI _saturationText;
 
+    private DewInstantiate _dew;
+
+    private SlimeExperience _slimeExp;
 
     public Feeding Feeding { get; private set; }
    
@@ -60,6 +63,8 @@ public class JellyInteractBase : Interactable
     {
         _jellyParams = GetComponent<Parameters>();
         Feeding = GetComponent<Feeding>();
+        _dew = GetComponent<DewInstantiate>();
+        _slimeExp = GetComponent<SlimeExperience>();
     }
 
     private void Update()
@@ -127,5 +132,10 @@ public class JellyInteractBase : Interactable
     public void InteractStop()
     {
         SetInteract(false);
+    }
+    public void SpawnDewAndAddEXP(int dewToSpawn,int EXPToAdd,string expSource)
+    {
+        _dew.DewSpawn(dewToSpawn);
+        _slimeExp.AddEXP(EXPToAdd, expSource);
     }
 }
