@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50676d1e2c36334995106035a4fbe43, type: 3}
+  m_Name: Cooking Settings
+  m_EditorClassIdentifier: 
+  <CookingTime>k__BackingField: 1
+  <ProductWhenIngredientsMatchNoRecipe>k__BackingField: {fileID: 11400000, guid: 2acc0b3656301544eb18281d1877b9f6,
+    type: 2}
+  <Recipes>k__BackingField:
+  - <IngredientA>k__BackingField: {fileID: 11400000, guid: 29ce0592c6f999741918df5821d136dc,
+      type: 2}
+    <IngredientB>k__BackingField: {fileID: 11400000, guid: 29ce0592c6f999741918df5821d136dc,
+      type: 2}
+    <Product>k__BackingField: {fileID: 11400000, guid: 33b536f855c433f41bd72411b4ad3b49,
+      type: 2}
+  - <IngredientA>k__BackingField: {fileID: 11400000, guid: ea60c6bcafafb47449f58b1932dda3a8,
+      type: 2}
+    <IngredientB>k__BackingField: {fileID: 11400000, guid: ea60c6bcafafb47449f58b1932dda3a8,
+      type: 2}
+    <Product>k__BackingField: {fileID: 11400000, guid: 8137ae494a7daac4cac6aecb5e40bb73,
+      type: 2}
+  - <IngredientA>k__BackingField: {fileID: 11400000, guid: 29ce0592c6f999741918df5821d136dc,
+      type: 2}
+    <IngredientB>k__BackingField: {fileID: 11400000, guid: 232a315a70ffef9499915b6f4173a9b8,
+      type: 2}
+    <Product>k__BackingField: {fileID: 11400000, guid: 3dbebd8f989c5b447889ecf6731f6ba6,
+      type: 2}
+  - <IngredientA>k__BackingField: {fileID: 11400000, guid: ea60c6bcafafb47449f58b1932dda3a8,
+      type: 2}
+    <IngredientB>k__BackingField: {fileID: 11400000, guid: ef64d4f322e341f4e8e470c4775fe5fc,
+      type: 2}
+    <Product>k__BackingField: {fileID: 11400000, guid: 6fae11b87a41f8948810425b75722f1c,
+      type: 2}
+  - <IngredientA>k__BackingField: {fileID: 11400000, guid: 232a315a70ffef9499915b6f4173a9b8,
+      type: 2}
+    <IngredientB>k__BackingField: {fileID: 11400000, guid: 232a315a70ffef9499915b6f4173a9b8,
+      type: 2}
+    <Product>k__BackingField: {fileID: 11400000, guid: a82dd03db704a0b48a04201df11b20f8,
+      type: 2}
+  - <IngredientA>k__BackingField: {fileID: 11400000, guid: ef64d4f322e341f4e8e470c4775fe5fc,
+      type: 2}
+    <IngredientB>k__BackingField: {fileID: 11400000, guid: ef64d4f322e341f4e8e470c4775fe5fc,
+      type: 2}
+    <Product>k__BackingField: {fileID: 11400000, guid: 7c6787b2ec80e2d4c9e68596170efa7d,
+      type: 2}
+  - <IngredientA>k__BackingField: {fileID: 11400000, guid: 232a315a70ffef9499915b6f4173a9b8,
+      type: 2}
+    <IngredientB>k__BackingField: {fileID: 11400000, guid: ea60c6bcafafb47449f58b1932dda3a8,
+      type: 2}
+    <Product>k__BackingField: {fileID: 11400000, guid: 656270c0768ad7c4abe8d51a3485786c,
+      type: 2}
+  - <IngredientA>k__BackingField: {fileID: 11400000, guid: 1e82287fd0204da4c8c177ec57992209,
+      type: 2}
+    <IngredientB>k__BackingField: {fileID: 11400000, guid: 25323f1ad10223240bb53a0a18e3fa6a,
+      type: 2}
+    <Product>k__BackingField: {fileID: 11400000, guid: a55bc59209a11aa4dbaec331f90b0664,
+      type: 2}

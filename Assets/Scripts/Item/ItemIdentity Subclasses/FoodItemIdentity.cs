@@ -6,6 +6,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "FoodItemIdentity", menuName = "ItemIdentity/FoodItemIdentity")]
 public class FoodItemIdentity : ItemIdentity
 {
+    [field: SerializeField]
+    public bool IsIngredientInCauldron { get; private set; }
     [field: SerializeField, Tooltip("Saturation value to be added to jelly after feeding")]
     public int SaturationValue { get; private set; }
     [field: SerializeField, Tooltip("How sour is the food?")]

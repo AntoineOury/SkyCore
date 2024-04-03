@@ -27,6 +27,8 @@ public class InventorySlot : MonoBehaviour
 
     public ItemStack _itemStack;
 
+    public System.Func<ItemIdentity, bool> RequirementForMovingItemInViaUI { get; set; }
+
     public ItemIdentity.ItemSortType SortType { get; private set; }
     public bool IsNotEmpty => _itemStack != null;
 
