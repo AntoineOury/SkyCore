@@ -25,6 +25,8 @@
 				</SoundBank>
 				<SoundBank Name="Main_Menu" ID="{C51F08AF-5535-4CFB-A69F-2CE4E7E1A6BD}">
 					<ObjectInclusionList>
+						<ObjectRef Name="Play_Menu_Music" ID="{7B908E6A-DD20-413F-9C77-DA27B9FFF84F}" WorkUnitID="{F05F9159-AF21-423D-8F81-903A3D83D93B}" Origin="Manual" Filter="7"/>
+						<ObjectRef Name="Play_Left_Click" ID="{EDC3F8FC-73DA-4377-BB8F-F9F5AA0B2BC1}" WorkUnitID="{F05F9159-AF21-423D-8F81-903A3D83D93B}" Origin="Manual" Filter="7"/>
 						<ObjectRef Name="Play_Mouse_Hovering" ID="{ED6254B0-FE73-45D0-A8A4-C2E866742115}" WorkUnitID="{F05F9159-AF21-423D-8F81-903A3D83D93B}" Origin="Manual" Filter="7"/>
 					</ObjectInclusionList>
 					<ObjectExclusionList/>
