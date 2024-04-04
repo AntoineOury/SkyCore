@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class InteractableWithUIMode : Interactable
+public class InteractableWithUIMode : Interactable
 {
     [SerializeField]
     private float _reactivateTime = 1.25f;
@@ -28,7 +28,10 @@ public abstract class InteractableWithUIMode : Interactable
     public static InteractableWithUIMode CurrentlyInteracting { get; private set; }
     public static bool AnyInteracting => CurrentlyInteracting != null;
 
-    public abstract bool InventoryInteraction(ItemIdentity item);
+    public virtual bool InventoryInteraction(ItemIdentity item)
+    {
+        return false;
+    }
 
     public override void OnInteractAction()
     {
