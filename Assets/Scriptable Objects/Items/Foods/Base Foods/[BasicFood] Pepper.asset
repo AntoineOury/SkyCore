@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3a20d29b5288624e8fd9f6854587b14, type: 3}
   m_Name: '[BasicFood] Pepper'
   m_EditorClassIdentifier: 
-  <Icon>k__BackingField: {fileID: 21300000, guid: 99ccc7589bff12b4d8972ca2718c465e,
+  <Icon>k__BackingField: {fileID: 21300000, guid: 8d0533d05f86f7f44a7fbac7de41a214,
     type: 3}
   <ItemPrefab>k__BackingField: {fileID: 2871547551631433579, guid: 0f0ec47815834ff499bb9a8da0d46516,
     type: 3}
@@ -20,6 +20,7 @@ MonoBehaviour:
   <SortType>k__BackingField: 2
   <AttractionRadius>k__BackingField: 0.75
   <AttractionRadiusIfSpawnedByTossingFromInventory>k__BackingField: 0.75
+  <IsIngredientInCauldron>k__BackingField: 1
   <SaturationValue>k__BackingField: 5
   <Sour>k__BackingField: 0
   <Sweet>k__BackingField: 0

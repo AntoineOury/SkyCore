@@ -188,6 +188,7 @@ public class Inventory : MonoBehaviour
         return amount <= countCanAdd;
     }
 
+    // this should be moved to the InventoryDragAndDrop script. Not doing that in case of merge conflicts w/ another task.
     public static bool TryMoveItemBetweenSlots(InventorySlot from, InventorySlot to)
     {
         if (from == null)
@@ -196,6 +197,13 @@ public class Inventory : MonoBehaviour
         }
 
         bool succeed = from != to && !InventoryInfoGetter.UnmatchedSortTypes(from.SortType, to.SortType);
+
+        // Don't succeed if code has set the RequirementForMovingItemInViaUI delegate of an item slot, and it's trying
+        // to move an item stack into the slot, and the requirement isn't met.
+        succeed &= to.RequirementForMovingItemInViaUI == null || from._itemStack == null 
+            || to.RequirementForMovingItemInViaUI(from._itemStack.identity);
+        succeed &= from.RequirementForMovingItemInViaUI == null || to._itemStack == null
+          || from.RequirementForMovingItemInViaUI(to._itemStack.identity);
 
         if (succeed)
         {

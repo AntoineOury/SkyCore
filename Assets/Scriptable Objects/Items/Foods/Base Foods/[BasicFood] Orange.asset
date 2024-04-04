@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3a20d29b5288624e8fd9f6854587b14, type: 3}
   m_Name: '[BasicFood] Orange'
   m_EditorClassIdentifier: 
-  <Icon>k__BackingField: {fileID: 21300000, guid: 4093041177b3bd746a710a0ae394851b,
+  <Icon>k__BackingField: {fileID: 21300000, guid: 4facbce67b3e4cf4eb78bf14aaaadd73,
     type: 3}
   <ItemPrefab>k__BackingField: {fileID: 2871547551631433579, guid: af284d3d9d44d7948abd6d5e0e7573df,
     type: 3}
@@ -20,6 +20,7 @@ MonoBehaviour:
   <SortType>k__BackingField: 2
   <AttractionRadius>k__BackingField: 0.75
   <AttractionRadiusIfSpawnedByTossingFromInventory>k__BackingField: 0.75
+  <IsIngredientInCauldron>k__BackingField: 1
   <SaturationValue>k__BackingField: 5
   <Sour>k__BackingField: 2
   <Sweet>k__BackingField: 1
