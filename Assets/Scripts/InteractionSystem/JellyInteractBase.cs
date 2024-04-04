@@ -34,4 +34,20 @@ public class JellyInteractBase : InteractableWithUIMode
             _saturationText.SetText($"Saturation: {_jellyParams.FoodSaturation}");
         }
     }
+
+    public override bool InventoryInteraction(ItemIdentity item)
+    {
+        switch (item) {
+            case FoodItemIdentity food:
+                if(_jellyParams.FoodSaturation < _jellyParams.MaxFoodSaturation)
+                {
+                    Feeding.TryFeedJelly(food.SaturationValue);
+                    return true;
+                }
+                return false;
+
+        default:
+            return false;
+        }
+    }
 }

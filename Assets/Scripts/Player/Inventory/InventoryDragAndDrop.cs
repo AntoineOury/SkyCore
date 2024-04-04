@@ -174,20 +174,17 @@ public class InventoryDragAndDrop
             return;
         }
 
-        if (_beingDragged._itemStack.identity == _berryItemIdentity)
+        // Try to give an item to the interactable
+        Ray ray;
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit, 100, _jellyFeedingLayerMask))
         {
-            // Try to feed the jelly which the player is interacting with.
-            Ray ray;
-            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit, 100, _jellyFeedingLayerMask))
+            InteractableWithUIMode interactable = hit.collider.GetComponent<InteractableWithUIMode>();
+            if (interactable == InteractableWithUIMode.CurrentlyInteracting
+                && interactable.InventoryInteraction(_beingDragged._itemStack.identity))
             {
-                JellyInteractBase jellyInteract = hit.collider.GetComponent<JellyInteractBase>();
-                if (jellyInteract == InteractableWithUIMode.CurrentlyInteracting
-                    && jellyInteract.Feeding.TryFeedJelly(_berryItemIdentity.SaturationValue))
-                {
-                    _beingDragged._itemStack.amount--;
-                    _beingDragged.OnItemStackChanged();
-                }
+                _beingDragged._itemStack.amount--;
+                _beingDragged.OnItemStackChanged();
             }
         }
     }

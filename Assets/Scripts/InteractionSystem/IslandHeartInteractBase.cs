@@ -6,22 +6,39 @@ using UnityEngine.UI;
 
 public class IslandHeartInteractBase : InteractableWithUIMode
 {
-    [Header("Feed-Island Heart interaction UI")]
-    [SerializeField, Tooltip("If the Island Heart is leveling up, disable the feedButton")]
-    private Button _feedButton;
 
     private IslandHeartLeveling heart;
 
     private void Awake()
     {
         heart = gameObject.GetComponent<IslandHeartLeveling>();
+
     }
 
     private void Update()
     {
-        if (IsInteracting)
+        
+    }
+
+    public override bool InventoryInteraction(ItemIdentity item)
+    {
+        if (item == null)
         {
-            _feedButton.interactable = !heart.IsMaxLevel();
+            Debug.Log("You do not have an item selected");
+            return false;
+        }
+        switch (item)
+        {
+            case GeneratorItemIdentity generator:
+                GameObject generatorSpawned = Instantiate(item.ItemPrefab);
+                return heart.PlaceGenerator(generatorSpawned, true);
+
+            case JellyDewItemIdentity jellyDew:
+                heart.FeedIslandHeart(1);
+                return true;
+
+            default:
+                return false;
         }
     }
 }
