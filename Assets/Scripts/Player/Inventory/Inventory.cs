@@ -217,7 +217,10 @@ public class Inventory : MonoBehaviour
         return succeed;
     }
 
-
+    public void OpenBackpack()
+    {
+        OnBackpack(new InputAction.CallbackContext());
+    }
 
     private void OnBackpack(InputAction.CallbackContext context)
     {

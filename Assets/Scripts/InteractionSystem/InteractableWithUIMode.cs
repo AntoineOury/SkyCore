@@ -28,6 +28,11 @@ public class InteractableWithUIMode : Interactable
     public static InteractableWithUIMode CurrentlyInteracting { get; private set; }
     public static bool AnyInteracting => CurrentlyInteracting != null;
 
+    public virtual bool InventoryInteraction(ItemIdentity item)
+    {
+        return false;
+    }
+
     public override void OnInteractAction()
     {
         SetInteract(true);
@@ -43,6 +48,8 @@ public class InteractableWithUIMode : Interactable
         IsInteracting = interact;
         
         _uiAndMaybeVirtualCamera.SetActive(interact);
+
+        Inventory.Instance.OpenBackpack();
         
         CursorMode.ReasonsForUnlockedCursor.ChangeReason("interacting", interact);
 

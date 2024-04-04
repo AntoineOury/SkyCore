@@ -72,6 +72,7 @@ public class PlayerInteraction : MonoBehaviour
 
         if (_currentInteractable != null)
         {
+            Debug.Log("Drone should displays an icon depending on the interaction context");
             _currentInteractable.OnInteractAction();
         }
     }
