@@ -1,0 +1,32 @@
+Event	ID	Name			Wwise Object Path	Notes
+	2228153899	Play_Menu_Music			\Default Work Unit\Music\Play_Menu_Music	
+	2830116340	Play_Left_Click			\Default Work Unit\UI\Play_Left_Click	
+	3807302544	Play_Mouse_Hovering			\Default Work Unit\UI\Play_Mouse_Hovering	
+
+Switch Group	ID	Name			Wwise Object Path	Notes
+	1819922903	Menu_Type			\Default Work Unit\Menu_Type	
+
+Switch	ID	Name	Switch Group			Notes
+	2005704188	Main_Menu	Menu_Type			
+	3090328911	Inventory_Menu	Menu_Type			
+	3422541661	Pause_Menu	Menu_Type			
+
+State Group	ID	Name			Wwise Object Path	Notes
+	2666809638	Day_Night			\Default Work Unit\Day_Night	
+
+State	ID	Name	State Group			Notes
+	311764537	Day	Day_Night			
+	748895195	None	Day_Night			
+	1011622525	Night	Day_Night			
+	1182670505	Mid	Day_Night			
+
+Custom State	ID	Name	State Group	Owner		Notes
+	779355135	Night	Day_Night	\Interactive Music Hierarchy\Music\Day_Music		
+	867684530	Mid	Day_Night	\Interactive Music Hierarchy\Music\Day_Music		
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	191177666	Music-General-LoadingScreen_60bpm_4-4_L8M_P1M_New	C:\Users\Loukas\Documents\GitHub\SkyCore\skyjellies_WwiseProject\.cache\Mac\SFX\Music-General-LoadingScreen_60bpm_4-4_L8M_P1M_New_D79FB2B7.wem		\Interactive Music Hierarchy\Music\Day_Music\Day_Music\Music-General-LoadingScreen_60bpm_4-4_L8M_P1M_New		7916796
+	310241983	UI_Generic_Click_Low	C:\Users\Loukas\Documents\GitHub\SkyCore\skyjellies_WwiseProject\.cache\Mac\SFX\UI_Menu Generic_Click_A60694EF.wem		\Actor-Mixer Hierarchy\UI\Generic Click\Left_Click\UI_Generic_Click_Low		92372
+	339822177	UI_Mouse_Hover	C:\Users\Loukas\Documents\GitHub\SkyCore\skyjellies_WwiseProject\.cache\Mac\SFX\UI_Menu Generic_Click_74B8A3A7.wem		\Actor-Mixer Hierarchy\UI\Mouse Hovering\UI_Mouse_Hover		90580
+	913560433	UI_Left_Click	C:\Users\Loukas\Documents\GitHub\SkyCore\skyjellies_WwiseProject\.cache\Mac\SFX\UI_Inventory_TakeItem_01_A81E72A0.wem		\Actor-Mixer Hierarchy\UI\Generic Click\Left_Click\UI_Left_Click		113672
+

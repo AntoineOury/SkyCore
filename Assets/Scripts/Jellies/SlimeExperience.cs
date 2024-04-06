@@ -40,17 +40,17 @@ public class SlimeExperience : MonoBehaviour
     private float _testEXPGain = 10f;
     [Tooltip("A variable for that when reached initiates EXP penalty formula")]
     [SerializeField]
-    private int _consectuctiveInteractionThreshold = 5;
-    [Tooltip("A variable that defines in seconds when to reset _consectuctiveInteractionCounter")]
+    private int _consecutiveInteractionThreshold = 5;
+    [Tooltip("A variable that defines in seconds when to reset _consecutiveInteractionCounter")]
     [SerializeField]
-    private float _consectuctiveInteractionTimer = 30f;
+    private float _consecutiveInteractionTimer = 30f;
     [Tooltip("A variable that determines how much penalty scales for interactions")]
     [SerializeField]
     private float _penaltyPercentage = 0.4f;
 
     private float _timeSinceLastInteraction = 0f;
 
-    private int _consectuctiveInteractionCounter = 0;
+    private int _consecutiveInteractionCounter = 0;
     
     private string _previousEXPsource = "";
 
@@ -67,7 +67,7 @@ public class SlimeExperience : MonoBehaviour
     }
 
     ///<summary>
-    /// Timer that resets _consectuctiveInteractionCounter after EXP has not been gained in a while
+    /// Timer that resets _consecutiveInteractionCounter after EXP has not been gained in a while
     /// </summary>
     void Update()
     {
@@ -79,11 +79,11 @@ public class SlimeExperience : MonoBehaviour
         #endif
 
         _timeSinceLastInteraction += Time.deltaTime;
-        if (_timeSinceLastInteraction >= _consectuctiveInteractionTimer) 
+        if (_timeSinceLastInteraction >= _consecutiveInteractionTimer) 
         {
             //Debug.Log("_consectuctiveInteractionCounter reset");
             _timeSinceLastInteraction = 0f;
-            _consectuctiveInteractionCounter = 0;
+            _consecutiveInteractionCounter = 0;
         }
     }
     ///<summary>
@@ -119,7 +119,7 @@ public class SlimeExperience : MonoBehaviour
     /// <summary>
     /// Adds additional EXP to the currentEXP
     /// If the EXP total reaches the EXP threshold, the level up function is called
-    /// When consecutive interactions are done more than the _consectuctiveInteractionThreshold allows
+    /// When consecutive interactions are done more than the _consecutiveInteractionThreshold allows
     /// for, the jelly will get an EXP penalty.
     /// parameter EXP: The EXP gained from the action
     /// parameter EXPsource: The source the EXP comes from
@@ -130,21 +130,22 @@ public class SlimeExperience : MonoBehaviour
 
         if (_previousEXPsource != EXPsource)
         {
-            _consectuctiveInteractionCounter = 0;
+            _consecutiveInteractionCounter = 0;
         }
         else 
         {
-            _consectuctiveInteractionCounter++;
+            _consecutiveInteractionCounter++;
         }
 
         _previousEXPsource = EXPsource;
         //Debug.Log("Source: " + EXPsource);
 
-        if (_consectuctiveInteractionCounter >= _consectuctiveInteractionThreshold) 
+        if (_consecutiveInteractionCounter >= _consecutiveInteractionThreshold) 
         {
-            float penalty = 1 / (1 + (_penaltyPercentage * (_consectuctiveInteractionCounter - _consectuctiveInteractionThreshold)));
+            float penalty = 1 / (1 + (_penaltyPercentage * (_consecutiveInteractionCounter - _consecutiveInteractionThreshold)));
             EXP *= penalty;
-            //Debug.Log("Consecutive Counter: " + _consectuctiveInteractionCounter + "| EXP Given: " + EXP);
+            //Debug.Log("Consecutive Counter: " + _consecutiveInteractionCounter + "| EXP Given: " + EXP);
+
             // In the future, add jelly annoyance reaction here to indicate EXP penalty to player.
         }
 

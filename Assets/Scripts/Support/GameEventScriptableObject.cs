@@ -169,6 +169,7 @@ public class GameEventScriptableObject : ScriptableObject
             {
                 (MonoBehaviour selectiveFor, GameEventScriptableObject gameEvent, System.Action action) 
                     = selectiveEventsAndResponses[i];
+
                 gameEvent.AddOnRaise(action, selectiveFor);
             }
         }

@@ -67,8 +67,8 @@
 				</Property>
 				<Property Name="VolumeThreshold" Type="Real64">
 					<ValueList>
-						<Value Platform="Windows">-30</Value>
-						<Value Platform="Mac">-30</Value>
+						<Value Platform="Windows">-96</Value>
+						<Value Platform="Mac">-96</Value>
 					</ValueList>
 				</Property>
 				<Property Name="WwiseVersionWhenCreated" Type="string" Value="Branch=wwise_v2021.1|Build=7973|VersionName=v2021.1.12|Config=Release"/>

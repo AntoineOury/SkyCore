@@ -268,6 +268,29 @@
 									<ObjectLists/>
 								</Bus>
 							</ChildrenList>
+							<StateInfo>
+								<StateGroupList>
+									<StateGroupInfo>
+										<StateGroupRef Name="GameState" ID="{C05EE549-8991-4FD9-8432-F96CC9BC1C07}"/>
+									</StateGroupInfo>
+								</StateGroupList>
+								<CustomStateList>
+									<CustomState>
+										<StateRef Name="Game_On" ID="{A030FA25-8AAD-4478-9CE7-30EECD46C8D5}"/>
+										<CustomState Name="" ID="{ABB3C9CD-82EA-4975-ADDB-CBD43A49F4F8}" ShortID="104628422"/>
+									</CustomState>
+									<CustomState>
+										<StateRef Name="Game_Pause" ID="{88A212A3-F7E4-4AE1-8F68-35CF2A96F72B}"/>
+										<CustomState Name="" ID="{C5B51501-7B2A-4AC2-9DEF-5413CB40B07B}" ShortID="865066299">
+											<PropertyList>
+												<Property Name="BusVolume" Type="Real64" Value="-108"/>
+												<Property Name="Highpass" Type="int16" Value="10"/>
+												<Property Name="Lowpass" Type="int16" Value="10"/>
+											</PropertyList>
+										</CustomState>
+									</CustomState>
+								</CustomStateList>
+							</StateInfo>
 							<ObjectLists/>
 						</Bus>
 					</ChildrenList>

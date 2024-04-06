@@ -65,7 +65,7 @@ public class Wandering : MonoBehaviour
     /// and either the jelly's doesn't have a path or the squared magnitude is 0, false otherwise. </returns>
     private bool NearDestination(float nearOffset)
     {
-        if (!_meshAgent.pathPending 
+        if (_meshAgent.enabled && !_meshAgent.pathPending 
             && _meshAgent.remainingDistance < Mathf.Min(_meshAgent.stoppingDistance, nearOffset) 
             && (!_meshAgent.hasPath || _meshAgent.velocity.sqrMagnitude == 0))
         {
@@ -88,7 +88,6 @@ public class Wandering : MonoBehaviour
         else 
         {
             // Create new destination for the jelly.
-
             Transform jellyTransform = transform;
             Vector3 wanderCenter = jellyTransform.position + (jellyTransform.forward * _wandDist);
             if (!CalcRandomWanderPoint(wanderCenter, _wandRange, out Vector3 calcPoint))
