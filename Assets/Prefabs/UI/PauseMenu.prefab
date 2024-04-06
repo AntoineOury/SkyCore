@@ -5345,6 +5345,7 @@ GameObject:
   - component: {fileID: 8267743937743583416}
   - component: {fileID: 8267743937743583417}
   - component: {fileID: 8267743937743583418}
+  - component: {fileID: 7900410016057678983}
   - component: {fileID: 307954277697130268}
   - component: {fileID: 8267743937743583419}
   - component: {fileID: 8267743937743583412}
@@ -5470,6 +5471,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &7900410016057678983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8267743937743583414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0885d4797f274ed43876b34b6d5953f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _event: {fileID: 5403245318140216574}
 --- !u!114 &307954277697130268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5595,6 +5609,7 @@ GameObject:
   - component: {fileID: 8267743937894127047}
   - component: {fileID: 8267743937894127040}
   - component: {fileID: 8267743937894127041}
+  - component: {fileID: 3083212556280370975}
   - component: {fileID: 92332714992873468}
   - component: {fileID: 8267743937894127042}
   - component: {fileID: 8267743937894127043}
@@ -5720,6 +5735,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &3083212556280370975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8267743937894127069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0885d4797f274ed43876b34b6d5953f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _event: {fileID: 5403245318140216574}
 --- !u!114 &92332714992873468
 MonoBehaviour:
   m_ObjectHideFlags: 0

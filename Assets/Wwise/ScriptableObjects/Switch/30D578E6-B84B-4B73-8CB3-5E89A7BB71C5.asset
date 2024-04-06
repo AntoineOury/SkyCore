@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e301cfe85be06a645888a09824c498c6, type: 3}
-  m_Name: 5D069452-5AB5-4B6E-BBF5-5F00C8CAA3E5
+  m_Name: 30D578E6-B84B-4B73-8CB3-5E89A7BB71C5
   m_EditorClassIdentifier: 
-  objectName: Pause_Menu
-  id: 3422541661
-  guid: 5D069452-5AB5-4B6E-BBF5-5F00C8CAA3E5
+  objectName: Main_Menu
+  id: 2005704188
+  guid: 30D578E6-B84B-4B73-8CB3-5E89A7BB71C5
   WwiseSwitchGroupReference: {fileID: 11400000, guid: 86e0b06a52a70a34086a1f7dccc63ef8,
     type: 2}
