@@ -60,7 +60,7 @@ namespace Jellies
             sum += Salty * food.Salty;
             sum += Bitter * food.Bitter;
             sum += Bitter * food.Bitter;
-            if (sum < 0)
+            if (sum < 1)
             {
                 sum = 1;
             }
