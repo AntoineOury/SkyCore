@@ -1,3 +1,4 @@
+using Codice.Client.Common.GameUI;
 using Codice.CM.Common.Tree.Partial;
 using Player;
 using System;
@@ -19,6 +20,7 @@ public class IslandHeartLeveling : MonoBehaviour
 	[SerializeField]
 	private GameObject _generatorLocation;
 	private GameObject _generator;
+	public GameObject Generator => _generator;
 
 	[Header("Island Heart Level Manager")]
 	[Tooltip("Current Island Heart Level")]
@@ -59,49 +61,31 @@ public class IslandHeartLeveling : MonoBehaviour
 		_generator = null;
 	}
 
+	/// <summary>
+	/// Keeping this to pick up tossed items for now, eventually want to replace most likely
+	/// </summary>
+	/// <param name="other"></param>
 	public void OnTriggerEnter(Collider other)
 	{
-		if(other.gameObject.GetComponent<GeneratorHandler>() && _generator == null)
+		if (other.gameObject.GetComponent<GeneratorHandler>())
 		{
-			GeneratorHandler handler = other.gameObject.GetComponent<GeneratorHandler>();
-			_generator = handler.gameObject;
-			handler.SetCharge((_currentXP/_xpThreshold) *100);
-			_generator.transform.parent = _generatorLocation.transform;
-			_generator.GetComponent<Rigidbody>().isKinematic = true;
-		} else if(other.gameObject.tag.Equals("JellyDew") && !IsMaxLevel())
-		{
-			//TODO: If dropping a large stack of Jelly Dew, we should make a way for that stack to be registered
-			//      as a stack of items with a count that can be put in place of the 1 currently used here. This
-			//		would also help prevent future performance problems due to too many items spawned for the
-			//		game to keep track of.
-			FeedIslandHeart(1);
+			if(_generator == null)
+			{
+				PlaceGenerator(other.gameObject, false);
+			}
 		}
-		if(!other.gameObject.tag.Equals("Player"))
+		else if(other.gameObject.GetComponent<PickupItem>())
 		{
-			return;
-		}
-		if(_generator == null)
-		{
-			//TODO: Drone should be notified to display the Generator icon here
-			Debug.Log("Displaying Inventory Scene and recommending the Generator be dropped");
-
-		} else
-		{
-            //TODO: Drone should be notified to display the Jelly Dew icon here
-            Debug.Log("Display jelly Dew Icon");
-        }
-	}
-
-	public void OnTriggerExit(Collider other)
-	{
-		if(!other.gameObject.tag.Equals("Player")) {
-			return;
-		} else
-		{
-			//TODO: Notify drone to stop displaying its icon here
+			if(other.gameObject.GetComponent<PickupItem>().ItemInfo is JellyDewItemIdentity && !IsMaxLevel()) {
+                //TODO: If dropping a large stack of Jelly Dew, we should make a way for that stack to be registered
+                //      as a stack of items with a count that can be put in place of the 1 currently used here. This
+                //		would also help prevent future performance problems due to too many items spawned for the
+                //		game to keep track of.
+                FeedIslandHeart(1);
+				Destroy(other.gameObject);
+            }
 		}
 	}
-
 	
 
 	/// <summary>
@@ -135,6 +119,20 @@ public class IslandHeartLeveling : MonoBehaviour
             }
         }
     }
+
+	public bool PlaceGenerator(GameObject generator, bool instantiate)
+	{
+		if (_generator == null)
+		{
+		    generator.transform.position = _generatorLocation.transform.position;
+			generator.transform.rotation = gameObject.transform.rotation;
+			_generator = generator;
+			_generator.GetComponent<GeneratorHandler>().SetCharge((_currentXP / _xpThreshold) * 100);
+			_generator.GetComponent<Rigidbody>().isKinematic = true;
+			return true;
+		}
+		return false;
+	}
 
 	public bool IsMaxLevel()
 	{

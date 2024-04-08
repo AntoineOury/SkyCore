@@ -173,7 +173,7 @@ public class DebugController : MonoBehaviour
     /// </summary>
     private void LockMouse()
     {
-        CursorMode.RemoveReasonForFreeCursor();
+        CursorMode.ReasonsForUnlockedCursor.RemoveReason("debug controller");
     }
 
     /// <summary>
@@ -181,7 +181,7 @@ public class DebugController : MonoBehaviour
     /// </summary>
     private void UnlockMouse()
     {
-        CursorMode.AddReasonForFreeCursor();
+        CursorMode.ReasonsForUnlockedCursor.AddReason("debug controller");
     }
 
     /// <summary>

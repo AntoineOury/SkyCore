@@ -25,23 +25,21 @@ public class InventoryDragAndDrop
 
     private LayerMask _jellyFeedingLayerMask = 1 << LayerMask.NameToLayer("Jellies");
 
-    private RectTransform[] _whereToConsiderMouseInsideInventory;
 
     private Transform _playerTransform;
-    private CapsuleCollider _playerCapsuleCollider;
-    private BerryItemIdentity _berryItemIdentity;
+    private FoodItemIdentity _berryItemIdentity;
 
-    public InventoryDragAndDrop(RectTransform[] whereToConsiderMouseInsideInventory, BerryItemIdentity berryItemIdentity)
+    public InventorySlot BeingDragged => _beingDragged;
+
+    public InventoryDragAndDrop(FoodItemIdentity berryItemIdentity)
     {
         _berryItemIdentity = berryItemIdentity;
-        _whereToConsiderMouseInsideInventory = whereToConsiderMouseInsideInventory;
         _click = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>().actions.FindAction("ClickForDragAndDrop", true);
         _click.started += OnClickStart;
         _click.canceled += OnClickCancel;
         _click.Disable();
 
         _playerTransform = PlayerMovement.Instance.transform;
-        _playerCapsuleCollider = _playerTransform.GetComponent<CapsuleCollider>();
     }
 
     public void EnableInput()
@@ -51,16 +49,21 @@ public class InventoryDragAndDrop
 
     public void DisableInputAndStop()
     {
+        TryReturnDraggedItemToItsSlot();
+        _click.Disable();
+    }
+
+    public void TryReturnDraggedItemToItsSlot()
+    {
         if (_beingDragged != null)
         {
             TryMoveDraggedItemToSlot(_beingDragged, true);
         }
-        _click.Disable();
     }
 
     private void OnClickStart(InputAction.CallbackContext context)
     {
-        if (Inventory.Instance.IgnoreInputs)
+        if (Inventory.Instance.IgnoreInput.AnyReasons)
         {
             return;
         }
@@ -80,7 +83,7 @@ public class InventoryDragAndDrop
 
     private void OnClickCancel(InputAction.CallbackContext context)
     {
-        if (Inventory.Instance.IgnoreInputs)
+        if (Inventory.Instance.IgnoreInput.AnyReasons)
         {
             return;
         }
@@ -101,7 +104,7 @@ public class InventoryDragAndDrop
     {
         if (_beingDragged != null)
         {
-            if (Inventory.Instance.IgnoreInputs)
+            if (Inventory.Instance.IgnoreInput.AnyReasons)
             {
                 TryMoveDraggedItemToSlot(_beingDragged, true);
             }
@@ -144,17 +147,7 @@ public class InventoryDragAndDrop
             throw new System.Exception("_beingDragged._itemStack is null. This shouldn't be possible");
         }
 
-        bool isOutsideInventory = true;
-        for (int i = 0; i < _whereToConsiderMouseInsideInventory.Length; i++)
-        {
-            if (RectTransformUtility.RectangleContainsScreenPoint(_whereToConsiderMouseInsideInventory[i], Input.mousePosition))
-            {
-                isOutsideInventory = false;
-                break;
-            }
-        }
-
-        if (isOutsideInventory)
+        if (!AreaToConsiderMouseInsideInventory.MouseIsInsideInventory())
         {
             FinishDragOutsideInventory();
         }
@@ -164,33 +157,34 @@ public class InventoryDragAndDrop
             if (slotBelowMouse != null 
                 && !InventoryInfoGetter.UnmatchedSortTypes(_beingDragged._itemStack.identity.SortType, slotBelowMouse.SortType))
             {
-                TryMoveDraggedItemToSlot(slotBelowMouse);
+                if (slotBelowMouse._itemStack == null || !InventoryInfoGetter.UnmatchedSortTypes(slotBelowMouse._itemStack.identity.SortType
+                    , _beingDragged.SortType))
+                {
+                    TryMoveDraggedItemToSlot(slotBelowMouse);
+                }
             }
         }
     }
 
     private void FinishDragOutsideInventory()
     {
-        if (!JellyInteractBase.AnyInteracting)
+        if (!InteractableWithUIMode.AnyInteracting)
         {
             TryTossItem();
             return;
         }
 
-        if (_beingDragged._itemStack.identity == _berryItemIdentity)
+        // Try to give an item to the interactable
+        Ray ray;
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit, 100, _jellyFeedingLayerMask))
         {
-            // Try to feed the jelly which the player is interacting with.
-            Ray ray;
-            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit, 100, _jellyFeedingLayerMask))
+            InteractableWithUIMode interactable = hit.collider.GetComponent<InteractableWithUIMode>();
+            if (interactable == InteractableWithUIMode.CurrentlyInteracting
+                && interactable.InventoryInteraction(_beingDragged._itemStack.identity))
             {
-                JellyInteractBase jellyInteract = hit.collider.GetComponent<JellyInteractBase>();
-                if (jellyInteract == JellyInteractBase.InteractingJelly
-                    && jellyInteract.Feeding.TryFeedJelly(_berryItemIdentity.SaturationValue))
-                {
-                    _beingDragged._itemStack.amount--;
-                    _beingDragged.OnItemStackChanged();
-                }
+                _beingDragged._itemStack.amount--;
+                _beingDragged.OnItemStackChanged();
             }
         }
     }

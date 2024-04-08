@@ -14,7 +14,7 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private Animator _animator;
     [SerializeField]
-    private Transform _itemParentDuringDragAndDrop;
+    private GameObject _prefabForItemParentDuringDragAndDrop;
     [SerializeField]
     private Transform _hotbarSectionSlotsParent;
     [SerializeField]
@@ -23,11 +23,9 @@ public class Inventory : MonoBehaviour
     private Transform _toolSectionSlotsParent;
     [SerializeField]
     private Transform _resourceSectionSlotsParent;
-    [SerializeField]
-    private RectTransform[] _whereToConsiderMouseInsideInventory;
 
     [SerializeField]
-    private BerryItemIdentity _berryItemIdentity;
+    private FoodItemIdentity _berryItemIdentity;
 
     [SerializeField]
     private int _hotBarStacksCapacity = 3;
@@ -49,6 +47,10 @@ public class Inventory : MonoBehaviour
         
     public InventoryDragAndDrop _dragAndDrop;
 
+    public InventoryDragAndDrop DragAndDrop => _dragAndDrop;
+
+    public Transform ParentDuringDragAndDrop { get; private set; }
+
     private static Inventory _instance;
     public static Inventory Instance
     {
@@ -57,45 +59,41 @@ public class Inventory : MonoBehaviour
             if (_instance == null)
             {
                 _instance = GameObject.FindGameObjectWithTag("InventoryUI").GetComponent<Inventory>();
+                _instance.CheckCreateThingsUsedByContainersToo();
             }
             return _instance;
         }
     }
 
-    private int _numberOfReasonsToIgnoreInputs = 0;
-    public int NumberOfReasonsToIgnoreInputs
-    {
-        get => _numberOfReasonsToIgnoreInputs;
-        set
-        {
-            _numberOfReasonsToIgnoreInputs = value;
-            //Debug.Log("# reasons ignore inputs for inventory: " + value);
-            if (_numberOfReasonsToIgnoreInputs < 0)
-            {
-                throw new System.Exception("In Inventory, _numberOfReasonsToIgnoreInputs < 0: " + _numberOfReasonsToIgnoreInputs);
-            }
-        }
-    }
-    public bool IgnoreInputs => NumberOfReasonsToIgnoreInputs > 0;
+    public Reasons IgnoreInput { get; private set; } = new();
 
 
     public GameObject HotbarHighlight => _hotBarHighlight;
     public Transform HotBarSlotsParent => _hotbarSectionSlotsParent;
 
+    private void CheckCreateThingsUsedByContainersToo()
+    {
+        if (_dragAndDrop == null)
+        {
+            ParentDuringDragAndDrop = Instantiate(_prefabForItemParentDuringDragAndDrop).transform;
+            _dragAndDrop = new InventoryDragAndDrop(_berryItemIdentity);
+        }
+
+    }
 
     private void Awake()
     {
-        _dragAndDrop = new InventoryDragAndDrop(_whereToConsiderMouseInsideInventory, _berryItemIdentity);
+        CheckCreateThingsUsedByContainersToo();
 
         _hotbarSection = new InventorySection(_hotBarStacksCapacity, ItemIdentity.ItemSortType.None
-            , _inventorySlotPrefab, _hotbarSectionSlotsParent, _itemParentDuringDragAndDrop, _dragAndDrop);
+            , _inventorySlotPrefab, _hotbarSectionSlotsParent, ParentDuringDragAndDrop, _dragAndDrop);
 
         InventorySection jellySection = new InventorySection(_jellySectionStacksCapacity, ItemIdentity.ItemSortType.JellyItem
-            , _inventorySlotPrefab, _jellySectionSlotsParent, _itemParentDuringDragAndDrop, _dragAndDrop);
+            , _inventorySlotPrefab, _jellySectionSlotsParent, ParentDuringDragAndDrop, _dragAndDrop);
         InventorySection toolSection = new InventorySection(_toolSectionStacksCapacity, ItemIdentity.ItemSortType.Tool
-            , _inventorySlotPrefab, _toolSectionSlotsParent, _itemParentDuringDragAndDrop, _dragAndDrop);
+            , _inventorySlotPrefab, _toolSectionSlotsParent, ParentDuringDragAndDrop, _dragAndDrop);
         InventorySection resourceSection = new InventorySection(_resourceSectionStacksCapacity, ItemIdentity.ItemSortType.Resource
-           , _inventorySlotPrefab, _resourceSectionSlotsParent, _itemParentDuringDragAndDrop, _dragAndDrop);
+           , _inventorySlotPrefab, _resourceSectionSlotsParent, ParentDuringDragAndDrop, _dragAndDrop);
 
         _sections = new InventorySection[] { _hotbarSection, jellySection, toolSection, resourceSection };
 
@@ -135,6 +133,12 @@ public class Inventory : MonoBehaviour
 
     public void TakeInAsManyAsFit(ItemStack item)
     {
+        if (item.amount <= 0)
+        {
+            throw new System.Exception("Trying to take in items from a stack whose amount is "
+                + item.amount + ", item stack: identity: " + item.identity);
+        }
+
         for (int i = 0; i < _sections.Length; i++)
         {
             _sections[i].TakeIntoExistingStacks(item);
@@ -142,6 +146,11 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < _sections.Length; i++)
         {
             _sections[i].TakeIntoNewStacks(item);
+        }
+
+        if (item.amount < 0)
+        {
+            throw new System.Exception("took too many. item.amount: " + item.amount + ", item stack: identity: " + item.identity);
         }
     }
        
@@ -179,6 +188,7 @@ public class Inventory : MonoBehaviour
         return amount <= countCanAdd;
     }
 
+    // this should be moved to the InventoryDragAndDrop script. Not doing that in case of merge conflicts w/ another task.
     public static bool TryMoveItemBetweenSlots(InventorySlot from, InventorySlot to)
     {
         if (from == null)
@@ -187,6 +197,13 @@ public class Inventory : MonoBehaviour
         }
 
         bool succeed = from != to && !InventoryInfoGetter.UnmatchedSortTypes(from.SortType, to.SortType);
+
+        // Don't succeed if code has set the RequirementForMovingItemInViaUI delegate of an item slot, and it's trying
+        // to move an item stack into the slot, and the requirement isn't met.
+        succeed &= to.RequirementForMovingItemInViaUI == null || from._itemStack == null 
+            || to.RequirementForMovingItemInViaUI(from._itemStack.identity);
+        succeed &= from.RequirementForMovingItemInViaUI == null || to._itemStack == null
+          || from.RequirementForMovingItemInViaUI(to._itemStack.identity);
 
         if (succeed)
         {
@@ -200,20 +217,22 @@ public class Inventory : MonoBehaviour
         return succeed;
     }
 
-
-
+    public void OpenBackpack()
+    {
+        OnBackpack(new InputAction.CallbackContext());
+    }
 
     private void OnBackpack(InputAction.CallbackContext context)
     {
-        if (IgnoreInputs)
+        if (IgnoreInput.AnyReasons)
         {
             return;
         }
 
         _isInBackpackMode = !_isInBackpackMode;
 
-        CursorMode.ChangeNumberOfReasonsForFreeCursor(_isInBackpackMode);
-        InputIgnoring.ChangeNumberOfReasonsToIgnoreInputsForMovementThings(_isInBackpackMode);
+        CursorMode.ReasonsForUnlockedCursor.ChangeReason("inventory open", _isInBackpackMode);
+        InputIgnoring.ChangeReasonToIgnoreInputsForMovementThings("inventory open", _isInBackpackMode);
 
         if (_isInBackpackMode)
         {

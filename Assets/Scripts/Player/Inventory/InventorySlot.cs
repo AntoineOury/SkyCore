@@ -27,6 +27,8 @@ public class InventorySlot : MonoBehaviour
 
     public ItemStack _itemStack;
 
+    public System.Func<ItemIdentity, bool> RequirementForMovingItemInViaUI { get; set; }
+
     public ItemIdentity.ItemSortType SortType { get; private set; }
     public bool IsNotEmpty => _itemStack != null;
 
@@ -66,6 +68,12 @@ public class InventorySlot : MonoBehaviour
                 throw new System.Exception("In InventorySlot, _countText.text != _itemStack.amount. Item stack identity: "
                     + _itemStack.identity.name + ", amount: " + _itemStack.amount + ", amount shown: " + _countText.text);
             }
+        }
+
+
+        if (_dragAndDrop == null)
+        {
+            throw new System.Exception("Inventory slot's _dragAndDrop is null. Remember to call InitializeAfterInstantiate");
         }
     }
 #endif

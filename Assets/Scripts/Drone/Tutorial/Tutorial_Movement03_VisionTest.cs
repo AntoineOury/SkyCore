@@ -76,7 +76,7 @@ public class Tutorial_Movement03_VisionTest : MonoBehaviour
         // Switch back to the player camera. This is needed as this is the one that is moved by the look controls.
         CameraSystem.SwitchToFirstPersonCamera();
 
-        Player.View.FirstPersonView.Instance.NumberOfReasonsToIgnoreInputs--;
+        Player.View.FirstPersonView.Instance.IgnoreInput.RemoveReason("movement tutorial");
 
         _pictogramBehaviour.ChangePictogramImage(_sprite_DroneCameraControls);
 

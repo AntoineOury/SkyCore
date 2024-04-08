@@ -54,9 +54,9 @@ public class PauseManagement : MonoBehaviour
         bool wasPaused = IsPaused;
         if (pause != wasPaused)
         {
-            CursorMode.ChangeNumberOfReasonsForFreeCursor(pause);
-            InputIgnoring.ChangeNumberOfReasonsToIgnoreInputsForMovementAndInteractionThings(pause);
-            Inventory.Instance.NumberOfReasonsToIgnoreInputs += pause ? 1 : -1;
+            CursorMode.ReasonsForUnlockedCursor.ChangeReason("paused", pause);
+            InputIgnoring.ChangeReasonToIgnoreInputsForMovementAndInteractionThings("paused", pause);
+            Inventory.Instance.IgnoreInput.ChangeReason("paused", pause);
         }
 
         Time.timeScale = pause ? 0 : 1;

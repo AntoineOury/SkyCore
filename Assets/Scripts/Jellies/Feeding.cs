@@ -14,9 +14,6 @@ namespace Jellies
     /// </summary>
     public class Feeding : MonoBehaviour
     {
-        [SerializeField, Tooltip("Scriptable object representing" +
-        " the type of item to feed the jelly")]
-        private BerryItemIdentity _berryItemIdentity;
 
         private Parameters _parameters;
 
@@ -38,7 +35,7 @@ namespace Jellies
         /// Feeds jelly by increasing it's food saturation.
         /// </summary>
         /// <param name="amountToIncrease">Amount of food to feed by, is same as saturation.</param>
-        public bool TryFeedJelly(float amountToIncrease)
+        public bool TryFeedJelly(float saturation)
         {
             if (_parameters.FoodSaturation >= _parameters.MaxFoodSaturation)
             {
@@ -49,8 +46,7 @@ namespace Jellies
                 }
                 return false;
             }
-
-            _parameters.IncreaseFoodSaturation(amountToIncrease);
+            _parameters.IncreaseFoodSaturation(saturation);
 
             int index = Math.Min(_parameters.NumOfDewSpawnedAtLevel.Length - 1, _slimeExp.LevelNum - 1);
             _dew.DewSpawn(_parameters.NumOfDewSpawnedAtLevel[index]);
@@ -58,16 +54,7 @@ namespace Jellies
             return true;
         }
 
-        /// <summary>
-        /// Called by the jelly prefab's feed button.
-        /// </summary>
-        public void OnFeedButton()
-        {
-            if (Inventory.Instance.TrySubtractItemAmount(_berryItemIdentity, 1))
-            {
-                TryFeedJelly(_berryItemIdentity.SaturationValue);
-            }
-        }
+        
     }
 }
 

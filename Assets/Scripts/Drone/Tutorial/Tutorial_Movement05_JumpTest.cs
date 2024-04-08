@@ -79,7 +79,7 @@ public class Tutorial_Movement05_JumpTest : MonoBehaviour
 
     private void EnterTutorial()
     {
-        PlayerMovement.Instance.NumberOfReasonsToIgnoreJumpInputs--;
+        PlayerMovement.Instance.IgnoreJumpInput.RemoveReason("movement tutorial");
 
         _waitingForTutorialDronePictureTimeToEnd = false;
         _jumpTestPassed = false;
@@ -105,7 +105,8 @@ public class Tutorial_Movement05_JumpTest : MonoBehaviour
     {
         // Switch back to the normal player camera.
         CameraSystem.SwitchToFirstPersonCamera();
-        PlayerMovement.Instance.NumberOfReasonsToIgnoreJumpInputs++;
+        PlayerMovement.Instance.IgnoreJumpInput.AddReason("movement tutorial");
+
     }
    
     private IEnumerator WaitForTutorialDonePictureDisplayTimeToEnd()
