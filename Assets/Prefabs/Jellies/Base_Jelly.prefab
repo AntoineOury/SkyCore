@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 6897571014077337869}
   - component: {fileID: 5170292628604333891}
   - component: {fileID: 2800760254389377842}
+  - component: {fileID: 1774028502545570940}
   m_Layer: 3
   m_Name: Base_Jelly
   m_TagString: Untagged
@@ -129,7 +130,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82b72aea51f8a3445980dd89248a65a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _foodItemIdentity: {fileID: 0}
 --- !u!114 &4714310058802045046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,6 +237,25 @@ MonoBehaviour:
     type: 3}
   minXSpawnRange: -5
   maxXSpawnRange: 5
+--- !u!114 &1774028502545570940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94955809726303427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d24253333aaec43438c927b8095d9bc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preferenceRange: 5
+  <Sour>k__BackingField: 0
+  <Sweet>k__BackingField: 0
+  <Savory>k__BackingField: 0
+  <Salty>k__BackingField: 0
+  <Bitter>k__BackingField: 0
+  <Spicy>k__BackingField: 0
 --- !u!1 &421980575205785031
 GameObject:
   m_ObjectHideFlags: 0
