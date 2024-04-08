@@ -1,22 +1,481 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SoundBanksInfo Platform="Mac" BasePlatform="Mac" SchemaVersion="12" SoundbankVersion="140">
 	<RootPaths>
-		<ProjectRoot>C:\Users\Loukas\Documents\GitHub\SkyCore\skyjellies_WwiseProject\</ProjectRoot>
-		<SourceFilesRoot>C:\Users\Loukas\Documents\GitHub\SkyCore\skyjellies_WwiseProject\.cache\Mac\</SourceFilesRoot>
-		<SoundBanksRoot>C:\Users\Loukas\Documents\GitHub\SkyCore\skyjellies_WwiseProject\GeneratedSoundBanks\Mac\</SoundBanksRoot>
+		<ProjectRoot>C:\Users\cwals\Documents\GitHub\SkyCore\skyjellies_WwiseProject\</ProjectRoot>
+		<SourceFilesRoot>C:\Users\cwals\Documents\GitHub\SkyCore\skyjellies_WwiseProject\.cache\Mac\</SourceFilesRoot>
+		<SoundBanksRoot>C:\Users\cwals\Documents\GitHub\SkyCore\skyjellies_WwiseProject\GeneratedSoundBanks\Mac\</SoundBanksRoot>
 		<ExternalSourcesInputFile></ExternalSourcesInputFile>
-		<ExternalSourcesOutputRoot>C:\Users\Loukas\Documents\GitHub\SkyCore\skyjellies_WwiseProject\GeneratedSoundBanks\Mac</ExternalSourcesOutputRoot>
+		<ExternalSourcesOutputRoot>C:\Users\cwals\Documents\GitHub\SkyCore\skyjellies_WwiseProject\GeneratedSoundBanks\Mac</ExternalSourcesOutputRoot>
 	</RootPaths>
 	<DialogueEvents/>
 	<StreamedFiles/>
 	<MediaFilesNotInAnyBank/>
 	<SoundBanks>
-		<SoundBank Id="133642231" Language="SFX" Hash="1110017348">
+		<SoundBank Id="133642231" Language="SFX" Hash="2367075857">
 			<ObjectPath>\SoundBanks\Default Work Unit\General</ObjectPath>
 			<ShortName>General</ShortName>
 			<Path>General.bnk</Path>
+			<IncludedEvents>
+				<Event Id="303910132" Name="Play_Broken_Spaceship" ObjectPath="\Events\Default Work Unit\Env\Play_Broken_Spaceship" MaxAttenuation="20." DurationType="Infinite">
+					<IncludedMemoryFiles>
+						<File Id="692682056" Language="SFX">
+							<ShortName>ENV-Spaceship-Broken_02.wav</ShortName>
+							<Path>SFX\ENV-Spaceship-Broken_02_60C8EAD5.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2687999423" Name="Play_Day_Night" ObjectPath="\Events\Default Work Unit\Env\Play_Day_Night" MaxAttenuation="0." DurationType="OneShot" DurationMin="0." DurationMax="0."/>
+				<Event Id="2169761796" Name="Play_Drone_All" ObjectPath="\Events\Default Work Unit\Env\Play_Drone_All" MaxAttenuation="20." DurationType="Infinite">
+					<IncludedMemoryFiles>
+						<File Id="593221781" Language="SFX">
+							<ShortName>ENV_DRONE_HOVERING_V2_B.wav</ShortName>
+							<Path>SFX\ENV_DRONE_HOVERING_V2_B_360F2363.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="4284253250" Name="Play_Drone_Scanning" ObjectPath="\Events\Default Work Unit\Env\Play_Drone_Scanning" MaxAttenuation="20." DurationType="Infinite"/>
+				<Event Id="2126837384" Name="Play_Island_Heart" ObjectPath="\Events\Default Work Unit\Env\Play_Island_Heart" DurationType="Infinite">
+					<IncludedMemoryFiles>
+						<File Id="958036601" Language="SFX">
+							<ShortName>ENV--General-LvlUpIsland_01.wav</ShortName>
+							<Path>SFX\ENV--General-LvlUpIsland_01_14883D71.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+					<DefaultSwitchValue>{3185B6D2-043B-4746-9538-B931FCE196A4}</DefaultSwitchValue>
+					<SwitchContainers>
+						<SwitchContainer SwitchValue="{62F4D3F4-A9C3-4EF9-B8C5-2E7EF664320B}">
+							<Media>
+								<File Id="958036601"/>
+							</Media>
+						</SwitchContainer>
+					</SwitchContainers>
+				</Event>
+				<Event Id="403792184" Name="Play_Jellies_Pet" ObjectPath="\Events\Default Work Unit\Jellies\Play_Jellies_Pet" MaxAttenuation="20." DurationType="OneShot" DurationMin="0." DurationMax="0.">
+					<IncludedMemoryFiles>
+						<File Id="268109012" Language="SFX">
+							<ShortName>Jellies--General-Petting-Happy_03.wav</ShortName>
+							<Path>SFX\Jellies--General-Petting-Happy_03_10C4C929.wem</Path>
+						</File>
+						<File Id="491288057" Language="SFX">
+							<ShortName>Jellies--General-Petting-Happy_02.wav</ShortName>
+							<Path>SFX\Jellies--General-Petting-Happy_02_10C4C929.wem</Path>
+						</File>
+						<File Id="512316781" Language="SFX">
+							<ShortName>Jellies--General-Petting-Happy_01.wav</ShortName>
+							<Path>SFX\Jellies--General-Petting-Happy_01_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1406322581" Name="Play_Jellies_Roam_Grass" ObjectPath="\Events\Default Work Unit\Jellies\Play_Jellies_Roam_Grass" MaxAttenuation="20." DurationType="Infinite">
+					<IncludedMemoryFiles>
+						<File Id="23739380" Language="SFX">
+							<ShortName>Jellies--Grass-Roaming_01.wav</ShortName>
+							<Path>SFX\Jellies--Grass-Roaming_01_10C4C929.wem</Path>
+						</File>
+						<File Id="53662747" Language="SFX">
+							<ShortName>Jellies--Grass-Roaming_03.wav</ShortName>
+							<Path>SFX\Jellies--Grass-Roaming_03_10C4C929.wem</Path>
+						</File>
+						<File Id="99406942" Language="SFX">
+							<ShortName>Jellies--Grass-Roaming_02.wav</ShortName>
+							<Path>SFX\Jellies--Grass-Roaming_02_10C4C929.wem</Path>
+						</File>
+						<File Id="116842961" Language="SFX">
+							<ShortName>Jellies--Grass-Roaming_04.wav</ShortName>
+							<Path>SFX\Jellies--Grass-Roaming_04_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2405070987" Name="Play_Jelly_Eating" ObjectPath="\Events\Default Work Unit\Jellies\Play_Jelly_Eating" MaxAttenuation="20." DurationType="OneShot" DurationMin="0." DurationMax="0.">
+					<IncludedMemoryFiles>
+						<File Id="36526449" Language="SFX">
+							<ShortName>Jellies--General--Eating--SFX_1.wav</ShortName>
+							<Path>SFX\Jellies--General--Eating--SFX_1_10C4C929.wem</Path>
+						</File>
+						<File Id="53939665" Language="SFX">
+							<ShortName>Jellies--General--Eating--chomp_1.wav</ShortName>
+							<Path>SFX\Jellies--General--Eating--chomp_1_10C4C929.wem</Path>
+						</File>
+						<File Id="137681786" Language="SFX">
+							<ShortName>Jellies--General--Eating--chomp_2.wav</ShortName>
+							<Path>SFX\Jellies--General--Eating--chomp_2_10C4C929.wem</Path>
+						</File>
+						<File Id="425362036" Language="SFX">
+							<ShortName>Jellies--General-Eating_01.wav</ShortName>
+							<Path>SFX\Jellies--General-Eating_01_10C4C929.wem</Path>
+						</File>
+						<File Id="427470194" Language="SFX">
+							<ShortName>Jellies--General--Eating--chomp_3.wav</ShortName>
+							<Path>SFX\Jellies--General--Eating--chomp_3_10C4C929.wem</Path>
+						</File>
+						<File Id="614237393" Language="SFX">
+							<ShortName>Jellies--General--Eating--SFX_2.wav</ShortName>
+							<Path>SFX\Jellies--General--Eating--SFX_2_10C4C929.wem</Path>
+						</File>
+						<File Id="777634846" Language="SFX">
+							<ShortName>Jellies--General--Eating--SFX_3.wav</ShortName>
+							<Path>SFX\Jellies--General--Eating--SFX_3_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="496414419" Name="Play_Jelly_Level_Up" ObjectPath="\Events\Default Work Unit\Jellies\Play_Jelly_Level_Up" DurationType="OneShot" DurationMin="0." DurationMax="0."/>
+				<Event Id="2830116340" Name="Play_Left_Click" ObjectPath="\Events\Default Work Unit\UI\Play_Left_Click" DurationType="OneShot" DurationMin="0.591708" DurationMax="0.591708">
+					<IncludedMemoryFiles>
+						<File Id="310241983" Language="SFX">
+							<ShortName>UI_Menu Generic_Click.wav</ShortName>
+							<Path>SFX\UI_Menu Generic_Click_A60694EF.wem</Path>
+						</File>
+						<File Id="913560433" Language="SFX">
+							<ShortName>UI_Inventory_TakeItem_01.wav</ShortName>
+							<Path>SFX\UI_Inventory_TakeItem_01_A81E72A0.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="3807302544" Name="Play_Mouse_Hovering" ObjectPath="\Events\Default Work Unit\UI\Play_Mouse_Hovering" DurationType="OneShot" DurationMin="0.296992" DurationMax="0.333362">
+					<IncludedMemoryFiles>
+						<File Id="339822177" Language="SFX">
+							<ShortName>UI_Menu Generic_Click.wav</ShortName>
+							<Path>SFX\UI_Menu Generic_Click_74B8A3A7.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+					<SwitchContainers>
+						<SwitchContainer SwitchValue="{5D069452-5AB5-4B6E-BBF5-5F00C8CAA3E5}">
+							<Media>
+								<File Id="339822177"/>
+							</Media>
+						</SwitchContainer>
+						<SwitchContainer SwitchValue="{BAB869D1-0079-4D7D-B27F-C70F13026CB8}">
+							<Media>
+								<File Id="339822177"/>
+							</Media>
+						</SwitchContainer>
+						<SwitchContainer SwitchValue="{30D578E6-B84B-4B73-8CB3-5E89A7BB71C5}">
+							<Media>
+								<File Id="339822177"/>
+							</Media>
+						</SwitchContainer>
+					</SwitchContainers>
+				</Event>
+				<Event Id="152276835" Name="Play_PickupItem" ObjectPath="\Events\Default Work Unit\Player\Play_PickupItem" DurationType="OneShot" DurationMin="0." DurationMax="0.353568">
+					<IncludedMemoryFiles>
+						<File Id="175737074" Language="SFX">
+							<ShortName>Player_PickUp_JellyDew_01.wav</ShortName>
+							<Path>SFX\Player_PickUp_JellyDew_01_8F5484AC.wem</Path>
+						</File>
+						<File Id="689219991" Language="SFX">
+							<ShortName>Player_Use_JellyDew_02.wav</ShortName>
+							<Path>SFX\Player_Use_JellyDew_02_DF0785CE.wem</Path>
+						</File>
+						<File Id="710785367" Language="SFX">
+							<ShortName>Player_PickUp_JellyDew_02.wav</ShortName>
+							<Path>SFX\Player_PickUp_JellyDew_02_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+					<SwitchContainers>
+						<SwitchContainer SwitchValue="{304397C4-5A3D-4122-A07C-D36D7587CBCD}">
+							<Media>
+								<File Id="175737074"/>
+								<File Id="689219991"/>
+								<File Id="710785367"/>
+							</Media>
+						</SwitchContainer>
+					</SwitchContainers>
+				</Event>
+				<Event Id="3537301466" Name="Play_Player_DropItem" ObjectPath="\Events\Default Work Unit\Player\Play_Player_DropItem" DurationType="OneShot" DurationMin="0." DurationMax="0.">
+					<SwitchContainers/>
+				</Event>
+				<Event Id="98439365" Name="Play_Player_Footsteps" ObjectPath="\Events\Default Work Unit\Player\Play_Player_Footsteps" DurationType="Mixed" DurationMin="0.272343" DurationMax="Infinite">
+					<IncludedMemoryFiles>
+						<File Id="44768568" Language="SFX">
+							<ShortName>Player_Swimming_01.wav</ShortName>
+							<Path>SFX\Player_Swimming_01_33AC0A03.wem</Path>
+						</File>
+						<File Id="161257019" Language="SFX">
+							<ShortName>footsteps_grass_step_single-001.wav</ShortName>
+							<Path>SFX\footsteps_grass_step_single-001_2F6D34DD.wem</Path>
+						</File>
+						<File Id="354210599" Language="SFX">
+							<ShortName>footsteps_grass_step_single-004.wav</ShortName>
+							<Path>SFX\footsteps_grass_step_single-004_D8B61E66.wem</Path>
+						</File>
+						<File Id="356729394" Language="SFX">
+							<ShortName>Player_Footsteps_Dirt_04.wav</ShortName>
+							<Path>SFX\Player_Footsteps_Dirt_04_79A85C78.wem</Path>
+						</File>
+						<File Id="368222679" Language="SFX">
+							<ShortName>Player_Footsteps_Water_03.wav</ShortName>
+							<Path>SFX\Player_Footsteps_Water_03_95273C7F.wem</Path>
+						</File>
+						<File Id="488063799" Language="SFX">
+							<ShortName>Player_Footsteps_Water_03.wav</ShortName>
+							<Path>SFX\Player_Footsteps_Water_03_2B5C285A.wem</Path>
+						</File>
+						<File Id="554937318" Language="SFX">
+							<ShortName>Player_Footsteps_Dirt_05.wav</ShortName>
+							<Path>SFX\Player_Footsteps_Dirt_05_88A88AB3.wem</Path>
+						</File>
+						<File Id="580305815" Language="SFX">
+							<ShortName>footsteps_grass_step_single-002.wav</ShortName>
+							<Path>SFX\footsteps_grass_step_single-002_0B4E8244.wem</Path>
+						</File>
+						<File Id="669829311" Language="SFX">
+							<ShortName>Player_Footsteps_Dirt_01.wav</ShortName>
+							<Path>SFX\Player_Footsteps_Dirt_01_C6050F38.wem</Path>
+						</File>
+						<File Id="688530654" Language="SFX">
+							<ShortName>Player_Footsteps_Dirt_03.wav</ShortName>
+							<Path>SFX\Player_Footsteps_Dirt_03_73C56048.wem</Path>
+						</File>
+						<File Id="747980697" Language="SFX">
+							<ShortName>footsteps_grass_step_single-003.wav</ShortName>
+							<Path>SFX\footsteps_grass_step_single-003_4B57805E.wem</Path>
+						</File>
+						<File Id="784710590" Language="SFX">
+							<ShortName>Player_Footsteps_Water_02.wav</ShortName>
+							<Path>SFX\Player_Footsteps_Water_02_A3EF6A28.wem</Path>
+						</File>
+						<File Id="864130489" Language="SFX">
+							<ShortName>Player_Footsteps_Dirt_02.wav</ShortName>
+							<Path>SFX\Player_Footsteps_Dirt_02_B1DC8A23.wem</Path>
+						</File>
+						<File Id="1064254406" Language="SFX">
+							<ShortName>Player_Footsteps_Water_02.wav</ShortName>
+							<Path>SFX\Player_Footsteps_Water_02_E7ED4D0C.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+					<DefaultSwitchValue>{53E5DABC-BE29-4EFA-B9D9-58CAFA9889B1}</DefaultSwitchValue>
+					<SwitchContainers>
+						<SwitchContainer SwitchValue="{36E36445-7B78-4A85-A233-DA9D3B7C02E8}">
+							<Media>
+								<File Id="356729394"/>
+								<File Id="554937318"/>
+								<File Id="669829311"/>
+								<File Id="688530654"/>
+								<File Id="864130489"/>
+							</Media>
+						</SwitchContainer>
+						<SwitchContainer SwitchValue="{53E5DABC-BE29-4EFA-B9D9-58CAFA9889B1}">
+							<Media>
+								<File Id="161257019"/>
+								<File Id="354210599"/>
+								<File Id="580305815"/>
+								<File Id="747980697"/>
+							</Media>
+						</SwitchContainer>
+						<SwitchContainer SwitchValue="{ABB7DDDD-AF1A-4B97-ABA6-FF0E78BC99A4}">
+							<DefaultSwitchValue>{9F40E068-E5BA-4328-86AE-99F27150F0BA}</DefaultSwitchValue>
+							<Children>
+								<SwitchContainer SwitchValue="{9F40E068-E5BA-4328-86AE-99F27150F0BA}">
+									<Media>
+										<File Id="368222679"/>
+										<File Id="488063799"/>
+										<File Id="784710590"/>
+										<File Id="1064254406"/>
+									</Media>
+								</SwitchContainer>
+								<SwitchContainer SwitchValue="{50E4D1AF-30EF-4F99-B664-8A0B9B5871B9}">
+									<Media>
+										<File Id="44768568"/>
+									</Media>
+								</SwitchContainer>
+							</Children>
+						</SwitchContainer>
+					</SwitchContainers>
+				</Event>
+				<Event Id="562256996" Name="Play_Player_Jump" ObjectPath="\Events\Default Work Unit\Player\Play_Player_Jump" DurationType="OneShot" DurationMin="0.628845" DurationMax="3.970266">
+					<IncludedMemoryFiles>
+						<File Id="45832823" Language="SFX">
+							<ShortName>Player_Exiting_Water_04.wav</ShortName>
+							<Path>SFX\Player_Exiting_Water_04_17650498.wem</Path>
+						</File>
+						<File Id="195837913" Language="SFX">
+							<ShortName>Player_Clothing_Jumping_Dropping_01.wav</ShortName>
+							<Path>SFX\Player_Clothing_Jumping_Dropping_01_5B67AD5B.wem</Path>
+						</File>
+						<File Id="612077736" Language="SFX">
+							<ShortName>Player_Clothing_Jumping_Dropping_01.wav</ShortName>
+							<Path>SFX\Player_Clothing_Jumping_Dropping_01_D91B5123.wem</Path>
+						</File>
+						<File Id="787634844" Language="SFX">
+							<ShortName>Player_Exiting_Water_02.wav</ShortName>
+							<Path>SFX\Player_Exiting_Water_02_9735FCF8.wem</Path>
+						</File>
+						<File Id="992020355" Language="SFX">
+							<ShortName>Player_Exiting_Water_01.wav</ShortName>
+							<Path>SFX\Player_Exiting_Water_01_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+					<DefaultSwitchValue>{9F40E068-E5BA-4328-86AE-99F27150F0BA}</DefaultSwitchValue>
+					<SwitchContainers>
+						<SwitchContainer SwitchValue="{9F40E068-E5BA-4328-86AE-99F27150F0BA}">
+							<Media>
+								<File Id="195837913"/>
+							</Media>
+						</SwitchContainer>
+						<SwitchContainer SwitchValue="{50E4D1AF-30EF-4F99-B664-8A0B9B5871B9}">
+							<Media>
+								<File Id="45832823"/>
+								<File Id="612077736"/>
+								<File Id="787634844"/>
+								<File Id="992020355"/>
+							</Media>
+						</SwitchContainer>
+					</SwitchContainers>
+				</Event>
+				<Event Id="2736433684" Name="Play_UI_CloseMenu" ObjectPath="\Events\Default Work Unit\UI\Play_UI_CloseMenu" DurationType="OneShot" DurationMin="0." DurationMax="1.61285">
+					<IncludedMemoryFiles>
+						<File Id="230185988" Language="SFX">
+							<ShortName>UI_PauseMenu_Closing_06.wav</ShortName>
+							<Path>SFX\UI_PauseMenu_Closing_06_1400C02E.wem</Path>
+						</File>
+						<File Id="381248890" Language="SFX">
+							<ShortName>Menu_HoveringMenuButtons_04.wav</ShortName>
+							<Path>SFX\Menu_HoveringMenuButtons_04_AC96386E.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+					<SwitchContainers>
+						<SwitchContainer SwitchValue="{5D069452-5AB5-4B6E-BBF5-5F00C8CAA3E5}">
+							<Media>
+								<File Id="230185988"/>
+								<File Id="381248890"/>
+							</Media>
+						</SwitchContainer>
+					</SwitchContainers>
+				</Event>
+				<Event Id="3929504087" Name="Play_UI_Inventory_Drop" ObjectPath="\Events\Default Work Unit\UI\Inventory Take-Drop\Play_UI_Inventory_Drop" DurationType="OneShot" DurationMin="0.168264" DurationMax="0.168264">
+					<IncludedMemoryFiles>
+						<File Id="943732005" Language="SFX">
+							<ShortName>UI_Inventory_TakeItem_01.wav</ShortName>
+							<Path>SFX\UI_Inventory_TakeItem_01_C18F3D3A.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+					<SwitchContainers>
+						<SwitchContainer SwitchValue="{0FC2380C-CB58-4202-92F4-EE91C6372D50}">
+							<Media>
+								<File Id="943732005"/>
+							</Media>
+						</SwitchContainer>
+						<SwitchContainer SwitchValue="{D3E7BB4F-513C-4605-A2C9-5DF20E59C16C}">
+							<Media>
+								<File Id="943732005"/>
+							</Media>
+						</SwitchContainer>
+						<SwitchContainer SwitchValue="{304397C4-5A3D-4122-A07C-D36D7587CBCD}">
+							<Media>
+								<File Id="943732005"/>
+							</Media>
+						</SwitchContainer>
+					</SwitchContainers>
+				</Event>
+				<Event Id="546353625" Name="Play_UI_Inventory_Take" ObjectPath="\Events\Default Work Unit\UI\Inventory Take-Drop\Play_UI_Inventory_Take" DurationType="OneShot" DurationMin="0.488266" DurationMax="0.488266">
+					<IncludedMemoryFiles>
+						<File Id="33475178" Language="SFX">
+							<ShortName>UI_Inventory_TakeItem_01.wav</ShortName>
+							<Path>SFX\UI_Inventory_TakeItem_01_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+					<SwitchContainers>
+						<SwitchContainer SwitchValue="{0FC2380C-CB58-4202-92F4-EE91C6372D50}">
+							<Media>
+								<File Id="33475178"/>
+							</Media>
+						</SwitchContainer>
+						<SwitchContainer SwitchValue="{D3E7BB4F-513C-4605-A2C9-5DF20E59C16C}">
+							<Media>
+								<File Id="33475178"/>
+							</Media>
+						</SwitchContainer>
+						<SwitchContainer SwitchValue="{304397C4-5A3D-4122-A07C-D36D7587CBCD}">
+							<Media>
+								<File Id="33475178"/>
+							</Media>
+						</SwitchContainer>
+					</SwitchContainers>
+				</Event>
+				<Event Id="3541361906" Name="Play_UI_OpenMenu" ObjectPath="\Events\Default Work Unit\UI\Play_UI_OpenMenu" DurationType="OneShot" DurationMin="0." DurationMax="0.411224">
+					<IncludedMemoryFiles>
+						<File Id="381248890" Language="SFX">
+							<ShortName>Menu_HoveringMenuButtons_04.wav</ShortName>
+							<Path>SFX\Menu_HoveringMenuButtons_04_AC96386E.wem</Path>
+						</File>
+						<File Id="728279142" Language="SFX">
+							<ShortName>UI_PauseMenu_Closing_06.wav</ShortName>
+							<Path>SFX\UI_PauseMenu_Closing_06_7AB1865E.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+					<SwitchContainers>
+						<SwitchContainer SwitchValue="{5D069452-5AB5-4B6E-BBF5-5F00C8CAA3E5}">
+							<Media>
+								<File Id="381248890"/>
+								<File Id="728279142"/>
+							</Media>
+						</SwitchContainer>
+					</SwitchContainers>
+				</Event>
+				<Event Id="2229253950" Name="Play_UseItem" ObjectPath="\Events\Default Work Unit\Player\Play_UseItem" DurationType="OneShot" DurationMin="0." DurationMax="0.602231">
+					<IncludedMemoryFiles>
+						<File Id="390909482" Language="SFX">
+							<ShortName>Player_Use_JellyDew_02.wav</ShortName>
+							<Path>SFX\Player_Use_JellyDew_02_352E56D6.wem</Path>
+						</File>
+						<File Id="612791213" Language="SFX">
+							<ShortName>ENV--General-LvlUpIsland_01.wav</ShortName>
+							<Path>SFX\ENV--General-LvlUpIsland_01_53E4457E.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+					<SwitchContainers>
+						<SwitchContainer SwitchValue="{304397C4-5A3D-4122-A07C-D36D7587CBCD}">
+							<Media>
+								<File Id="390909482"/>
+								<File Id="612791213"/>
+							</Media>
+						</SwitchContainer>
+					</SwitchContainers>
+				</Event>
+			</IncludedEvents>
+			<GameParameters>
+				<GameParameter Id="2803209766" Name="Island_Heart_XP" ObjectPath="\Game Parameters\Default Work Unit\Island_Heart_XP"/>
+			</GameParameters>
+			<StateGroups>
+				<StateGroup Id="2654748154" Name="Water" ObjectPath="\States\Default Work Unit\Water" GUID="{45FD7A3D-2D18-45CF-8A94-DDF1A6A5A6BE}">
+					<States>
+						<State Id="748895195" Name="None" ObjectPath="\States\Default Work Unit\Water\None" GUID="{F513B9D2-788D-46F2-9FDC-2F2113EB115D}"/>
+						<State Id="2432428" Name="Above" ObjectPath="\States\Default Work Unit\Water\Above" GUID="{9F40E068-E5BA-4328-86AE-99F27150F0BA}"/>
+						<State Id="384800980" Name="Below" ObjectPath="\States\Default Work Unit\Water\Below" GUID="{50E4D1AF-30EF-4F99-B664-8A0B9B5871B9}"/>
+					</States>
+				</StateGroup>
+			</StateGroups>
+			<SwitchGroups>
+				<SwitchGroup Id="1281648863" Name="Item_Type" ObjectPath="\Switches\Default Work Unit\Item_Type" GUID="{B2665098-18F9-4A15-8946-3C4B48B4B45C}">
+					<Switches>
+						<Switch Id="302590163" Name="Berry" ObjectPath="\Switches\Default Work Unit\Item_Type\Berry" GUID="{D3E7BB4F-513C-4605-A2C9-5DF20E59C16C}"/>
+						<Switch Id="1759730654" Name="Portable_Generator" ObjectPath="\Switches\Default Work Unit\Item_Type\Portable_Generator" GUID="{0FC2380C-CB58-4202-92F4-EE91C6372D50}"/>
+						<Switch Id="333239846" Name="Jelly_Dew" ObjectPath="\Switches\Default Work Unit\Item_Type\Jelly_Dew" GUID="{304397C4-5A3D-4122-A07C-D36D7587CBCD}"/>
+					</Switches>
+				</SwitchGroup>
+				<SwitchGroup Id="1673590565" Name="IslandHeart_XP" ObjectPath="\Switches\Default Work Unit\IslandHeart_XP" GUID="{BE4BFC75-C65E-46B5-8B9A-B6124C9C8EF2}">
+					<Switches>
+						<Switch Id="2145291615" Name="Level_UP" ObjectPath="\Switches\Default Work Unit\IslandHeart_XP\Level_UP" GUID="{62F4D3F4-A9C3-4EF9-B8C5-2E7EF664320B}"/>
+						<Switch Id="1548389549" Name="Unleveled" ObjectPath="\Switches\Default Work Unit\IslandHeart_XP\Unleveled" GUID="{3185B6D2-043B-4746-9538-B931FCE196A4}"/>
+					</Switches>
+				</SwitchGroup>
+				<SwitchGroup Id="1819922903" Name="Menu_Type" ObjectPath="\Switches\Default Work Unit\Menu_Type" GUID="{D5234D67-B7FF-4A5B-8CA4-028C5B0D9467}">
+					<Switches>
+						<Switch Id="2005704188" Name="Main_Menu" ObjectPath="\Switches\Default Work Unit\Menu_Type\Main_Menu" GUID="{30D578E6-B84B-4B73-8CB3-5E89A7BB71C5}"/>
+						<Switch Id="3422541661" Name="Pause_Menu" ObjectPath="\Switches\Default Work Unit\Menu_Type\Pause_Menu" GUID="{5D069452-5AB5-4B6E-BBF5-5F00C8CAA3E5}"/>
+						<Switch Id="3090328911" Name="Inventory_Menu" ObjectPath="\Switches\Default Work Unit\Menu_Type\Inventory_Menu" GUID="{BAB869D1-0079-4D7D-B27F-C70F13026CB8}"/>
+					</Switches>
+				</SwitchGroup>
+				<SwitchGroup Id="3865314626" Name="Material" ObjectPath="\Switches\Default Work Unit\Material" GUID="{3CAAA9C5-058E-4DF2-848F-C240D19E14DB}">
+					<Switches>
+						<Switch Id="2195636714" Name="Dirt" ObjectPath="\Switches\Default Work Unit\Material\Dirt" GUID="{36E36445-7B78-4A85-A233-DA9D3B7C02E8}"/>
+						<Switch Id="4248645337" Name="Grass" ObjectPath="\Switches\Default Work Unit\Material\Grass" GUID="{53E5DABC-BE29-4EFA-B9D9-58CAFA9889B1}"/>
+						<Switch Id="2654748154" Name="Water" ObjectPath="\Switches\Default Work Unit\Material\Water" GUID="{ABB7DDDD-AF1A-4B97-ABA6-FF0E78BC99A4}"/>
+					</Switches>
+				</SwitchGroup>
+			</SwitchGroups>
 		</SoundBank>
-		<SoundBank Id="1355168291" Language="SFX" Hash="2455727087">
+		<SoundBank Id="1355168291" Language="SFX" Hash="430420855">
 			<ObjectPath>Init</ObjectPath>
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
@@ -35,7 +494,41 @@
 				</StateGroup>
 			</StateGroups>
 		</SoundBank>
-		<SoundBank Id="2005704188" Language="SFX" Hash="1453758393">
+		<SoundBank Id="1512859615" Language="SFX" Hash="1084428695">
+			<ObjectPath>\SoundBanks\Default Work Unit\Testing</ObjectPath>
+			<ShortName>Testing</ShortName>
+			<Path>Testing.bnk</Path>
+			<IncludedEvents>
+				<Event Id="2126837384" Name="Play_Island_Heart" ObjectPath="\Events\Default Work Unit\Env\Play_Island_Heart" DurationType="Infinite">
+					<IncludedMemoryFiles>
+						<File Id="958036601" Language="SFX">
+							<ShortName>ENV--General-LvlUpIsland_01.wav</ShortName>
+							<Path>SFX\ENV--General-LvlUpIsland_01_14883D71.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+					<DefaultSwitchValue>{3185B6D2-043B-4746-9538-B931FCE196A4}</DefaultSwitchValue>
+					<SwitchContainers>
+						<SwitchContainer SwitchValue="{62F4D3F4-A9C3-4EF9-B8C5-2E7EF664320B}">
+							<Media>
+								<File Id="958036601"/>
+							</Media>
+						</SwitchContainer>
+					</SwitchContainers>
+				</Event>
+			</IncludedEvents>
+			<GameParameters>
+				<GameParameter Id="2803209766" Name="Island_Heart_XP" ObjectPath="\Game Parameters\Default Work Unit\Island_Heart_XP"/>
+			</GameParameters>
+			<SwitchGroups>
+				<SwitchGroup Id="1673590565" Name="IslandHeart_XP" ObjectPath="\Switches\Default Work Unit\IslandHeart_XP" GUID="{BE4BFC75-C65E-46B5-8B9A-B6124C9C8EF2}">
+					<Switches>
+						<Switch Id="2145291615" Name="Level_UP" ObjectPath="\Switches\Default Work Unit\IslandHeart_XP\Level_UP" GUID="{62F4D3F4-A9C3-4EF9-B8C5-2E7EF664320B}"/>
+						<Switch Id="1548389549" Name="Unleveled" ObjectPath="\Switches\Default Work Unit\IslandHeart_XP\Unleveled" GUID="{3185B6D2-043B-4746-9538-B931FCE196A4}"/>
+					</Switches>
+				</SwitchGroup>
+			</SwitchGroups>
+		</SoundBank>
+		<SoundBank Id="2005704188" Language="SFX" Hash="3079287413">
 			<ObjectPath>\SoundBanks\Default Work Unit\Main_Menu</ObjectPath>
 			<ShortName>Main_Menu</ShortName>
 			<Path>Main_Menu.bnk</Path>
