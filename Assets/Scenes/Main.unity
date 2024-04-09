@@ -1401,6 +1401,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tumble
       objectReference: {fileID: 0}
+    - target: {fileID: 612310603713912353, guid: 68eea3fc79eb3494aaa9f78ea6a3f356,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 612310603713912353, guid: 68eea3fc79eb3494aaa9f78ea6a3f356,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8730205451980050505, guid: 68eea3fc79eb3494aaa9f78ea6a3f356,
         type: 3}
       propertyPath: m_RootOrder
@@ -5097,6 +5107,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5168178571539068865, guid: 84315793b98391e4aa77586827539d24,
         type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 5168178571539068865, guid: 84315793b98391e4aa77586827539d24,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.072
+      objectReference: {fileID: 0}
+    - target: {fileID: 5168178571539068865, guid: 84315793b98391e4aa77586827539d24,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -7.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 5168178571539068865, guid: 84315793b98391e4aa77586827539d24,
+        type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
@@ -5104,6 +5129,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5168178571539068865, guid: 84315793b98391e4aa77586827539d24,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5168178571539068865, guid: 84315793b98391e4aa77586827539d24,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5168178571539068866, guid: 84315793b98391e4aa77586827539d24,
+        type: 3}
+      propertyPath: near clip plane
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5168178571539068866, guid: 84315793b98391e4aa77586827539d24,
+        type: 3}
+      propertyPath: orthographic size
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5269426722706629544, guid: 84315793b98391e4aa77586827539d24,
         type: 3}

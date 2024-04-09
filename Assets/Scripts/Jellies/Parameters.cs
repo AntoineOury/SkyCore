@@ -42,6 +42,15 @@ namespace Jellies
             get;
             private set;
         }
+        private bool _canBePet;
+        public bool CanBePet
+        {
+            get;
+            set; 
+             
+                
+            
+        }
 
         /// <summary>
         /// The required experience per level
@@ -124,17 +133,6 @@ namespace Jellies
             else
             {
                 FoodSaturation = MaxFoodSaturation;
-            }
-            
-
-            // TODO: Come back and make this more dynamic and replace with a event.
-            if (_slimeXp == null && transform.GetComponentInChildren<SlimeExperience>())
-            {
-                _slimeXp = transform.GetComponentInChildren<SlimeExperience>();
-            }
-            else if (_slimeXp != null)
-            {
-                _slimeXp.AddEXP(10, "Red Berries");
             }
         }
 

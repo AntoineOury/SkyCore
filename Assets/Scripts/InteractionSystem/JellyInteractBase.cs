@@ -14,6 +14,10 @@ public class JellyInteractBase : InteractableWithUIMode
 
     private FoodPreferences _foodPreferences;
 
+    private DewInstantiate _dew;
+
+    private SlimeExperience _slimeExp;
+
     public Feeding Feeding { get; private set; }
 
 
@@ -21,7 +25,10 @@ public class JellyInteractBase : InteractableWithUIMode
     {
         _jellyParams = GetComponent<Parameters>();
         Feeding = GetComponent<Feeding>();
+
         _foodPreferences = GetComponent<FoodPreferences>();
+        _dew = GetComponent<DewInstantiate>();
+        _slimeExp = GetComponent<SlimeExperience>();
     }
 
     private void Update()
@@ -56,5 +63,10 @@ public class JellyInteractBase : InteractableWithUIMode
         default:
             return false;
         }
+    }
+    public void SpawnDewAndAddEXP(int dewToSpawn,int EXPToAdd,string expSource)
+    {
+        _dew.DewSpawn(dewToSpawn);
+        _slimeExp.AddEXP(EXPToAdd, expSource);
     }
 }
