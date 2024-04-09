@@ -5,21 +5,19 @@ using UnityEngine;
 public class ItemDespawn : MonoBehaviour
 {
     [SerializeField]
-    private int timer = 300;
-    // Start is called before the first frame update
+    private int _timer = 300;
+
     void Start()
     {
         StartCoroutine(Despawn());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    /// <summary>
+    /// Timer to DeSpawn objects after a certain amount of time
+    /// </summary>
     IEnumerator Despawn()
     {
-        yield return new WaitForSeconds(timer);
+        yield return new WaitForSeconds(_timer);
         Destroy(gameObject);
     }
 }
