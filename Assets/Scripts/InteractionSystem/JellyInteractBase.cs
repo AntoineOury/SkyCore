@@ -2,6 +2,7 @@ using Jellies;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class JellyInteractBase : InteractableWithUIMode
 {
@@ -33,28 +34,55 @@ public class JellyInteractBase : InteractableWithUIMode
         }
     }
 
+    public override void OnInteractAction()
+    {
+        ItemIdentity HeldItemRef = null;
+        if (GameObject.FindWithTag("Player").GetComponent<HoldingItemHandler>().HeldItem != null)
+        {
+            HeldItemRef = GameObject.FindWithTag("Player").GetComponent<HoldingItemHandler>().HeldItem.identity;
+        }
+        InventoryInteraction(HeldItemRef);
+    }
+
     public override bool InventoryInteraction(ItemIdentity item)
     {
-        switch (item) {
-            case FoodItemIdentity food:
-                if(_jellyParams.FoodSaturation < _jellyParams.MaxFoodSaturation)
-                {
-                    int adjustedSaturation = _foodPreferences.GetAdjustedSaturation(food);
-                    if(adjustedSaturation < food.SaturationValue)
+        //Check if Player has an item
+        if (item != null)
+        {
+            switch (item)
+            {
+                case FoodItemIdentity food:
+                    if (_jellyParams.FoodSaturation < _jellyParams.MaxFoodSaturation)
                     {
-                        // Could replace with a way to decrease how much the Jelly likes the player 
-                        Debug.Log("The Jelly did not like that food");
-                    } else
-                    {
-                        // Could replace with a way to increase how much the Jelly likes the player
-                        Debug.Log("The jelly loved that food");
-                    }
-                    return Feeding.TryFeedJelly(adjustedSaturation);
-                }
-                return false;
+                        int adjustedSaturation = _foodPreferences.GetAdjustedSaturation(food);
+                        if (adjustedSaturation < food.SaturationValue)
+                        {
+                            // Could replace with a way to decrease how much the Jelly likes the player 
+                            Debug.Log("The Jelly did not like that food");
+                        }
+                        else
+                        {
+                            // Could replace with a way to increase how much the Jelly likes the player
+                            Debug.Log("The jelly loved that food");
+                        }
+                        //Subtract Item from Inventory
+                        Inventory.Instance.TrySubtractItemAmount(item, 1);
 
-        default:
-            return false;
+                        //TODO: Replace this with new feeding system:
+                        return Feeding.TryFeedJelly(adjustedSaturation);
+                    }
+                    return false;
+
+                default:
+                    return false;
+            }
         }
+        //Petting Logic
+        else
+        {
+            Debug.Log("I pet you.");
+            //TODO: Add petting function here:
+        }
+        return false;
     }
 }
