@@ -88,11 +88,11 @@ public class Inventory : MonoBehaviour
         _hotbarSection = new InventorySection(_hotBarStacksCapacity, ItemIdentity.ItemSortType.None
             , _inventorySlotPrefab, _hotbarSectionSlotsParent, ParentDuringDragAndDrop, _dragAndDrop);
 
-        InventorySection jellySection = new InventorySection(_jellySectionStacksCapacity, ItemIdentity.ItemSortType.JellyItem
+        InventorySection jellySection = new InventorySection(_jellySectionStacksCapacity, ItemIdentity.ItemSortType.None
             , _inventorySlotPrefab, _jellySectionSlotsParent, ParentDuringDragAndDrop, _dragAndDrop);
-        InventorySection toolSection = new InventorySection(_toolSectionStacksCapacity, ItemIdentity.ItemSortType.Tool
+        InventorySection toolSection = new InventorySection(_toolSectionStacksCapacity, ItemIdentity.ItemSortType.None
             , _inventorySlotPrefab, _toolSectionSlotsParent, ParentDuringDragAndDrop, _dragAndDrop);
-        InventorySection resourceSection = new InventorySection(_resourceSectionStacksCapacity, ItemIdentity.ItemSortType.Resource
+        InventorySection resourceSection = new InventorySection(_resourceSectionStacksCapacity, ItemIdentity.ItemSortType.None
            , _inventorySlotPrefab, _resourceSectionSlotsParent, ParentDuringDragAndDrop, _dragAndDrop);
 
         _sections = new InventorySection[] { _hotbarSection, jellySection, toolSection, resourceSection };
