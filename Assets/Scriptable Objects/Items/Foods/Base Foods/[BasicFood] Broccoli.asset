@@ -21,7 +21,7 @@ MonoBehaviour:
   <AttractionRadius>k__BackingField: 0.75
   <AttractionRadiusIfSpawnedByTossingFromInventory>k__BackingField: 0.75
   <IsIngredientInCauldron>k__BackingField: 1
-  <SaturationValue>k__BackingField: 5
+  <SatiationValue>k__BackingField: 1
   <Sour>k__BackingField: 0
   <Sweet>k__BackingField: 0
   <Savory>k__BackingField: 1

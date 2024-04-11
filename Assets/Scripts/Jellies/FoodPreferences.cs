@@ -51,19 +51,16 @@ namespace Jellies
             }
         }
 
-        public int GetAdjustedSaturation(FoodItemIdentity food)
+        public int GetAdjustedSatiation(FoodItemIdentity food)
         {
             int sum = 0;
-            sum += Sour * food.Sour;
-            sum += Sweet * food.Sweet;
-            sum += Savory * food.Savory;
-            sum += Salty * food.Salty;
-            sum += Bitter * food.Bitter;
-            sum += Bitter * food.Bitter;
-            if (sum < 1)
-            {
-                sum = 1;
-            }
+            sum += Sour >= 0 ? Sour * food.Sour : Sour;
+            sum += Sweet >= 0 ? Sweet * food.Sweet : Sweet;
+            sum += Savory >= 0 ? Savory * food.Savory : Savory;
+            sum += Salty >= 0 ? Salty * food.Salty : Salty;
+            sum += Bitter >= 0 ? Bitter * food.Bitter : Bitter;
+            sum += Spicy >= 0 ? Spicy * food.Spicy : Spicy;
+
             return sum;
         }
 

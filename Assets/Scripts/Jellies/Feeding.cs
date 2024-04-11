@@ -7,6 +7,16 @@ using Player;
 
 namespace Jellies
 {
+    public enum HungerStates
+    {
+        Hungry = 0,
+        SlightlyFed,
+        Satisfied,
+        Full
+    }
+
+
+
     /// <summary>
     /// Currently a stub. Intended functionality:
     /// Handling of Jelly feeding mechanic, checking if the player can feed the Jelly.
@@ -14,6 +24,9 @@ namespace Jellies
     /// </summary>
     public class Feeding : MonoBehaviour
     {
+        
+        public HungerStates HungerState { get; private set; }
+
 
         private Parameters _parameters;
 
@@ -22,7 +35,6 @@ namespace Jellies
         private SlimeExperience _slimeExp;
 
 
-        public bool IsFull => _parameters.FoodSaturation == _parameters.MaxFoodSaturation;
 
         private void Awake()
         {
@@ -34,19 +46,19 @@ namespace Jellies
         /// <summary>
         /// Feeds jelly by increasing it's food saturation.
         /// </summary>
-        /// <param name="amountToIncrease">Amount of food to feed by, is same as saturation.</param>
-        public bool TryFeedJelly(float saturation)
+        /// <param name="satiationAmount">Amount of food that is being fed to the jelly.</param>
+        public bool TryFeedJelly(float satiationAmount)
         {
-            if (_parameters.FoodSaturation >= _parameters.MaxFoodSaturation)
+            if (_parameters.Satiation >= _parameters.MaxSatiation)
             {
-                if (_parameters.FoodSaturation > _parameters.MaxFoodSaturation)
+                if (_parameters.Satiation > _parameters.MaxSatiation)
                 {
-                    throw new Exception("In Feeding, _parameters.FoodSaturation >= _parameters.MaxFoodSaturation: "
-                        + _parameters.FoodSaturation + " " + _parameters.MaxFoodSaturation);
+                    throw new Exception("In Feeding, _parameters.Satiation >= _parameters.MaxSatiation: "
+                        + _parameters.Satiation + " " + _parameters.MaxSatiation);
                 }
                 return false;
             }
-            _parameters.IncreaseFoodSaturation(saturation);
+            _parameters.IncreaseSatiation(satiationAmount);
 
             int index = Math.Min(_parameters.NumOfDewSpawnedAtLevel.Length - 1, _slimeExp.LevelNum - 1);
             _dew.DewSpawn(_parameters.NumOfDewSpawnedAtLevel[index]);

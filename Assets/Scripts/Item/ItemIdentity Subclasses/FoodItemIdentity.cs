@@ -9,7 +9,7 @@ public class FoodItemIdentity : ItemIdentity
     [field: SerializeField]
     public bool IsIngredientInCauldron { get; private set; }
     [field: SerializeField, Tooltip("Saturation value to be added to jelly after feeding")]
-    public int SaturationValue { get; private set; }
+    public int SatiationValue { get; private set; }
     [field: SerializeField, Tooltip("How sour is the food?")]
     public int Sour { get; private set; }
     [field: SerializeField, Tooltip("How sweet is the food?")]

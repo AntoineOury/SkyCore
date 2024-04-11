@@ -16,7 +16,7 @@ namespace Jellies
 
     /// <summary>
     /// Handles updating and storing Jelly information. 
-    /// It handles the type of Jelly a Jelly is, ensures Jelly Hunger levels are updated, with the Food Saturation decreasing at regular intervals, 
+    /// It handles the type of Jelly a Jelly is, ensures Jelly Satiation levels are updated, with the Food Saturation decreasing at regular intervals, 
     /// and updates the Jelly experience system whenever the Jelly is fed.
     /// </summary>
     public class Parameters : MonoBehaviour
@@ -58,7 +58,7 @@ namespace Jellies
         /// How well fed is the jelly. Decreases over time.
         /// </summary>
         [Tooltip("How well fed is the jelly. Decreases over time.")]
-        public float FoodSaturation
+        public float Satiation
         {
             get;
             private set;
@@ -68,33 +68,79 @@ namespace Jellies
         /// How full can the jelly get. 
         /// </summary>
         [Tooltip("How full can the jelly get.")]
-        [field: SerializeField]
-        public float MaxFoodSaturation
+        public float MaxSatiation
         {
-            get;
-            private set;
+            get { return _hungerStateFullThreshold; }
         }
 
-        /// <summary>
-        /// How low can the food saturation get before the Jelly is hungry.
-        /// </summary>
-        [Tooltip("How low can the food saturation get before the Jelly is hungry.")]
-        [SerializeField]
-        private float _minFoodSaturation;
 
         /// <summary>
-        /// How often to decrease the food saturation.
+        /// How often to decrease the hunger.
         /// </summary>
-        [Tooltip("How often to decrease the food saturation.")]
+        [Tooltip("How often (in seconds) to decrease the hunger.")]
         [SerializeField]
-        private float _foodSaturationInterval;
+        private float _satiationDecreaseInterval;
 
         /// <summary>
-        /// How much to decrease the Food Saturation by.
+        /// How much to decrease the Satiation by.
         /// </summary>
-        [Tooltip("How much to decrease the Food Saturation by.")]
+        [Tooltip("How much to decrease the hunger by each time SatiationDecreaseInterval seconds have elapsed.")]
         [SerializeField]
-        private float _foodSaturationDecrement;
+        private float _satiationDecreaseAmount;
+
+       
+        [Tooltip("How much food must be in the jelly's stomach for it to enter the slightly fed hunger state.")]
+        [SerializeField]
+        private float _hungerStateSlightlyFedThreshold = 4;
+
+        [Tooltip("How much food must be in the jelly's stomach for it to enter the satisfied hunger state.")]
+        [SerializeField]
+        private float _hungerStateSatisfiedThreshold = 8;
+
+        [Tooltip("How much food must be in the jelly's stomach for it to enter the full hunger state.")]
+        [SerializeField]
+        private float _hungerStateFullThreshold = 12;
+
+
+        public float HungerStateSlightlyFedThreshold { get { return _hungerStateSlightlyFedThreshold; } }
+        public float HungerStateSatisfiedThreshold { get { return _hungerStateSatisfiedThreshold; } }
+        public float HungerStateFullThreshold { get { return _hungerStateFullThreshold; } }
+
+
+        public HungerStates HungerState
+        {
+            get
+            {
+                if (Satiation < 0 || Satiation > _hungerStateFullThreshold)
+                    throw new Exception("Invalid hunger value: " + Satiation);
+
+
+                else if (Satiation < _hungerStateSlightlyFedThreshold)
+                    return HungerStates.Hungry;
+                else if (Satiation < _hungerStateSatisfiedThreshold)
+                    return HungerStates.SlightlyFed;
+                else if (Satiation < _hungerStateFullThreshold)
+                    return HungerStates.Satisfied;
+                else if (Satiation == _hungerStateFullThreshold)
+                    return HungerStates.Full;                
+                else
+                    throw new Exception("Invalid hunger value: " + Satiation);
+            }
+        }
+
+        public string HungerLevelName()
+        {
+            string name = Enum.GetName(typeof(HungerStates), HungerState);
+
+            // Insert a space before each uppercase letter except the first one.
+            for (int i = name.Length - 1; i >= 0; i--)
+            {
+                if (char.IsUpper(name[i]) && i > 0)
+                    name.Insert(i - 1, " ");
+            }
+
+            return name;
+        }
 
         /// <summary>
         /// Xp Controller for the slime.
@@ -115,18 +161,10 @@ namespace Jellies
         /// <summary>
         /// Feed the jelly a given amount.
         /// </summary>
-        public void IncreaseFoodSaturation(float amount)
+        public void IncreaseSatiation(float amount)
         {
-            if(FoodSaturation + amount <= MaxFoodSaturation)
-            {
-                FoodSaturation += amount;
-            }
-            else
-            {
-                FoodSaturation = MaxFoodSaturation;
-            }
+            Satiation = Mathf.Clamp(Satiation + amount, 0, MaxSatiation);
             
-
             // TODO: Come back and make this more dynamic and replace with a event.
             if (_slimeXp == null && transform.GetComponentInChildren<SlimeExperience>())
             {
@@ -141,28 +179,24 @@ namespace Jellies
         /// <summary>
         /// Jelly loses some food Saturation when going to the bathroom.
         /// </summary>
-        public void DecreaseFoodSaturation(float amount)
+        public void DecreaseSatiation(float amount)
         {
-            FoodSaturation -= amount;
-            if (FoodSaturation < 0)
-            {
-                FoodSaturation = 0;
-            }
+            // The Mathf.Abs() call here is necessary, because subtracting a negative number is the same as adding a positive, which is not what we should do here.
+            Satiation = Mathf.Clamp(Satiation - Mathf.Abs(amount), 0, MaxSatiation);
         }
 
         /// <summary>
         /// Set how full is the jelly's belly.
         /// Used for Unit Testing and can be removed if necessary
         /// </summary>
-        public void SetFoodSaturation(float amount)
+        public void SetSatiation(float amount)
         {
-            FoodSaturation = amount;
+            Satiation = Mathf.Clamp(Satiation + amount, 0, MaxSatiation);
         }
 
         private void Awake()
         {
-            MaxFoodSaturation = 100;
-            FoodSaturation = MaxFoodSaturation;
+            Satiation = MaxSatiation;
         }
 
         /// <summary>
@@ -174,13 +208,13 @@ namespace Jellies
         }
 
         /// <summary>
-        /// A function that decreases the food satiation over time.
+        /// A function that decreases the hunger over time.
         /// </summary>
         /// <returns>Next time to run function</returns>
         IEnumerator Digest()
         {
-            DecreaseFoodSaturation(_foodSaturationDecrement);
-            yield return new WaitForSeconds(_foodSaturationInterval);
+            DecreaseSatiation(_satiationDecreaseAmount);
+            yield return new WaitForSeconds(_satiationDecreaseInterval);
             StartCoroutine(Digest());
         }
     }

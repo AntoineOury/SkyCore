@@ -14,11 +14,11 @@ public class JelliesFeedingTests
         Feeding feeding = testJelly.AddComponent<Feeding>();
         float initValue = 50;
         float increasseValue = 10;
-        parameters.SetFoodSaturation(initValue);
+        parameters.SetSatiation(initValue);
         
         feeding.TryFeedJelly(increasseValue);
         
-        Assert.AreEqual(initValue + increasseValue, parameters.FoodSaturation);
+        Assert.AreEqual(initValue + increasseValue, parameters.Satiation);
         yield return null;
     }
 }

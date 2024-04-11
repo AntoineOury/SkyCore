@@ -20,7 +20,8 @@ MonoBehaviour:
   <SortType>k__BackingField: 2
   <AttractionRadius>k__BackingField: 0.75
   <AttractionRadiusIfSpawnedByTossingFromInventory>k__BackingField: 0.75
-  <SaturationValue>k__BackingField: 5
+  <IsIngredientInCauldron>k__BackingField: 0
+  <SatiationValue>k__BackingField: 1
   <Sour>k__BackingField: 0
   <Sweet>k__BackingField: 2
   <Savory>k__BackingField: 0

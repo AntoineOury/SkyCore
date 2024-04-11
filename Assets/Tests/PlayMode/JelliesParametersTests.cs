@@ -18,11 +18,11 @@ public class JelliesParametersTests
         CreateTestJelly(out GameObject testJelly, out Parameters parameters);
         float initValue = 50;
         float increaseValue = 10;
-        parameters.SetFoodSaturation(initValue);
+        parameters.SetSatiation(initValue);
         
-        parameters.IncreaseFoodSaturation(increaseValue);
+        parameters.IncreaseSatiation(increaseValue);
         
-        Assert.AreEqual(initValue + increaseValue, parameters.FoodSaturation);
+        Assert.AreEqual(initValue + increaseValue, parameters.Satiation);
         yield return null;
     }
     
@@ -32,11 +32,11 @@ public class JelliesParametersTests
         CreateTestJelly(out GameObject testJelly, out Parameters parameters);
         float initValue = 50;
         float increaseValue = 10;
-        parameters.SetFoodSaturation(initValue);
+        parameters.SetSatiation(initValue);
         
-        parameters.DecreaseFoodSaturation(increaseValue);
+        parameters.DecreaseSatiation(increaseValue);
         
-        Assert.AreEqual(initValue - increaseValue, parameters.FoodSaturation);
+        Assert.AreEqual(initValue - increaseValue, parameters.Satiation);
         yield return null;
     }
 
@@ -44,11 +44,11 @@ public class JelliesParametersTests
     public IEnumerator TestIfFoodDoesNotExceedMaxSaturation()
     {
         CreateTestJelly(out GameObject testJelly, out Parameters parameters);
-        float maxValue = parameters.MaxFoodSaturation;
-        parameters.SetFoodSaturation(maxValue);
-        parameters.IncreaseFoodSaturation(1f);
+        float maxValue = parameters.MaxSatiation;
+        parameters.SetSatiation(maxValue);
+        parameters.IncreaseSatiation(1f);
 
-        Assert.LessOrEqual(parameters.FoodSaturation, maxValue);
+        Assert.LessOrEqual(parameters.Satiation, maxValue);
         yield return null;
     }
 
@@ -56,11 +56,11 @@ public class JelliesParametersTests
     public IEnumerator TestIfJellyGetsHungrierAfter10Seconds()
     {
         CreateTestJelly(out GameObject testJelly, out Parameters parameters);
-        float initValue = parameters.MaxFoodSaturation;
+        float initValue = parameters.MaxSatiation;
         float timeToWait = 10f;
-        parameters.SetFoodSaturation(initValue);
+        parameters.SetSatiation(initValue);
         
         yield return new WaitForSeconds(timeToWait);
-        Assert.LessOrEqual(parameters.FoodSaturation, parameters.MaxFoodSaturation);
+        Assert.LessOrEqual(parameters.Satiation, parameters.MaxSatiation);
     }
 }

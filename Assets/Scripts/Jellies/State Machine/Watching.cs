@@ -67,6 +67,7 @@ public class Watching : MonoBehaviour
 
     private void ExitWatching()
     {
-        _agent.ResetPath();
+        if (_agent.enabled)
+            _agent.ResetPath();
     }
 }
