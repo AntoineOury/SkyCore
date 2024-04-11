@@ -20,6 +20,9 @@ public class PickupItem : MonoBehaviour
     [SerializeField]
     private int _amount = 1;
 
+    [SerializeField]
+    private int _timer = 300;
+
     [field: SerializeField]
     public Rigidbody Rigidbody { get; private set; }
 
@@ -40,6 +43,7 @@ public class PickupItem : MonoBehaviour
         _defaultSleepThreshold = Rigidbody.sleepThreshold;
         _defaultCollisionDetectionMode = Rigidbody.collisionDetectionMode;
         CurrentAttractionRadius = _itemInfo.AttractionRadius;
+        StartCoroutine(Despawn());
     }
 
 
@@ -69,6 +73,15 @@ public class PickupItem : MonoBehaviour
         Rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
         yield return new WaitForSeconds(DURATION_OF_CONTINUOUS_COLLISION_DETECTION_WHEN_TOSSED);
         Rigidbody.collisionDetectionMode = _defaultCollisionDetectionMode;
+    }
+
+    /// <summary>
+    /// Timer to DeSpawn objects after a certain amount of time
+    /// </summary>
+    IEnumerator Despawn()
+    {
+        yield return new WaitForSeconds(_timer);
+        Destroy(gameObject);
     }
 
 
