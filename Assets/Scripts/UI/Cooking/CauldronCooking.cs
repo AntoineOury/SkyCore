@@ -112,7 +112,7 @@ public class CauldronCooking : MonoBehaviour
 
         if (_productSlot._itemStack == null)
         {
-            _productSlot._itemStack = new ItemStack(_productBeingCooked, 1);
+            _productSlot._itemStack = ItemStack.ProduceObject(_productBeingCooked, 1);
         }
         else
         {

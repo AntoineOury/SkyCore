@@ -32,7 +32,12 @@ public class PeriodicHarvestable : Interactable
 
     private void Awake()
     {
-        _itemStack = new ItemStack(_itemIdentity, _numberToHarvest);
+        _itemStack = ItemStack.ProduceObject(_itemIdentity, _numberToHarvest);
+    }
+
+    private void OnDestroy()
+    {
+        _itemStack.ReturnToPool();
     }
 
     private void Update()

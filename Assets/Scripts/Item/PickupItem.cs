@@ -36,10 +36,15 @@ public class PickupItem : MonoBehaviour
 
     private void Awake()
     {
-        _stack = new ItemStack(_itemInfo, _amount);
+        _stack = ItemStack.ProduceObject(_itemInfo, _amount);
         _defaultSleepThreshold = Rigidbody.sleepThreshold;
         _defaultCollisionDetectionMode = Rigidbody.collisionDetectionMode;
         CurrentAttractionRadius = _itemInfo.AttractionRadius;
+    }
+
+    private void OnDestroy()
+    {
+        _stack.ReturnToPool();
     }
 
 

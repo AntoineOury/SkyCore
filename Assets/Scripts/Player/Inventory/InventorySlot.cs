@@ -42,6 +42,11 @@ public class InventorySlot : MonoBehaviour
         _textPosRelativeImagePos = _countTextGameobject.transform.position - _imageGameobject.transform.position;
     }
 
+    private void OnDestroy()
+    {
+        _itemStack?.ReturnToPool();
+    }
+
 #if UNITY_EDITOR
     private void LateUpdate()
     {
