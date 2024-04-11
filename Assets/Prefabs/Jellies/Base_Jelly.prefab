@@ -199,8 +199,9 @@ MonoBehaviour:
   <NumOfDewSpawnedAtLevel>k__BackingField: 01000000
   <RequiredExpForNextLevel>k__BackingField:
   - 10
-  _satiationDecreaseInterval: 20
+  _satiationDecreaseInterval: 10
   _satiationDecreaseAmount: 5
+  _eatingTime: 10
   _hungerStateSlightlyFedThreshold: 33
   _hungerStateSatisfiedThreshold: 66
   _hungerStateFullThreshold: 100

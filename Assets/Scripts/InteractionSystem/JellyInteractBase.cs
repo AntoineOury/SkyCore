@@ -46,7 +46,7 @@ public class JellyInteractBase : InteractableWithUIMode
     {
         switch (item) {
             case FoodItemIdentity food:
-                if(_jellyParams.Satiation < _jellyParams.MaxSatiation)
+                if(_jellyParams.CanEat && _jellyParams.Satiation < _jellyParams.MaxSatiation)
                 {
                     int adjustedSatiation = _foodPreferences.GetAdjustedSatiation(food);
                     if(adjustedSatiation < food.SatiationValue)

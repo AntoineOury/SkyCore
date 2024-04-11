@@ -21,6 +21,15 @@ namespace Jellies
     /// </summary>
     public class Parameters : MonoBehaviour
     {
+        private float _timeSinceLastFed;
+
+
+
+        /// <summary>
+        /// Returns true if the jelly is not already eating a piece of food, or false if it is.
+        /// </summary>
+        public bool CanEat { get { return _timeSinceLastFed >= _eatingTime; } }
+
         /// <summary>
         /// What type of jelly is it.
         /// </summary>
@@ -88,18 +97,22 @@ namespace Jellies
         [SerializeField]
         private float _satiationDecreaseAmount;
 
+        [Tooltip("How long it takes (in seconds) for the jelly to eat a piece of food.")]
+        [SerializeField]
+        private float _eatingTime;
+
        
         [Tooltip("How much food must be in the jelly's stomach for it to enter the slightly fed hunger state.")]
         [SerializeField]
-        private float _hungerStateSlightlyFedThreshold = 4;
+        private float _hungerStateSlightlyFedThreshold = 33;
 
         [Tooltip("How much food must be in the jelly's stomach for it to enter the satisfied hunger state.")]
         [SerializeField]
-        private float _hungerStateSatisfiedThreshold = 8;
+        private float _hungerStateSatisfiedThreshold = 66;
 
         [Tooltip("How much food must be in the jelly's stomach for it to enter the full hunger state.")]
         [SerializeField]
-        private float _hungerStateFullThreshold = 12;
+        private float _hungerStateFullThreshold = 100;
 
 
         public float HungerStateSlightlyFedThreshold { get { return _hungerStateSlightlyFedThreshold; } }
@@ -174,6 +187,9 @@ namespace Jellies
             {
                 _slimeXp.AddEXP(10, "Red Berries");
             }
+
+            // Reset the eating timer.
+            _timeSinceLastFed = 0f;
         }
 
         /// <summary>
@@ -191,6 +207,10 @@ namespace Jellies
         /// </summary>
         public void SetSatiation(float amount)
         {
+            // If we increased satiation, reset the eating timer.
+            if (amount > Satiation)
+                _timeSinceLastFed = 0f;
+
             Satiation = Mathf.Clamp(Satiation + amount, 0, MaxSatiation);
         }
 
@@ -205,6 +225,12 @@ namespace Jellies
         private void Start()
         {
             StartCoroutine(Digest());
+        }
+
+        private void Update()
+        {
+            // Increment the time since last given food timer.
+            _timeSinceLastFed += Time.deltaTime;
         }
 
         /// <summary>
